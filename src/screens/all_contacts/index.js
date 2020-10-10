@@ -79,6 +79,7 @@ const App = (props) => {
               );
             return (
               <View
+                key={i}
                 style={{
                   flexDirection: 'row',
                   width: '100%',

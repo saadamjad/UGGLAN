@@ -15,7 +15,7 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
-
+import 'react-native-gesture-handler';
 import {
   Header,
   LearnMoreLinks,
@@ -23,12 +23,13 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import Stack from './src/stacknavigation';
 
-const App: () => React$Node = () => {
+const App =  (props) => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
-      <SafeAreaView></SafeAreaView>
+      <Stack navigation={props.navigation} />
     </>
   );
 };

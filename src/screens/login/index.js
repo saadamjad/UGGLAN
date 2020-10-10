@@ -7,13 +7,11 @@ import {View, Text, ImageBackground, Image} from 'react-native';
 const App = (props) => {
   const function1 = () => {
     // alert('Ruko Zara');
-  props.navigation.navigate('loginpage')
-    
+    props.navigation.navigate('loginpage');
   };
 
   const function2 = () => {
     alert('Sabar Karo');
-    
   };
 
   const function3 = () => {
@@ -93,7 +91,7 @@ const App = (props) => {
             />
           }
           title="Connect with facebook"
-          buttonStyle={{backgroundColor: '#3B5998', height: 50, }}
+          buttonStyle={{backgroundColor: '#3B5998', height: 50}}
           onPress={() => function3()}
         />
       </View>

@@ -27,6 +27,11 @@ function App() {
   return (
     <NavigationContainer headerMode="none">
       <Stack.Navigator>
+      <Stack.Screen
+          name="settings"
+          component={settings}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="login"
           component={login}
@@ -112,11 +117,7 @@ function App() {
           component={thankyou}
           options={{headerShown: false}}
         />
-        <Stack.Screen
-          name="settings"
-          component={settings}
-          options={{headerShown: false}}
-        />
+      
       </Stack.Navigator>
     </NavigationContainer>
   );

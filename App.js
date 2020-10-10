@@ -23,7 +23,7 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import Stack from './src/stacknavigation';
+import Stack from './src/navigations/stacknavigation';
 
 const App =  (props) => {
   return (

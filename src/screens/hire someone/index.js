@@ -9,52 +9,62 @@ import {
   ScrollView,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-
+import StarRating from 'react-native-star-rating';
 const App = (props) => {
   const Hirefunction = () => {
     props.navigation.navigate('hireProfile');
+  };
+  const random = () => {
+    return Math.random() * 5;
   };
   const [Array, Setarray] = useState([
     {
       image: require('../../assets/images/1.jpg'),
       name: 'Abdul Samad',
       dollar: '$50',
+      rating: random(),
       address: ' Km: 0.7km away',
     },
     {
       image: require('../../assets/images/2.jpg'),
       name: 'Logan',
       dollar: '$40',
+      rating: random(),
       address: ' Km: 2.4km away',
     },
     {
       image: require('../../assets/images/3.jpg'),
       name: 'Babu Bhai',
       dollar: '$90',
+      rating: random(),
       address: ' Km: 1.2km away',
     },
     {
       image: require('../../assets/images/4.jpg'),
       name: 'Samad Soomro',
       dollar: '$75',
+      rating: random(),
       address: ' Km: 0.7km away',
     },
     {
       image: require('../../assets/images/5.jpg'),
       name: 'Jungle Book',
       dollar: '$99',
+      rating: random(),
       address: ' Km: 0.4km away',
     },
     {
       image: require('../../assets/images/6.jpg'),
       name: 'Jet Ski',
       dollar: '$50',
+      rating: random(),
       address: ' Km: 0.9km away',
     },
     {
       image: require('../../assets/images/7.jpg'),
       name: 'Desi Munda',
       dollar: '$60',
+      rating: random(),
       address: ' Km: 0.8km away',
     },
   ]);
@@ -137,6 +147,32 @@ const App = (props) => {
                     </Text>
                   </View>
                   {/* ********Stars Area******** */}
+                  <View style={{marginVertical: 5}}>
+                    {/* <Rating
+                      ratingCount={5}
+                      // onFinishRating={this.ratingCompleted}
+                      defaultRating={}
+                      imageSize={25}
+                      style={{
+                        paddingVertical: 10,
+                        backgroundColor: 'transparent',
+                      }}
+                      starContainerStyle={{backgroundColor: 'transparent'}}
+                    /> */}
+                    <StarRating
+                      disabled={false}
+                      maxStars={5}
+                      fullStarColor={'#FFF700'}
+                      emptyStarColor={'#FFF700'}
+                      emptyStar={'ios-star-outline'}
+                      fullStar={'ios-star'}
+                      halfStar={'ios-star-half'}
+                      iconSet={'Ionicons'}
+                      starSize={15}
+                      containerStyle={{width: 80, marginLeft: 5, marginTop: -5}}
+                      rating={item.rating}
+                    />
+                  </View>
                 </View>
 
                 {/* ==========Hire Button========== */}

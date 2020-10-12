@@ -9,6 +9,7 @@ import Slider from '@react-native-community/slider';
 
 const App = () => {
   const [toggle, setToggle] = useState(false);
+  const [isSlider, setSlider] = useState(5);
   return (
     <SafeAreaView style={{backgroundColor: '#000000', flex: 1}}>
       <View style={{width: '90%', alignSelf: 'center'}}>
@@ -211,15 +212,21 @@ const App = () => {
             5 Sec
           </Text>
         </View>
-        {/* ================== */}
-        <View style={{}}>
+        {/* ========Slider========== */}
+
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <Text style={{color: '#F6931B'}}>0</Text>
           <Slider
             style={{width: 300, height: 40}}
             minimumValue={0}
-            maximumValue={1}
-            minimumTrackTintColor="#FFFFFF"
-            maximumTrackTintColor="#000000"
+            maximumValue={10}
+            value={isSlider}
+            onValueChange={setSlider}
+            minimumTrackTintColor="#F6931B"
+            maximumTrackTintColor="#FFFFFF"
+            thumbTintColor="#FFFFFF"
           />
+          <Text style={{color: '#F6931B'}}>10</Text>
         </View>
 
         {/* ================== */}

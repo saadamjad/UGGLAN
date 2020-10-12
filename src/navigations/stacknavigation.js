@@ -20,6 +20,7 @@ import selectPaymentMethod from '../screens/selectPaymentMethod';
 import payMasterCard from '../screens/payMasterCard';
 import thankyou from '../screens/thankyou';
 import settings from '../screens/settings';
+import SosPopup from '../components/popup';
 
 const Stack = createStackNavigator();
 
@@ -27,7 +28,12 @@ function App() {
   return (
     <NavigationContainer headerMode="none">
       <Stack.Navigator>
-      <Stack.Screen
+        <Stack.Screen
+          name="SosPopup"
+          component={SosPopup}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
           name="settings"
           component={settings}
           options={{headerShown: false}}
@@ -117,7 +123,6 @@ function App() {
           component={thankyou}
           options={{headerShown: false}}
         />
-      
       </Stack.Navigator>
     </NavigationContainer>
   );

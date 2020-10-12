@@ -2,10 +2,14 @@ import React from 'react';
 import {Button} from 'react-native-elements';
 import {View, Text, ImageBackground, SafeAreaView, Image} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import StarRating from 'react-native-star-rating';
 
 const App = (props) => {
   const hireNowFunction = () => {
     props.navigation.navigate('shareUGGLAN');
+  };
+  const random = () => {
+    return Math.random() * 5;
   };
   return (
     <ImageBackground
@@ -61,6 +65,23 @@ const App = (props) => {
             </Text>
           </View>
           {/* ******Ratting Stars******* */}
+
+          <View style={{marginVertical: 5}}>
+            <StarRating
+              disabled={false}
+              maxStars={5}
+              fullStarColor={'#FFF700'}
+              emptyStarColor={'#FFF700'}
+              emptyStar={'ios-star-outline'}
+              fullStar={'ios-star'}
+              halfStar={'ios-star-half'}
+              iconSet={'Ionicons'}
+              starSize={19}
+              containerStyle={{width: 80, marginLeft: 5, marginTop: -5}}
+              rating={random()}
+            />
+          </View>
+
           <View style={{marginVertical: 8}}>
             <Text style={{height: 20, color: '#FFFFFF', fontSize: 15}}>
               About David
@@ -93,8 +114,9 @@ const App = (props) => {
                 }}
               />
             </LinearGradient>
-            <LinearGradient colors={['#F6931B', '#DE2516']}
-            style={{borderRadius: 3}}>
+            <LinearGradient
+              colors={['#F6931B', '#DE2516']}
+              style={{borderRadius: 3}}>
               <Button
                 title="Hire Now"
                 onPress={() => hireNowFunction()}

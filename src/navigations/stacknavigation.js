@@ -21,6 +21,11 @@ import payMasterCard from '../screens/payMasterCard';
 import thankyou from '../screens/thankyou';
 import settings from '../screens/settings';
 import SosPopup from '../components/popup';
+import SelectLanguage from '../screens/select_language';
+import NotificationSent from '../components/notification_sent';
+import PayOnCash from '../components/pay_on_cash';
+import PayMasterCardPopup from '../components/pay_master_card_popup';
+import PayVisaCardPopup from '../components/pay_visa_card_popup';
 
 const Stack = createStackNavigator();
 
@@ -28,6 +33,36 @@ function App() {
   return (
     <NavigationContainer headerMode="none">
       <Stack.Navigator>
+        <Stack.Screen
+          name="hireProfile"
+          component={hireProfile}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="PayVisaCardPopup"
+          component={PayVisaCardPopup}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="PayMasterCardPopup"
+          component={PayMasterCardPopup}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="PayOnCash"
+          component={PayOnCash}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="NotificationSent"
+          component={NotificationSent}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="SelectLanguage"
+          component={SelectLanguage}
+          options={{headerShown: false}}
+        />
         <Stack.Screen
           name="SosPopup"
           component={SosPopup}
@@ -74,11 +109,6 @@ function App() {
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="settings"
-          component={settings}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
           name="calling"
           component={calling}
           options={{headerShown: false}}
@@ -86,11 +116,6 @@ function App() {
         <Stack.Screen
           name="hiresomeone"
           component={hiresomeone}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="hireProfile"
-          component={hireProfile}
           options={{headerShown: false}}
         />
         <Stack.Screen
@@ -122,6 +147,11 @@ function App() {
         <Stack.Screen
           name="thankyou"
           component={thankyou}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="PayMasterCard"
+          component={payMasterCard}
           options={{headerShown: false}}
         />
       </Stack.Navigator>

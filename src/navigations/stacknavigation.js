@@ -74,6 +74,11 @@ function App() {
           options={{headerShown: false}}
         />
         <Stack.Screen
+          name="settings"
+          component={settings}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
           name="calling"
           component={calling}
           options={{headerShown: false}}
@@ -113,11 +118,7 @@ function App() {
           component={selectPaymentMethod}
           options={{headerShown: false}}
         />
-        <Stack.Screen
-          name="payMasterCard"
-          component={payMasterCard}
-          options={{headerShown: false}}
-        />
+
         <Stack.Screen
           name="thankyou"
           component={thankyou}

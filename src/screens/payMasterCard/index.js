@@ -9,13 +9,49 @@ import {
   Image,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import CheckBox from '@react-native-community/checkbox';
+import {Icon} from 'native-base';
+import CheckBox from '../../components/checkBox';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const App = (props) => {
   const Pay = () => {
     props.navigation.navigate('thankyou');
   };
-  const [isMark, setMark] = useState(false);
+  const [mark, setMark] = useState(false);
+  const [state, setState] = useState({card: 'master'});
+
+  const CardView = (val) => {
+    return (
+      <View
+        style={{
+          width: '45%',
+          borderWidth: 0.5,
+          borderColor: '#707070',
+          borderRadius: 3,
+          backgroundColor:
+            state.card == val.toLowerCase() ? '#F6931B' : 'transparent',
+          justifyContent: 'center',
+        }}>
+        <TouchableOpacity
+          onPress={() => setState({...state, card: val.toLowerCase()})}>
+          <View
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}>
+            <Image
+              source={require('../../assets/images/card1.png')}
+              style={{height: 25.99, width: 28.87}}
+            />
+          </View>
+          <Text style={{color: '#FFFFFF', fontSize: 12, textAlign: 'center'}}>
+            {val} Card
+          </Text>
+        </TouchableOpacity>
+      </View>
+    );
+  };
+
   return (
     <ImageBackground
       source={require('../../assets/images/bg_image.png')}
@@ -38,56 +74,10 @@ const App = (props) => {
             height: 60,
             width: '100%',
             marginBottom: 10,
+            justifyContent: 'space-around',
           }}>
           {/* ====Box 1==== */}
-          <View
-            style={{
-              width: '45%',
-              borderWidth: 0.5,
-              borderColor: '#707070',
-              borderRadius: 3,
-              backgroundColor: '#F6931B',
-              justifyContent: 'center',
-            }}>
-            <View
-              style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Image
-                source={require('../../assets/images/card1.png')}
-                style={{height: 25.99, width: 28.87}}
-              />
-            </View>
-            <Text style={{color: '#FFFFFF', fontSize: 12, textAlign: 'center'}}>
-              Master Card
-            </Text>
-          </View>
-
-          {/* ====Box 2==== */}
-          <View
-            style={{
-              width: '45%',
-              borderWidth: 0.5,
-              borderColor: '#707070',
-              borderRadius: 3,
-              marginLeft: 25,
-              justifyContent: 'center',
-            }}>
-            <View
-              style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
-              <Image
-                source={require('../../assets/images/card2.png')}
-                style={{height: 25.99, width: 28.87}}
-              />
-            </View>
-            <Text style={{color: '#FFFFFF', fontSize: 12, textAlign: 'center'}}>
-              Visa Card
-            </Text>
-          </View>
+          {['Master', 'Visa'].map((val) => CardView(val))}
         </View>
 
         {/* ==========Name On Card========== */}
@@ -132,7 +122,11 @@ const App = (props) => {
               width: '10%',
             }}>
             <Image
-              source={require('../../assets/images/masterCard2.png')}
+              source={
+                state.card == 'master'
+                  ? require('../../assets/images/masterCard2.png')
+                  : require('../../assets/images/visa2.png')
+              }
               style={{height: 25, width: 38}}
             />
           </View>
@@ -182,15 +176,11 @@ const App = (props) => {
 
         {/* ==========CheckBox========== */}
 
-        <View style={{flexDirection: 'row', alignItems: 'center'}}>
-          <CheckBox
-            disabled={false}
-            value={isMark}
-            onValueChange={(newValue) => setMark(newValue)}
-            style={{color: 'red'}}
-          />
-          <Text style={{color: '#FFFFFF'}}>
-            Save this card details: {isMark ? '👍' : '👎'}
+        <View
+          style={{flexDirection: 'row', alignItems: 'center', marginTop: 30}}>
+          <CheckBox mark={mark} setMark={setMark} />
+          <Text style={{color: '#FFFFFF', marginLeft: 8}}>
+            Save this card details
           </Text>
         </View>
 

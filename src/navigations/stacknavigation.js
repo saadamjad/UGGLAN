@@ -27,9 +27,9 @@ function App() {
   return (
     <NavigationContainer headerMode="none">
       <Stack.Navigator>
-      <Stack.Screen
-          name="settings"
-          component={settings}
+        <Stack.Screen
+          name="payMasterCard"
+          component={payMasterCard}
           options={{headerShown: false}}
         />
         <Stack.Screen
@@ -65,6 +65,11 @@ function App() {
         <Stack.Screen
           name="call"
           component={call}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="settings"
+          component={settings}
           options={{headerShown: false}}
         />
         <Stack.Screen
@@ -107,17 +112,12 @@ function App() {
           component={selectPaymentMethod}
           options={{headerShown: false}}
         />
-        <Stack.Screen
-          name="payMasterCard"
-          component={payMasterCard}
-          options={{headerShown: false}}
-        />
+
         <Stack.Screen
           name="thankyou"
           component={thankyou}
           options={{headerShown: false}}
         />
-      
       </Stack.Navigator>
     </NavigationContainer>
   );

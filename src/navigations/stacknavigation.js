@@ -21,112 +21,146 @@ import payMasterCard from '../screens/payMasterCard';
 import thankyou from '../screens/thankyou';
 import settings from '../screens/settings';
 import SosPopup from '../components/popup';
-
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import DrawerContent from './drawer';
 const Stack = createStackNavigator();
+
+const Drawer = createDrawerNavigator();
+
+function MyDrawer() {
+  return (
+    <Drawer.Navigator
+      drawerStyle={{backgroundColor: 'transparent'}}
+      drawerContentOptions={{
+        activeTintColor: '#4C5AC9',
+        itemStyle: {marginVertical: 30},
+      }}
+      drawerContent={(props) => <DrawerContent {...props} />}>
+      <Drawer.Screen name="My Profile" component={MainStack} />
+    </Drawer.Navigator>
+  );
+}
+function AuthStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="login"
+        component={login}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="signup"
+        component={signup}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen name="otp" component={otp} options={{headerShown: false}} />
+      <Stack.Screen
+        name="newpassword"
+        component={newpassword}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="loginpage"
+        component={loginpage}
+        options={{headerShown: false}}
+      />
+    </Stack.Navigator>
+  );
+}
+function MainStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="allcontacts"
+        component={allcontacts}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SosPopup"
+        component={SosPopup}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="call"
+        component={call}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="settings"
+        component={settings}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="calling"
+        component={calling}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="hiresomeone"
+        component={hiresomeone}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="hireProfile"
+        component={hireProfile}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="shareUGGLAN"
+        component={shareUGGLAN}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="payMasterCard"
+        component={payMasterCard}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="help"
+        component={help}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="addPayment"
+        component={addPayment}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="addNewCard"
+        component={addNewCard}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="selectPaymentMethod"
+        component={selectPaymentMethod}
+        options={{headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="thankyou"
+        component={thankyou}
+        options={{headerShown: false}}
+      />
+    </Stack.Navigator>
+  );
+}
 
 function App() {
   return (
     <NavigationContainer headerMode="none">
       <Stack.Navigator>
         <Stack.Screen
-          name="SosPopup"
-          component={SosPopup}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="settings"
-          component={settings}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="login"
-          component={login}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="signup"
-          component={signup}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="loginpage"
-          component={loginpage}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="otp"
-          component={otp}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="newpassword"
-          component={newpassword}
+          name="Auth"
+          component={AuthStack}
           options={{headerShown: false}}
         />
         <Stack.Screen
           name="allcontacts"
-          component={allcontacts}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="call"
-          component={call}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="settings"
-          component={settings}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="calling"
-          component={calling}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="hiresomeone"
-          component={hiresomeone}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="hireProfile"
-          component={hireProfile}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="shareUGGLAN"
-          component={shareUGGLAN}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="help"
-          component={help}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="addPayment"
-          component={addPayment}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="addNewCard"
-          component={addNewCard}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="selectPaymentMethod"
-          component={selectPaymentMethod}
-          options={{headerShown: false}}
-        />
-
-        <Stack.Screen
-          name="thankyou"
-          component={thankyou}
+          component={MyDrawer}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
-
 export default App;

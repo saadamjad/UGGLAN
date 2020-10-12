@@ -78,7 +78,7 @@ const App = (props) => {
 
       <View
         style={{
-          height: 50,
+          height: 40,
           width: 301,
           alignSelf: 'center',
           marginVertical: 5,
@@ -93,7 +93,7 @@ const App = (props) => {
             />
           }
           title="Connect with facebook"
-          buttonStyle={{backgroundColor: '#3B5998', height: 50, }}
+          buttonStyle={{backgroundColor: '#3B5998', height: 40, }}
           onPress={() => function3()}
         />
       </View>

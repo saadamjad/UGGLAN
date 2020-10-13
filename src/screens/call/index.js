@@ -8,6 +8,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
+import GlobalHeader from '../../components/header';
 
 const App = (props) => {
   const callfunction = () => {
@@ -57,6 +58,7 @@ const App = (props) => {
         height: '100%',
         width: '100%',
       }}>
+      <GlobalHeader navigation={props.navigation} isBack={true} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <SafeAreaView
           style={{

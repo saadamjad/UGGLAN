@@ -8,8 +8,9 @@ import {
   PermissionsAndroid,
 } from 'react-native';
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
+import GlobalHeader from '../../components/header';
 
-export default () => {
+export default (props) => {
   //  state here
 
   const [state, setState] = useState({position: {}});
@@ -42,6 +43,7 @@ export default () => {
   };
   return (
     <View style={{flex: 1}}>
+      <GlobalHeader navigation={props.navigation}/>
       <MapView
         provider={PROVIDER_GOOGLE}
         style={{flex: 1}}

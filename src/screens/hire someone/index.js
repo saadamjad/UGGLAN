@@ -148,17 +148,6 @@ const App = (props) => {
                   </View>
                   {/* ********Stars Area******** */}
                   <View style={{marginVertical: 5}}>
-                    {/* <Rating
-                      ratingCount={5}
-                      // onFinishRating={this.ratingCompleted}
-                      defaultRating={}
-                      imageSize={25}
-                      style={{
-                        paddingVertical: 10,
-                        backgroundColor: 'transparent',
-                      }}
-                      starContainerStyle={{backgroundColor: 'transparent'}}
-                    /> */}
                     <StarRating
                       disabled={false}
                       maxStars={5}

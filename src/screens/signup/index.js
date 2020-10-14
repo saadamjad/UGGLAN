@@ -14,7 +14,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 const App = (props) => {
   const SgnUpFntn = () => {
-    props.navigation.navigate('otp')
+    props.navigation.navigate('otp');
   };
 
   return (
@@ -37,33 +37,39 @@ const App = (props) => {
 
         {/* ==========Profile Image========== */}
 
-        <View style={{alignItems: 'center', marginBottom: 50}}>
+        <View style={{alignItems: 'center'}}>
           <View
             style={{
-              height: 100,
-              width: 100,
               borderRadius: 100,
               borderWidth: 0.5,
               borderColor: 'white',
+              marginBottom: 50,
             }}>
             <ImageBackground
               source={require('../../assets/images/1.jpg')}
               style={{height: 100, width: 100}}
               imageStyle={{borderRadius: 100}}>
               <View style={{position: 'absolute', bottom: -10}}>
-                <View style={{marginLeft: 55, marginBottom: 15}}>
+                <LinearGradient
+                  colors={['#F6931B', '#DE2516']}
+                  style={{
+                    marginLeft: 75,
+                    marginBottom: 15,
+                    borderRadius: 20,
+                    overflow: 'hidden',
+                  }}>
                   <AntDesign
-                    name="pluscircle"
-                    size={22}
-                    color="#F6931B"
-                    style={{
-                      marginLeft: 20,
-                      backgroundColor: 'white',
-                      borderRadius: 20,
-                      overflow: 'hidden',
-                    }}
+                    name="plus"
+                    size={20}
+                    color="#FFFF"
+                    style={
+                      {
+                        // marginLeft: 20,
+                        // backgroundColor: 'white',
+                      }
+                    }
                   />
-                </View>
+                </LinearGradient>
               </View>
             </ImageBackground>
           </View>
@@ -71,7 +77,6 @@ const App = (props) => {
 
         {/* ==========Form Start========== */}
 
-        {/* <View style={{width: '90%', alignSelf: 'center'}}> */}
         {/* ==========Full Name Row========== */}
 
         <View
@@ -85,9 +90,8 @@ const App = (props) => {
           <TextInput
             placeholder="Full Name"
             placeholderTextColor="#696969"
-            style={{color: 'white', width: '85%'}}
+            style={{color: 'white', width: '90%'}}
           />
-          <View style={{width: '6%'}}></View>
           <Ionicons
             name="person"
             // size={14}

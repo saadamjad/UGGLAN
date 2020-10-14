@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Fontisto from 'react-native-vector-icons/Fontisto';
+import styles from './styles';
 
 const App = (props) => {
   const LginFntn = () => {
@@ -18,93 +19,63 @@ const App = (props) => {
   return (
     <ImageBackground
       source={require('../../assets/images/bg_image.png')}
-      style={{
-        height: '100%',
-        width: '100%',
-      }}>
-      <SafeAreaView style={{flex: 1, marginTop: 20}}>
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginVertical: 20,
-          }}>
-          <Text style={{color: '#FFFFFF', fontSize: 25, height: 40}}>
-            Create New Password
-          </Text>
+      style={styles.ImageBackground}>
+      <SafeAreaView style={styles.SafeAreaView}>
+        {/* ========Title======== */}
+        <View style={styles.titleView}>
+          <Text style={styles.titleText}>Create New Password</Text>
         </View>
 
         {/* ======Form Start====== */}
 
-        <View style={{width: '90%', alignSelf: 'center'}}>
+        <View style={styles.formView}>
           {/* ==========Password========== */}
 
-          <View
-            style={{
-              flexDirection: 'row',
-              borderBottomWidth: 1,
-              borderColor: '#C0C0C0',
-              alignItems: 'center',
-              width: '100%',
-            }}>
+          <View style={styles.passwordView}>
             <TextInput
               placeholder="Password"
               placeholderTextColor="#696969"
               keyboardType="visible-password"
               //   secureTextEntry= {secure}
-              style={{color: 'white', width: '90%'}}
+              style={styles.passwordTextInput}
             />
             <View style={{width: '15%'}}>
               <Fontisto
                 name="key"
                 // size={14}
                 color="#C0C0C0"
-                style={{alignItems: 'flex-end', width: 13.5, height: 13.5}}
+                style={styles.passwordIcon}
               />
             </View>
           </View>
 
           {/* ==========Repeat Password========== */}
 
-          <View
-            style={{
-              flexDirection: 'row',
-              borderBottomWidth: 1,
-              borderColor: '#C0C0C0',
-              alignItems: 'center',
-              width: '100%',
-              marginVertical: 10,
-            }}>
+          <View style={styles.rpView}>
             <TextInput
               placeholder="Repeat Password"
               placeholderTextColor="#696969"
               keyboardType="visible-password"
               //   secureTextEntry= {secure}
-              style={{color: 'white', width: '90%'}}
+              style={styles.rpTextInput}
             />
             <View style={{width: '15%'}}>
               <Fontisto
                 name="key"
                 // size={14}
                 color="#C0C0C0"
-                style={{alignItems: 'flex-end', width: 13.5, height: 13.5}}
+                style={styles.rpIcon}
               />
             </View>
           </View>
 
-          {/* ========Login Button======== */}
+          {/* ========Continue Button======== */}
 
           <LinearGradient
             colors={['#F6931B', '#DE2516']}
-            style={{
-              width: 301,
-              height: 42,
-              alignSelf: 'center',
-              marginVertical: 50,
-              borderRadius: 3,
-            }}>
+            style={styles.buttonView}>
             <Button
-              title="Login"
+              title="Continue"
               onPress={() => LginFntn()}
               buttonStyle={{backgroundColor: 'transparent'}}
             />

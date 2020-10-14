@@ -9,11 +9,12 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Fontisto from 'react-native-vector-icons/Fontisto';
+import styles from './styles';
 
 const App = (props) => {
   const LginFntn = () => {
     // alert('Login Hoga');
-    props.navigation.navigate('signup')
+    props.navigation.navigate('signup');
   };
 
   return (
@@ -23,106 +24,67 @@ const App = (props) => {
         height: '100%',
         width: '100%',
       }}>
-      <SafeAreaView style={{flex: 1, marginTop: 20}}>
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginVertical: 20,
-          }}>
-          <Text style={{color: '#FFFFFF', fontSize: 25, height: 40}}>
-            Login
-          </Text>
+      <SafeAreaView style={styles.mainView}>
+        <View style={styles.loginView}>
+          <Text style={styles.loginText}>Login</Text>
         </View>
 
         {/* ======Form Start====== */}
 
-        <View style={{width: '90%', alignSelf: 'center'}}>
+        <View style={styles.widthView}>
           {/* ==========Phone Number========== */}
 
-          <View
-            style={{
-              flexDirection: 'row',
-              borderBottomWidth: 1,
-              borderColor: '#C0C0C0',
-              alignItems: 'center',
-              width: '100%',
-            }}>
+          <View style={styles.phoneView}>
             <TextInput
               placeholder="Phone number"
               placeholderTextColor="#696969"
               keyboardType="numeric"
-              style={{color: 'white', width: '85%'}}
+              style={styles.phoneTextInput}
             />
-            <View style={{width: '6%'}}></View>
             <Fontisto
               name="phone"
               // size={14}
               color="#C0C0C0"
-              style={{alignItems: 'flex-end', width: 14.33, height: 14.33}}
+              style={styles.phoneIcon}
             />
           </View>
 
           {/* ==========Password========== */}
 
-          <View
-            style={{
-              flexDirection: 'row',
-              borderBottomWidth: 1,
-              borderColor: '#C0C0C0',
-              alignItems: 'center',
-              width: '100%',
-            }}>
+          <View style={styles.passwordView}>
             <TextInput
               placeholder="Password"
               placeholderTextColor="#696969"
               keyboardType="visible-password"
               //   secureTextEntry= {secure}
-              style={{color: 'white', width: '90%'}}
+              style={styles.passwordTextInput}
             />
-            <View style={{width: '15%'}}>
-              <Fontisto
-                name="key"
-                // size={14}
-                color="#C0C0C0"
-                style={{alignItems: 'flex-end', height: 13.5, width: 13.5}}
-              />
-            </View>
+            <Fontisto
+              name="key"
+              // size={14}
+              color="#C0C0C0"
+              style={styles.passwordIcon}
+            />
           </View>
-          <View style={{alignItems: 'flex-end', marginVertical: 20}}>
-            <Text style={{color: '#C0C0C0', fontSize: 12, height: 15}}>
-              Forgot Password ?
-            </Text>
+
+          {/* ========Forgot Password======== */}
+
+          <View style={styles.forgotView}>
+            <Text style={styles.forgotText}>Forgot Password ?</Text>
           </View>
 
           {/* ========Dont Have An Account======== */}
 
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginVertical: 40,
-            }}>
-            <Text style={{color: '#808080', fontSize: 12}}>
-              Dont have an Account?
-            </Text>
-            <Text style={{color: '#C0C0C0', paddingLeft: 5, height: 19}}>
-              Sign Up
-            </Text>
+          <View style={styles.dontView}>
+            <Text style={styles.dontText}>Dont have an Account?</Text>
+            <Text style={styles.signupText}>Sign Up</Text>
           </View>
 
           {/* ========Login Button======== */}
 
           <LinearGradient
             colors={['#F6931B', '#DE2516']}
-            style={{
-              width: 301,
-              height: 42,
-              alignSelf: 'center',
-              marginVertical: 10,
-              borderRadius: 3,
-            }}>
+            style={styles.loginLG}>
             <Button
               title="Login"
               onPress={() => LginFntn()}

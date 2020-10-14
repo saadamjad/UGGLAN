@@ -8,6 +8,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
+import styles from './styles';
 
 const App = (props) => {
   const sendfunction = () => {
@@ -54,19 +55,11 @@ const App = (props) => {
   return (
     <ImageBackground
       source={require('../../assets/images/bg_image.png')}
-      style={{
-        height: '100%',
-        width: '100%',
-      }}>
+      style={styles.imageBackground}>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <SafeAreaView
-          style={{
-            flex: 1,
-            marginTop: 20,
-            width: '90%',
-            alignSelf: 'center',
-          }}>
-          {/* ==========Parrent Box========== */}
+        <SafeAreaView style={styles.SafeAreaView}>
+          {/* ==========Using Map========== */}
+
           {Array.map((item, i) => {
             console.log('loop', i),
               console.log(
@@ -78,67 +71,36 @@ const App = (props) => {
                 item.mobileNumber,
               );
             return (
-              <View
-                key={i}
-                style={{
-                  flexDirection: 'row',
-                  width: '100%',
-                  marginVertical: 10,
-                  borderBottomWidth: 0.5,
-                  borderColor: '#707070',
-                }}>
+              /* ==========Parrent Box========== */
+
+              <View key={i} style={styles.parrentBoxView}>
                 {/* ==========Image========== */}
 
-                <View
-                  style={{
-                    width: '25%',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginBottom: 20,
-                  }}>
-                  <View
-                    style={{
-                      borderWidth: 0.5,
-                      borderColor: '#F6931B',
-                      borderRadius: 100,
-                      overflow: 'hidden',
-                    }}>
-                    <Image
-                      source={item.image}
-                      style={{height: 60, width: 60, borderRadius: 60}}
-                    />
+                <View style={styles.imageMainView}>
+                  <View style={styles.imageView}>
+                    <Image source={item.image} style={styles.imageStyle} />
                   </View>
                 </View>
 
                 {/* ==========Title & Mobile no:========== */}
 
-                <View
-                  style={{
-                    flex: 1,
-                  }}>
+                <View style={{flex: 1}}>
                   <View style={{marginVertical: 10}}>
-                    <Text style={{color: '#FFFFFF'}}>{item.title}</Text>
+                    <Text style={styles.titleText}>{item.title}</Text>
                   </View>
 
                   <View>
-                    <Text style={{color: '#B3B6B7', fontSize: 12}}>
-                      {item.mobileNumber}
-                    </Text>
+                    <Text style={styles.mobileText}>{item.mobileNumber}</Text>
                   </View>
                 </View>
 
                 {/* ==========Send Image Button========== */}
 
-                <View
-                  style={{
-                    width: '15%',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}>
+                <View style={styles.sendView}>
                   <TouchableOpacity onPress={() => sendfunction()}>
                     <Image
                       source={require('../../assets/images/send.png')}
-                      style={{height: 30, width: 30}}
+                      style={styles.sendImageStyle}
                     />
                   </TouchableOpacity>
                 </View>

@@ -3,6 +3,7 @@ import {Button} from 'react-native-elements';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import LinearGradient from 'react-native-linear-gradient';
 import {View, Text, ImageBackground, Image} from 'react-native';
+import styles from './styles';
 
 const App = (props) => {
   const function1 = () => {
@@ -25,30 +26,16 @@ const App = (props) => {
         height: '100%',
         width: '100%',
       }}>
-      <View
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginVertical: 50,
-        }}>
+      <View style={styles.imageView}>
         <Image
           source={require('../../assets/images/logo.png')}
-          style={{height: 217, width: 217}}
+          style={styles.imageStyle}
         />
       </View>
 
       {/* ==========Buttons========== */}
 
-      <LinearGradient
-        colors={['#F6931B', '#DE2516']}
-        style={{
-          height: 40,
-          width: 301,
-          alignSelf: 'center',
-          marginVertical: 5,
-          marginTop: 50,
-          borderRadius: 3,
-        }}>
+      <LinearGradient colors={['#F6931B', '#DE2516']} style={styles.loginLG}>
         <Button
           title="Login"
           onPress={() => function1()}
@@ -56,15 +43,7 @@ const App = (props) => {
         />
       </LinearGradient>
 
-      <LinearGradient
-        colors={['#F6931B', '#DE2516']}
-        style={{
-          height: 40,
-          width: 301,
-          alignSelf: 'center',
-          marginVertical: 5,
-          borderRadius: 3,
-        }}>
+      <LinearGradient colors={['#F6931B', '#DE2516']} style={styles.signUpLG}>
         <Button
           title="Sign Up"
           onPress={() => function2()}
@@ -74,13 +53,7 @@ const App = (props) => {
         />
       </LinearGradient>
 
-      <View
-        style={{
-          height: 40,
-          width: 301,
-          alignSelf: 'center',
-          marginVertical: 5,
-        }}>
+      <View style={styles.facebookView}>
         <Button
           icon={
             <FontAwesome
@@ -91,21 +64,15 @@ const App = (props) => {
             />
           }
           title="Connect with facebook"
-          buttonStyle={{backgroundColor: '#3B5998', height: 40, }}
+          buttonStyle={{backgroundColor: '#3B5998', height: 40}}
           onPress={() => function3()}
         />
       </View>
 
       {/* ==========Footer========== */}
 
-      <View style={{justifyContent: 'center', marginVertical: 20}}>
-        <Text
-          style={{
-            color: '#FFFFFF',
-            fontSize: 12,
-            textAlign: 'center',
-            lineHeight: 20,
-          }}>
+      <View style={styles.footerView}>
+        <Text style={styles.footerText}>
           By Proceeding you Agree to our {'\n'} Terms & Conditions {'\n'} and
           comfrom you are atleast 13 year old.
         </Text>

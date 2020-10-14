@@ -30,6 +30,7 @@ import {Icon} from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import BottomTabNavigation from './bottomTabNavigation';
+import Home from '../screens/Home';
 const Stack = createStackNavigator();
 
 const Drawer = createDrawerNavigator();
@@ -76,12 +77,99 @@ function AuthStack() {
     </Stack.Navigator>
   );
 }
+function HomeStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="HomeScreen"
+        component={Home}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="allcontacts"
+        component={allcontacts}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SosPopup"
+        component={SosPopup}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="call"
+        component={call}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="settings"
+        component={settings}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="calling"
+        component={calling}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="hiresomeone"
+        component={hiresomeone}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="hireProfile"
+        component={hireProfile}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="shareUGGLAN"
+        component={shareUGGLAN}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="payMasterCard"
+        component={payMasterCard}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="help"
+        component={help}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="addPayment"
+        component={addPayment}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="addNewCard"
+        component={addNewCard}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="selectPaymentMethod"
+        component={selectPaymentMethod}
+        options={{headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="thankyou"
+        component={thankyou}
+        options={{headerShown: false}}
+      />
+    </Stack.Navigator>
+  );
+}
 function MainStack() {
   return (
     <Stack.Navigator>
       <Stack.Screen
         name="allcontacts"
         component={allcontacts}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="HomeScreen"
+        component={Home}
         options={{headerShown: false}}
       />
       <Stack.Screen
@@ -207,7 +295,7 @@ function MyTabs() {
             />
           ),
         }}
-        component={MainStack}
+        component={HomeStack}
       />
       <Tab.Screen
         name="Call"

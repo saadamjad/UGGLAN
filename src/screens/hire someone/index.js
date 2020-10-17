@@ -153,10 +153,10 @@ const App = (props) => {
                       maxStars={5}
                       fullStarColor={'#FFF700'}
                       emptyStarColor={'#FFF700'}
-                      emptyStar={'ios-star-outline'}
-                      fullStar={'ios-star'}
-                      halfStar={'ios-star-half'}
-                      iconSet={'Ionicons'}
+                      // emptyStar={'ios-star-outline'}
+                      // fullStar={'ios-star'}
+                      // halfStar={'ios-star-half'}
+                      // iconSet={'Ionicons'}
                       starSize={15}
                       containerStyle={{width: 80, marginLeft: 5, marginTop: -5}}
                       rating={item.rating}
@@ -181,7 +181,6 @@ const App = (props) => {
                       buttonStyle={{
                         backgroundColor: 'transparent',
                         width: 90,
-                        height: 28,
                       }}
                     />
                   </LinearGradient>

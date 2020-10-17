@@ -35,7 +35,7 @@ const App = (props) => {
             <TextInput
               placeholder="Password"
               placeholderTextColor="#696969"
-              keyboardType="visible-password"
+              keyboardType="default"
               //   secureTextEntry= {secure}
               style={styles.passwordTextInput}
             />
@@ -55,7 +55,7 @@ const App = (props) => {
             <TextInput
               placeholder="Repeat Password"
               placeholderTextColor="#696969"
-              keyboardType="visible-password"
+              keyboardType="default"
               //   secureTextEntry= {secure}
               style={styles.rpTextInput}
             />

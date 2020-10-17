@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Platform,
   PermissionsAndroid,
+  SafeAreaView,
 } from 'react-native';
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 import GlobalHeader from '../../components/header';
@@ -42,7 +43,7 @@ export default (props) => {
     // console.log('LOCATION HERE', location);
   };
   return (
-    <View style={{flex: 1}}>
+    <SafeAreaView style={{flex: 1}}>
       <GlobalHeader navigation={props.navigation}/>
       <MapView
         provider={PROVIDER_GOOGLE}
@@ -75,6 +76,6 @@ export default (props) => {
         )}
         {/* ))} */}
       </MapView>
-    </View>
+    </SafeAreaView>
   );
 };

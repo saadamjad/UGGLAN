@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
   mainView: {
     flex: 1,
@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
   phoneTextInput: {
     color: 'white',
     width: '90%',
+    height: Platform.OS == 'ios' ? 40 : 0,
   },
   phoneIcon: {
     alignItems: 'flex-end',
@@ -54,6 +55,7 @@ const styles = StyleSheet.create({
   passwordTextInput: {
     color: 'white',
     width: '90%',
+    height: Platform.OS == 'ios' ? 40 : 0,
   },
 
   passwordIcon: {

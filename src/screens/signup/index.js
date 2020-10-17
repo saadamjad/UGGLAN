@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   ImageBackground,
   TextInput,
+  Platform,
 } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
@@ -90,7 +91,11 @@ const App = (props) => {
           <TextInput
             placeholder="Full Name"
             placeholderTextColor="#696969"
-            style={{color: 'white', width: '90%'}}
+            style={{
+              color: 'white',
+              width: '90%',
+              height: Platform.OS == 'ios' ? 40 : 0,
+            }}
           />
           <Ionicons
             name="person"
@@ -124,7 +129,11 @@ const App = (props) => {
               placeholder="Code"
               placeholderTextColor="#696969"
               keyboardType="number-pad"
-              style={{color: 'white', width: '85%'}}
+              style={{
+                color: 'white',
+                width: '85%',
+                height: Platform.OS == 'ios' ? 40 : 0,
+              }}
             />
             <View style={{width: '15%'}}>
               <AntDesign
@@ -153,7 +162,11 @@ const App = (props) => {
               placeholder="Phone"
               placeholderTextColor="#696969"
               keyboardType="numeric"
-              style={{color: 'white', width: '85%'}}
+              style={{
+                color: 'white',
+                width: '85%',
+                height: Platform.OS == 'ios' ? 40 : 0,
+              }}
             />
             <Fontisto
               name="phone"
@@ -182,7 +195,11 @@ const App = (props) => {
             placeholder="Email"
             placeholderTextColor="#696969"
             keyboardType="email-address"
-            style={{color: 'white', width: '90%'}}
+            style={{
+              color: 'white',
+              width: '90%',
+              height: Platform.OS == 'ios' ? 40 : 0,
+            }}
           />
           <View style={{width: '15%'}}>
             <Fontisto
@@ -211,9 +228,13 @@ const App = (props) => {
           <TextInput
             placeholder="Password"
             placeholderTextColor="#696969"
-            keyboardType="visible-password"
+            keyboardType="default"
             //   secureTextEntry= {secure}
-            style={{color: 'white', width: '90%'}}
+            style={{
+              color: 'white',
+              width: '90%',
+              height: Platform.OS == 'ios' ? 40 : 0,
+            }}
           />
           <View style={{width: '15%'}}>
             <Fontisto

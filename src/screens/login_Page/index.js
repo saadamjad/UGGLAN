@@ -55,8 +55,8 @@ const App = (props) => {
             <TextInput
               placeholder="Password"
               placeholderTextColor="#696969"
-              keyboardType="visible-password"
-              //   secureTextEntry= {secure}
+              keyboardType="default"
+                secureTextEntry
               style={styles.passwordTextInput}
             />
             <Fontisto

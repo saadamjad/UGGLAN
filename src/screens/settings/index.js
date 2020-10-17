@@ -209,7 +209,7 @@ const App = () => {
           </View>
 
           <Text style={{color: '#F6931B', fontSize: 15, height: 20}}>
-            5 Sec
+            {Math.floor(isSlider)} Sec
           </Text>
         </View>
         {/* ========Slider========== */}
@@ -217,7 +217,7 @@ const App = () => {
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <Text style={{color: '#F6931B'}}>0</Text>
           <Slider
-            style={{width: 300, height: 40}}
+            style={{width: '95%', height: 40}}
             minimumValue={0}
             maximumValue={10}
             value={isSlider}

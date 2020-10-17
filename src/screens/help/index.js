@@ -70,7 +70,6 @@ const App = (props) => {
               buttonStyle={{
                 backgroundColor: 'transparent',
                 width: 275,
-                height: 33,
               }}
             />
           </LinearGradient>
@@ -127,7 +126,6 @@ const App = (props) => {
               buttonStyle={{
                 backgroundColor: 'transparent',
                 width: 275,
-                height: 33,
               }}
             />
           </LinearGradient>

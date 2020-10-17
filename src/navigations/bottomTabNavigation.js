@@ -16,7 +16,7 @@ export default ({state, descriptors, navigation}) => {
           type="AntDesign"
           style={{
             fontSize: 25,
-            color: focusedOptions.tabBarLabel == 'Home' ? 'black' : 'rgba(255,255,255, 0.6)',
+            color: focusedOptions.tabBarLabel == 'Home' ? 'white' : 'rgba(255,255,255, 0.6)',
           }}
         />
       ),
@@ -29,7 +29,7 @@ export default ({state, descriptors, navigation}) => {
           type="FontAwesome"
           style={{
             fontSize: 25,
-            color: focusedOptions.tabBarLabel == 'Call' ? 'black' : 'rgba(255,255,255, 0.6)',
+            color: focusedOptions.tabBarLabel == 'Call' ? 'white' : 'rgba(255,255,255, 0.6)',
           }}
         />
       ),
@@ -52,7 +52,7 @@ export default ({state, descriptors, navigation}) => {
           style={{
             fontSize: 25,
             color:
-              focusedOptions.tabBarLabel == 'Live Location' ? 'black' : 'rgba(255,255,255, 0.6)',
+              focusedOptions.tabBarLabel == 'Live Location' ? 'white' : 'rgba(255,255,255, 0.6)',
           }}
         />
       ),
@@ -65,7 +65,7 @@ export default ({state, descriptors, navigation}) => {
           type="MaterialIcons"
           style={{
             fontSize: 25,
-            color: focusedOptions.tabBarLabel == 'Timer' ? 'black' : 'rgba(255,255,255, 0.6)',
+            color: focusedOptions.tabBarLabel == 'Timer' ? 'white' : 'rgba(255,255,255, 0.6)',
           }}
         />
       ),
@@ -107,7 +107,7 @@ export default ({state, descriptors, navigation}) => {
             <Text
               style={{
                 color:
-                  focusedOptions.tabBarLabel == val.name ? 'black' : 'rgba(255,255,255, 0.6)',
+                  focusedOptions.tabBarLabel == val.name ? 'white' : 'rgba(255,255,255, 0.6)',
                 fontSize: 14,
               }}>
               {val.name.length <= 6

@@ -7,8 +7,12 @@ target 'UGGLAN' do
   config = use_native_modules!
 
   use_react_native!(:path => config["reactNativePath"])
+  rn_maps_path = '../node_modules/react-native-maps'
 
   pod 'react-native-geolocation', :path => '../node_modules/@react-native-community/geolocation'
+  pod 'react-native-google-maps', :path => rn_maps_path
+  pod 'GoogleMaps'
+  pod 'Google-Maps-iOS-Utils'
 
   target 'UGGLANTests' do
     inherit! :complete

@@ -39,7 +39,11 @@ const App = (props) => {
         <Button
           title="Login"
           onPress={() => function1()}
-          buttonStyle={{backgroundColor: 'transparent'}}
+          buttonStyle={{
+            backgroundColor: 'transparent',
+            height: '100%',
+            width: '100%',
+          }}
         />
       </LinearGradient>
 
@@ -49,6 +53,8 @@ const App = (props) => {
           onPress={() => function2()}
           buttonStyle={{
             backgroundColor: 'transparent',
+            height: '100%',
+            width: '100%',
           }}
         />
       </LinearGradient>

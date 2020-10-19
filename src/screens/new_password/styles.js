@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
   passwordTextInput: {
     color: 'white',
     width: '90%',
+    height: 40
   },
 
   passwordIcon: {
@@ -61,6 +62,7 @@ const styles = StyleSheet.create({
   rpTextInput: {
     color: 'white',
     width: '90%',
+    height: 40
   },
   rpIcon: {
     alignItems: 'flex-end',

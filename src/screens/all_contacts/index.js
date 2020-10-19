@@ -8,6 +8,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from 'react-native';
+import GlobalHeader from '../../components/header';
 import styles from './styles';
 
 const App = (props) => {
@@ -56,8 +57,9 @@ const App = (props) => {
     <ImageBackground
       source={require('../../assets/images/bg_image.png')}
       style={styles.imageBackground}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <SafeAreaView style={styles.SafeAreaView}>
+      <SafeAreaView style={styles.SafeAreaView}>
+        <GlobalHeader navigation={props.navigation} isBack={true} screenText={"All Contacts"} />
+        <ScrollView showsVerticalScrollIndicator={false}>
           {/* ==========Using Map========== */}
 
           {Array.map((item, i) => {
@@ -107,8 +109,8 @@ const App = (props) => {
               </View>
             );
           })}
-        </SafeAreaView>
-      </ScrollView>
+        </ScrollView>
+      </SafeAreaView>
     </ImageBackground>
   );
 };

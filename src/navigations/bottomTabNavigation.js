@@ -140,6 +140,10 @@ export default ({state, descriptors, navigation}) => {
       <Notify visible={visible1} />
       <Popup
         visible={visible}
+        notifySpecific={() => {
+          setVisible(false);
+          navigation.navigate('allcontacts');
+        }}
         notify={() => {
           setVisible(false);
           setVisible1(true);

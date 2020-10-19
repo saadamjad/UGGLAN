@@ -7,7 +7,7 @@ import {ThemeProvider} from '@react-navigation/native';
 const App = (props) => {
   const buttonArrays = [
     {name: 'Notify All contacts', func: props.notify},
-    {name: 'Notify specific contacts', func: props.toggleVisible},
+    {name: 'Notify specific contacts', func: props.notifySpecific},
     {name: 'Cancel', color: 'white', func: props.toggleVisible},
   ];
   return (

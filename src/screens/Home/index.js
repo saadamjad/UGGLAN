@@ -1,10 +1,12 @@
 import Geolocation from '@react-native-community/geolocation';
-import React, {useState, useEffect} from 'react';
+import {Icon} from 'native-base';
+import React, {useState, useEffect, useRef} from 'react';
 import {
   View,
   Text,
   TouchableOpacity,
   Platform,
+  Animated,
   PermissionsAndroid,
   SafeAreaView,
 } from 'react-native';
@@ -15,8 +17,28 @@ import RightDrawer from '../../components/rightSideDrawer';
 export default (props) => {
   //  state here
 
-  const [state, setState] = useState({position: {}, isVisible: false});
-
+  const [state, setState] = useState({
+    position: {},
+    isVisible: false,
+    done: false,
+    anim: useRef(new Animated.Value(0)).current,
+  });
+  const runAnimation = () => {
+    if (state.done) {
+      Animated.timing(state.anim, {
+        toValue: 0,
+        duration: 500,
+        useNativeDriver: true,
+      }).start();
+    } else {
+      Animated.timing(state.anim, {
+        toValue: 1,
+        duration: 500,
+        useNativeDriver: true,
+      }).start();
+    }
+    setState({...state,done: !state.done});
+  };
   useEffect(() => {
     GettingLocationPermission();
   }, []);
@@ -84,6 +106,37 @@ export default (props) => {
         )}
         {/* ))} */}
       </MapView>
+      <TouchableOpacity
+        onPress={() => runAnimation()}
+        style={{
+          position: 'absolute',
+          height: 60,
+          width: 60,
+          transform: [
+            {
+              rotate: state.anim.interpolate({
+                inputRange: [0, 1],
+                outputRange: ['0deg', '-45deg'],
+              }),
+            },
+          ],
+          borderRadius: 100,
+          backgroundColor: 'white',
+          left: 30,
+          bottom: 50,
+          shadowColor: '#000',
+          shadowOffset: {
+            width: 0,
+            height: 2,
+          },
+          shadowOpacity: 0.25,
+          shadowRadius: 3.84,
+          elevation: 5,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        <Icon style={{color: '#F6931B'}} type="AntDesign" name="plus" />
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };

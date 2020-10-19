@@ -9,7 +9,6 @@ export default ({state, descriptors, navigation}) => {
   const [visible, setVisible] = useState(false);
   const [visible1, setVisible1] = useState(false);
   const focusedOptions = descriptors[state.routes[state.index].key].options;
-  console.log('BHAIYAA', focusedOptions);
 
   const navs = [
     {

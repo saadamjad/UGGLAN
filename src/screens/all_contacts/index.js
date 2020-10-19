@@ -58,20 +58,15 @@ const App = (props) => {
       source={require('../../assets/images/bg_image.png')}
       style={styles.imageBackground}>
       <SafeAreaView style={styles.SafeAreaView}>
-        <GlobalHeader navigation={props.navigation} isBack={true} screenText={"All Contacts"} />
+        <GlobalHeader
+          navigation={props.navigation}
+          isBack={true}
+          screenText={'All Contacts'}
+        />
         <ScrollView showsVerticalScrollIndicator={false}>
           {/* ==========Using Map========== */}
 
           {Array.map((item, i) => {
-            console.log('loop', i),
-              console.log(
-                'item==',
-                item.image,
-                'title',
-                item.title,
-                'mobileNumber',
-                item.mobileNumber,
-              );
             return (
               /* ==========Parrent Box========== */
 

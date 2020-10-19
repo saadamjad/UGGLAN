@@ -31,6 +31,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import BottomTabNavigation from './bottomTabNavigation';
 import Home from '../screens/Home';
+import HomeLiveLocation from '../screens/HomeLiveLocation';
 const Stack = createStackNavigator();
 
 const Drawer = createDrawerNavigator();
@@ -336,7 +337,7 @@ function MyTabs() {
           ),
         }}
         name="Live Location"
-        component={MainStack}
+        component={HomeLiveLocation}
       />
       <Tab.Screen
         options={{

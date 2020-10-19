@@ -7,7 +7,11 @@ const GlobalHeader = (props) => {
   return (
     <LinearGradient
       colors={
-        props.isBack ? ['transparent', 'transparent'] : ['#F6931B', '#DE2516']
+        props.isBack
+          ? props.bg
+            ? ['#F6931B', '#DE2516']
+            : ['transparent', 'transparent']
+          : ['#F6931B', '#DE2516']
       }
       style={{
         elevation: 0,

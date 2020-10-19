@@ -78,6 +78,7 @@ export default ({state, descriptors, navigation}) => {
         height: 65,
         flexDirection: 'row',
         justifyContent: 'space-around',
+        overflow: 'visible'
       }}
       colors={['#F6931B', '#DE2516']}>
       {navs.map((val) => (

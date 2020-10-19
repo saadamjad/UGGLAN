@@ -6,14 +6,20 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import ToggleSwitch from 'toggle-switch-react-native';
 import Slider from '@react-native-community/slider';
+import GlobalHeader from '../../components/header';
 
-const App = () => {
+const App = (props) => {
   const [toggle, setToggle] = useState(false);
   const [isSlider, setSlider] = useState(5);
   return (
     <SafeAreaView style={{backgroundColor: '#000000', flex: 1}}>
+      <GlobalHeader
+        navigation={props.navigation}
+        isBack={true}
+        screenText={'Settings'}
+      />
       <View style={{width: '90%', alignSelf: 'center'}}>
-        <View style={{flexDirection: 'row', marginVertical: 20}}>
+        {/* <View style={{flexDirection: 'row', marginVertical: 20}}>
           <AntDesign
             name="left"
             size={19}
@@ -23,7 +29,7 @@ const App = () => {
           <Text style={{color: '#FFFFFF', marginLeft: 3}}>
             Select payment method
           </Text>
-        </View>
+        </View> */}
 
         {/* ==========Map View========== */}
 

@@ -2,10 +2,13 @@ import React, {Component} from 'react';
 import {TouchableOpacity, Text, Image, View} from 'react-native';
 import {Icon} from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
+import RightDrawer from '../rightSideDrawer';
 const GlobalHeader = (props) => {
   return (
     <LinearGradient
-      colors={['#F6931B', '#DE2516']}
+      colors={
+        props.isBack ? ['transparent', 'transparent'] : ['#F6931B', '#DE2516']
+      }
       style={{
         elevation: 0,
         borderBottomWidth: 0,
@@ -25,7 +28,11 @@ const GlobalHeader = (props) => {
             flexDirection: 'row',
             alignItems: 'center',
           }}>
-          <Icon style={{color: 'white'}} name="left" type="AntDesign" />
+          <Icon
+            style={{color: 'white', fontSize: 17}}
+            name="left"
+            type="AntDesign"
+          />
           <Text style={{color: 'white', marginLeft: 5, fontSize: 16}}>
             {props.screenText}
           </Text>
@@ -55,13 +62,14 @@ const GlobalHeader = (props) => {
               UGGLAN
             </Text>
           </View>
-          <View
+          <TouchableOpacity
+            onPress={() => props.toggleDrawer()}
             style={{
               justifyContent: 'center',
               alignItems: 'center',
             }}>
             <Icon style={{color: 'white'}} name="users" type="FontAwesome5" />
-          </View>
+          </TouchableOpacity>
         </>
       )}
     </LinearGradient>

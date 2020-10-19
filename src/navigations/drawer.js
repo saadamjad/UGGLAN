@@ -9,6 +9,53 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
+
+const DrawerItems = [
+  {title: 'My Profile', name: 'Home', icon: 'user'},
+  {
+    title: 'Hire Prople',
+    name: 'hiresomeone',
+    type: 'FontAwesome',
+    icon: 'users',
+  },
+  {
+    title: 'Add Payment',
+    name: 'addPayment',
+    type: 'Entypo',
+    icon: 'credit-card',
+  },
+  {
+    title: 'Settings',
+    name: 'settings',
+    type: 'Fontisto',
+    icon: 'player-settings',
+  },
+  {
+    title: 'History',
+    name: 'settings',
+    type: 'FontAwesome5',
+    icon: 'history',
+  },
+
+  {
+    title: 'Share UGGLAN',
+    name: 'settings',
+    type: 'FontAwesome',
+    icon: 'share',
+  },
+  {
+    title: 'Help',
+    name: 'settings',
+    type: 'Entypo',
+    icon: 'help-with-circle',
+  },
+  {
+    title: 'Log Out',
+    name: 'football',
+    icon: 'logout',
+  },
+];
+
 const DrawerContent = (props) => {
   let activeName = props?.state?.history[1]?.key?.split('-')[0];
 
@@ -20,51 +67,7 @@ const DrawerContent = (props) => {
         backgroundColor: 'white',
       }}>
       <View style={{flex: 1, paddingTop: 10, marginTop: 60}}>
-        {[
-          {title: 'My Profile', name: 'Home', icon: 'user'},
-          {
-            title: 'Hire Prople',
-            name: 'hiresomeone',
-            type: 'FontAwesome',
-            icon: 'users',
-          },
-          {
-            title: 'Add Payment',
-            name: 'addPayment',
-            type: 'Entypo',
-            icon: 'credit-card',
-          },
-          {
-            title: 'Settings',
-            name: 'settings',
-            type: 'Fontisto',
-            icon: 'player-settings',
-          },
-          {
-            title: 'History',
-            name: 'settings',
-            type: 'FontAwesome5',
-            icon: 'history',
-          },
-
-          {
-            title: 'Share UGGLAN',
-            name: 'settings',
-            type: 'FontAwesome',
-            icon: 'share',
-          },
-          {
-            title: 'Help',
-            name: 'settings',
-            type: 'Entypo',
-            icon: 'help-with-circle',
-          },
-          {
-            title: 'Log Out',
-            name: 'football',
-            icon: 'logout',
-          },
-        ].map((val) => (
+        {DrawerItems.map((val) => (
           <TouchableOpacity
             onPress={() => props.navigation.navigate(val.name)}
             style={{

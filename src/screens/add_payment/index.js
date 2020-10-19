@@ -3,6 +3,7 @@ import {Button} from 'react-native-elements';
 import {View, Text, ImageBackground, SafeAreaView, Image} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './styles';
+import GlobalHeader from '../../components/header';
 
 const App = (props) => {
   const cardFunction = () => {
@@ -16,6 +17,11 @@ const App = (props) => {
         width: '100%',
       }}>
       <SafeAreaView style={styles.mainView}>
+        <GlobalHeader
+          navigation={props.navigation}
+          isBack={true}
+          screenText={'Add payment'}
+        />
         <View style={styles.rowView}>
           {/* ==========Image========== */}
 

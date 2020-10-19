@@ -10,11 +10,12 @@ import {
 } from 'react-native';
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 import GlobalHeader from '../../components/header';
+import RightDrawer from '../../components/rightSideDrawer';
 
 export default (props) => {
   //  state here
 
-  const [state, setState] = useState({position: {}});
+  const [state, setState] = useState({position: {}, isVisible: false});
 
   useEffect(() => {
     GettingLocationPermission();
@@ -44,7 +45,14 @@ export default (props) => {
   };
   return (
     <SafeAreaView style={{flex: 1}}>
-      <GlobalHeader navigation={props.navigation}/>
+      <GlobalHeader
+        toggleDrawer={() => setState({...state, isVisible: !state.isVisible})}
+        navigation={props.navigation}
+      />
+      <RightDrawer
+        toggleDrawer={() => setState({...state, isVisible: !state.isVisible})}
+        isVisible={state.isVisible}
+      />
       <MapView
         provider={PROVIDER_GOOGLE}
         style={{flex: 1}}

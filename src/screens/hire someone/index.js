@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import StarRating from 'react-native-star-rating';
+import GlobalHeader from '../../components/header';
 const App = (props) => {
   const Hirefunction = () => {
     props.navigation.navigate('hireProfile');
@@ -76,120 +77,132 @@ const App = (props) => {
         height: '100%',
         width: '100%',
       }}>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <SafeAreaView
-          style={{
-            flex: 1,
-            marginTop: 20,
-            width: '90%',
-            alignSelf: 'center',
-          }}>
-          {/* ==========Parrent Box========== */}
-          {Array.map((item, i) => {
-            return (
-              <View
-                style={{
-                  flexDirection: 'row',
-                  width: '100%',
-                  marginVertical: 10,
-                  borderBottomWidth: 0.5,
-                  borderColor: '#707070',
-                }}>
-                {/* ==========Image========== */}
-
+      <SafeAreaView>
+        <GlobalHeader
+          navigation={props.navigation}
+          isBack={true}
+          screenText={'Hire Someone'}
+        />
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <SafeAreaView
+            style={{
+              flex: 1,
+              marginTop: 20,
+              width: '90%',
+              alignSelf: 'center',
+            }}>
+            {/* ==========Parrent Box========== */}
+            {Array.map((item, i) => {
+              return (
                 <View
                   style={{
-                    width: '25%',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginBottom: 20,
+                    flexDirection: 'row',
+                    width: '100%',
+                    marginVertical: 10,
+                    borderBottomWidth: 0.5,
+                    borderColor: '#707070',
                   }}>
+                  {/* ==========Image========== */}
+
                   <View
                     style={{
-                      borderWidth: 0.5,
-                      borderColor: '#F6931B',
-                      borderRadius: 100,
-                      overflow: 'hidden',
+                      width: '25%',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      marginBottom: 20,
                     }}>
-                    <Image
-                      source={item.image}
-                      style={{height: 60, width: 60, borderRadius: 100}}
-                      resizeMode="cover"
-                    />
-                  </View>
-                </View>
-
-                {/* ==========Name & Address & Stars========== */}
-
-                <View
-                  style={{
-                    flex: 1,
-                    marginLeft: 0,
-                  }}>
-                  <View style={{flexDirection: 'row'}}>
-                    <Text style={{fontSize: 15, color: '#FFFFFF'}}>
-                      {item.name}
-                      {'   |'}
-                    </Text>
-                    <Text
+                    <View
                       style={{
-                        color: item.status == 'pending' ? '#A1A1A1' : '#29FF00',
-                        marginLeft: 5,
-                        fontSize: 12,
-                        padding: 2,
+                        borderWidth: 0.5,
+                        borderColor: '#F6931B',
+                        borderRadius: 100,
+                        overflow: 'hidden',
                       }}>
-                      {item.dollar}
-                    </Text>
+                      <Image
+                        source={item.image}
+                        style={{height: 60, width: 60, borderRadius: 100}}
+                        resizeMode="cover"
+                      />
+                    </View>
                   </View>
-                  <View style={{marginVertical: 5}}>
-                    <Text style={{fontSize: 13, color: '#F6931B'}}>
-                      {item.address}
-                    </Text>
+
+                  {/* ==========Name & Address & Stars========== */}
+
+                  <View
+                    style={{
+                      flex: 1,
+                      marginLeft: 0,
+                    }}>
+                    <View style={{flexDirection: 'row'}}>
+                      <Text style={{fontSize: 15, color: '#FFFFFF'}}>
+                        {item.name}
+                        {'   |'}
+                      </Text>
+                      <Text
+                        style={{
+                          color:
+                            item.status == 'pending' ? '#A1A1A1' : '#29FF00',
+                          marginLeft: 5,
+                          fontSize: 12,
+                          padding: 2,
+                        }}>
+                        {item.dollar}
+                      </Text>
+                    </View>
+                    <View style={{marginVertical: 5}}>
+                      <Text style={{fontSize: 13, color: '#F6931B'}}>
+                        {item.address}
+                      </Text>
+                    </View>
+                    {/* ********Stars Area******** */}
+                    <View style={{marginVertical: 5}}>
+                      <StarRating
+                        disabled={false}
+                        maxStars={5}
+                        fullStarColor={'#FFF700'}
+                        emptyStarColor={'#FFF700'}
+                        // emptyStar={'ios-star-outline'}
+                        // fullStar={'ios-star'}
+                        // halfStar={'ios-star-half'}
+                        // iconSet={'Ionicons'}
+                        starSize={15}
+                        containerStyle={{
+                          width: 80,
+                          marginLeft: 5,
+                          marginTop: -5,
+                        }}
+                        rating={item.rating}
+                      />
+                    </View>
                   </View>
-                  {/* ********Stars Area******** */}
-                  <View style={{marginVertical: 5}}>
-                    <StarRating
-                      disabled={false}
-                      maxStars={5}
-                      fullStarColor={'#FFF700'}
-                      emptyStarColor={'#FFF700'}
-                      // emptyStar={'ios-star-outline'}
-                      // fullStar={'ios-star'}
-                      // halfStar={'ios-star-half'}
-                      // iconSet={'Ionicons'}
-                      starSize={15}
-                      containerStyle={{width: 80, marginLeft: 5, marginTop: -5}}
-                      rating={item.rating}
-                    />
+
+                  {/* ==========Hire Button========== */}
+
+                  <View
+                    style={{
+                      width: '25%',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}>
+                    <LinearGradient
+                      colors={['#F6931B', '#DE2516']}
+                      style={{borderRadius: 3}}>
+                      <Button
+                        title="Hire Now"
+                        onPress={() => Hirefunction()}
+                        buttonStyle={{
+                          backgroundColor: 'transparent',
+                          width: 90,
+                        }}
+                      />
+                    </LinearGradient>
                   </View>
                 </View>
-
-                {/* ==========Hire Button========== */}
-
-                <View
-                  style={{
-                    width: '25%',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}>
-                  <LinearGradient
-                    colors={['#F6931B', '#DE2516']}
-                    style={{borderRadius: 3}}>
-                    <Button
-                      title="Hire Now"
-                      onPress={() => Hirefunction()}
-                      buttonStyle={{
-                        backgroundColor: 'transparent',
-                        width: 90,
-                      }}
-                    />
-                  </LinearGradient>
-                </View>
-              </View>
-            );
-          })}
-        </SafeAreaView>
-      </ScrollView>
+              );
+            })}
+          </SafeAreaView>
+        </ScrollView>
+      </SafeAreaView>
     </ImageBackground>
   );
 };

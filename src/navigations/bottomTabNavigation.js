@@ -2,8 +2,12 @@ import React from 'react';
 import {View, Text, TouchableOpacity, Image} from 'react-native';
 import {Icon} from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
-
+import {useState} from 'react';
+import Popup from '../components/popup';
+import Notify from '../components/notification_sent';
 export default ({state, descriptors, navigation}) => {
+  const [visible, setVisible] = useState(false);
+  const [visible1, setVisible1] = useState(false);
   const focusedOptions = descriptors[state.routes[state.index].key].options;
   console.log('BHAIYAA', focusedOptions);
 
@@ -16,7 +20,10 @@ export default ({state, descriptors, navigation}) => {
           type="AntDesign"
           style={{
             fontSize: 25,
-            color: focusedOptions.tabBarLabel == 'Home' ? 'white' : 'rgba(255,255,255, 0.6)',
+            color:
+              focusedOptions.tabBarLabel == 'Home'
+                ? 'white'
+                : 'rgba(255,255,255, 0.6)',
           }}
         />
       ),
@@ -29,7 +36,10 @@ export default ({state, descriptors, navigation}) => {
           type="FontAwesome"
           style={{
             fontSize: 25,
-            color: focusedOptions.tabBarLabel == 'Call' ? 'white' : 'rgba(255,255,255, 0.6)',
+            color:
+              focusedOptions.tabBarLabel == 'Call'
+                ? 'white'
+                : 'rgba(255,255,255, 0.6)',
           }}
         />
       ),
@@ -37,10 +47,12 @@ export default ({state, descriptors, navigation}) => {
     {
       name: '',
       icon: (
-        <Image
-          style={{width: 80, height: 80, marginTop: -40}}
-          source={require('../assets/icons/siren2.png')}
-        />
+        <TouchableOpacity onPress={() => setVisible(!visible)}>
+          <Image
+            style={{width: 80, height: 80, marginTop: -40}}
+            source={require('../assets/icons/siren2.png')}
+          />
+        </TouchableOpacity>
       ),
     },
     {
@@ -52,7 +64,9 @@ export default ({state, descriptors, navigation}) => {
           style={{
             fontSize: 25,
             color:
-              focusedOptions.tabBarLabel == 'Live Location' ? 'white' : 'rgba(255,255,255, 0.6)',
+              focusedOptions.tabBarLabel == 'Live Location'
+                ? 'white'
+                : 'rgba(255,255,255, 0.6)',
           }}
         />
       ),
@@ -65,7 +79,10 @@ export default ({state, descriptors, navigation}) => {
           type="MaterialIcons"
           style={{
             fontSize: 25,
-            color: focusedOptions.tabBarLabel == 'Timer' ? 'white' : 'rgba(255,255,255, 0.6)',
+            color:
+              focusedOptions.tabBarLabel == 'Timer'
+                ? 'white'
+                : 'rgba(255,255,255, 0.6)',
           }}
         />
       ),
@@ -78,7 +95,7 @@ export default ({state, descriptors, navigation}) => {
         height: 65,
         flexDirection: 'row',
         justifyContent: 'space-around',
-        overflow: 'visible'
+        overflow: 'visible',
       }}
       colors={['#F6931B', '#DE2516']}>
       {navs.map((val) => (
@@ -108,7 +125,9 @@ export default ({state, descriptors, navigation}) => {
             <Text
               style={{
                 color:
-                  focusedOptions.tabBarLabel == val.name ? 'white' : 'rgba(255,255,255, 0.6)',
+                  focusedOptions.tabBarLabel == val.name
+                    ? 'white'
+                    : 'rgba(255,255,255, 0.6)',
                 fontSize: 14,
               }}>
               {val.name.length <= 6
@@ -118,6 +137,18 @@ export default ({state, descriptors, navigation}) => {
           </TouchableOpacity>
         </View>
       ))}
+      <Notify visible={visible1} />
+      <Popup
+        visible={visible}
+        notify={() => {
+          setVisible(false);
+          setVisible1(true);
+          setTimeout(() => {
+            setVisible1(false);
+          }, 3000);
+        }}
+        toggleVisible={() => setVisible(!visible)}
+      />
     </LinearGradient>
   );
 };

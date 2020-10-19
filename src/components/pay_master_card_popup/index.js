@@ -1,12 +1,15 @@
 import React from 'react';
 import {Button} from 'react-native-elements';
-import {View, Text, Image, SafeAreaView} from 'react-native';
+import {View, Text, Image, SafeAreaView, Modal} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-const App = () => {
-  const buttonArrays = [{name: 'Confirm'}, {name: 'Cancel', color: 'white'}];
+const App = ({toggleVisible, visible, onConfirm}) => {
+  const buttonArrays = [
+    {name: 'Confirm', func: () => onConfirm()},
+    {name: 'Cancel', color: 'white', func: () => toggleVisible()},
+  ];
   return (
-    <SafeAreaView style={{backgroundColor: '#000000', flex: 1}}>
+    <Modal transparent={true} animationType={'slide'} visible={visible}>
       <View style={{width: '90%', alignSelf: 'center', marginVertical: 50}}>
         <View
           style={{
@@ -43,6 +46,7 @@ const App = () => {
                 }}>
                 <Button
                   title={val.name}
+                  onPress={val.func}
                   titleStyle={{
                     color: val.color ? 'grey' : 'white',
                     fontSize: 13,
@@ -60,7 +64,7 @@ const App = () => {
           </View>
         </View>
       </View>
-    </SafeAreaView>
+    </Modal>
   );
 };
 export default App;

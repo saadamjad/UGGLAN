@@ -8,14 +8,16 @@ import RadioForm, {
 } from 'react-native-simple-radio-button';
 import LinearGradient from 'react-native-linear-gradient';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-
+import PayModal from '../../components/pay_on_cash';
 const App = (props) => {
   const Continue = () => {
-    props.navigation.navigate('payMasterCard');
+    setVisible(true);
+    // props.navigation.navigate('payMasterCard');
   };
 
   const [isRadio1, setRadio1] = useState(false);
   const [isRadio2, setRadio2] = useState(false);
+  const [visible, setVisible] = useState(false);
 
   return (
     <ImageBackground
@@ -31,6 +33,11 @@ const App = (props) => {
           marginTop: 20,
           alignSelf: 'center',
         }}>
+        <PayModal
+          visible={visible}
+          onConfirm={() => {setVisible(false);props.navigation.navigate('payMasterCard');}}
+          toggleVisible={() => setVisible(!visible)}
+        />
         <View style={{flexDirection: 'row'}}>
           <AntDesign
             name="left"

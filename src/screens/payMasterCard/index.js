@@ -12,11 +12,13 @@ import LinearGradient from 'react-native-linear-gradient';
 import {Icon} from 'native-base';
 import CheckBox from '../../components/checkBox';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-
+import PayCardModal from '../../components/pay_master_card_popup';
 const App = (props) => {
   const Pay = () => {
-    props.navigation.navigate('thankyou');
+    setVisible(true);
+    // props.navigation.navigate('thankyou');
   };
+  const [visible, setVisible] = useState(false);
   const [mark, setMark] = useState(false);
   const [state, setState] = useState({card: 'master'});
 
@@ -67,7 +69,14 @@ const App = (props) => {
           alignSelf: 'center',
         }}>
         {/* ============Box Row============ */}
-
+        <PayCardModal
+          visible={visible}
+          toggleVisible={() => setVisible(!visible)}
+          onConfirm={() => {
+            setVisible(false);
+            props.navigation.navigate('thankyou');
+          }}
+        />
         <View
           style={{
             flexDirection: 'row',

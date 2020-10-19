@@ -1,10 +1,11 @@
+import {useLinkProps} from '@react-navigation/native';
 import React from 'react';
-import {View, Text, Image, SafeAreaView} from 'react-native';
+import {View, Text, Image, SafeAreaView, Modal} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
 
-const App = () => {
+const App = (props) => {
   return (
-    <SafeAreaView style={{backgroundColor: '#000000', flex: 1}}>
+    <Modal transparent={true} animationType={'fade'} visible={props.visible}>
       <View style={{width: '90%', alignSelf: 'center', marginVertical: 50}}>
         <View
           style={{
@@ -42,7 +43,7 @@ const App = () => {
           </View>
         </View>
       </View>
-    </SafeAreaView>
+    </Modal>
   );
 };
 export default App;

@@ -9,6 +9,7 @@ import RadioForm, {
 import LinearGradient from 'react-native-linear-gradient';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import PayModal from '../../components/pay_on_cash';
+import GlobalHeader from '../../components/header';
 const App = (props) => {
   const Continue = () => {
     setVisible(true);
@@ -35,10 +36,13 @@ const App = (props) => {
         }}>
         <PayModal
           visible={visible}
-          onConfirm={() => {setVisible(false);props.navigation.navigate('payMasterCard');}}
+          onConfirm={() => {
+            setVisible(false);
+            props.navigation.navigate('payMasterCard');
+          }}
           toggleVisible={() => setVisible(!visible)}
         />
-        <View style={{flexDirection: 'row'}}>
+        {/* <View style={{flexDirection: 'row'}}>
           <AntDesign
             name="left"
             size={19}
@@ -48,7 +52,12 @@ const App = (props) => {
           <Text style={{color: '#FFFFFF', marginLeft: 5}}>
             Select payment method
           </Text>
-        </View>
+        </View> */}
+        <GlobalHeader
+          isBack={true}
+          screenText={'Select payment method'}
+          navigation={props.navigation}
+        />
 
         {/* ============Radio Buttons Start============= */}
 

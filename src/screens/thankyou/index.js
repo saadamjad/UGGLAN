@@ -3,6 +3,7 @@ import {Button} from 'react-native-elements';
 import {View, Text, SafeAreaView, ImageBackground, Image} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import GlobalHeader from '../../components/header'
 
 const App = (props) => {
   const Track=()=> {
@@ -22,7 +23,7 @@ const App = (props) => {
           marginVertical: 20,
           alignSelf: 'center',
         }}>
-        <View style={{flexDirection: 'row'}}>
+        {/* <View style={{flexDirection: 'row'}}>
           <AntDesign
             name="left"
             size={19}
@@ -32,7 +33,11 @@ const App = (props) => {
           {/* <Text style={{color: '#FFFFFF', marginLeft: 5}}>
             Select payment method
           </Text> */}
-        </View>
+        {/* </View> */}
+        <GlobalHeader
+          isBack={true}
+          navigation={props.navigation}
+        />
         <View style={{alignItems: 'center', marginTop: 30}}>
           <Text style={{color: '#FFFFFF', fontSize: 17}}>Thank You</Text>
         </View>

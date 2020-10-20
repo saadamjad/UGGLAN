@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Fontisto from 'react-native-vector-icons/Fontisto';
+import Globalinputs from '../../components/inputfields'
 import styles from './styles';
 
 const App = (props) => {
@@ -28,6 +29,7 @@ const App = (props) => {
         <View style={styles.loginView}>
           <Text style={styles.loginText}>Login</Text>
         </View>
+        {/* <Globalinputs/> */}
 
         {/* ======Form Start====== */}
 

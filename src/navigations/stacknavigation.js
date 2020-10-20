@@ -30,6 +30,7 @@ import {Icon} from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import BottomTabNavigation from './bottomTabNavigation';
+import selectlangauge from '../screens/select_language' 
 import Home from '../screens/Home';
 import HomeLiveLocation from '../screens/HomeLiveLocation';
 const Stack = createStackNavigator();
@@ -75,6 +76,7 @@ function AuthStack() {
         component={loginpage}
         options={{headerShown: false}}
       />
+
     </Stack.Navigator>
   );
 }
@@ -171,6 +173,11 @@ function MainStack() {
       <Stack.Screen
         name="HomeScreen"
         component={Home}
+        options={{headerShown: false}}
+      />
+       <Stack.Screen
+        name="selectlangauge"
+        component={selectlangauge}
         options={{headerShown: false}}
       />
       <Stack.Screen

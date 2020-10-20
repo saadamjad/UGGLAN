@@ -13,7 +13,7 @@ import {
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 import GlobalHeader from '../../components/header';
 import RightDrawer from '../../components/rightSideDrawer';
-
+import * as Animatable from "react-native-animatable";
 export default (props) => {
   //  state here
 
@@ -37,7 +37,7 @@ export default (props) => {
         useNativeDriver: true,
       }).start();
     }
-    setState({...state,done: !state.done});
+    setState({...state, done: !state.done});
   };
   useEffect(() => {
     GettingLocationPermission();
@@ -106,37 +106,80 @@ export default (props) => {
         )}
         {/* ))} */}
       </MapView>
-      <TouchableOpacity
-        onPress={() => runAnimation()}
+      <View
         style={{
-          position: 'absolute',
-          height: 60,
-          width: 60,
-          transform: [
-            {
-              rotate: state.anim.interpolate({
-                inputRange: [0, 1],
-                outputRange: ['0deg', '-45deg'],
-              }),
-            },
-          ],
-          borderRadius: 100,
-          backgroundColor: 'white',
           left: 30,
           bottom: 50,
-          shadowColor: '#000',
-          shadowOffset: {
-            width: 0,
-            height: 2,
-          },
-          shadowOpacity: 0.25,
-          shadowRadius: 3.84,
-          elevation: 5,
+          position: 'absolute',
+          // backgroundColor: 'black',
           alignItems: 'center',
-          justifyContent: 'center',
+          // justifyContent: 'space-between',
         }}>
-        <Icon style={{color: '#F6931B'}} type="AntDesign" name="plus" />
-      </TouchableOpacity>
+        {[
+          {type: 'FontAwesome5', name: 'satellite-dish'},
+          {type: 'SimpleLineIcons', name: 'volume-2', name1: 'volume-off'},
+          {type: 'Feather', name: 'mic', name1: 'mic-off'},
+          {type: 'SimpleLineIcons', name: 'location-pin', name1: 'mic-off'},
+        ].map((val) => (
+          <Animatable.View animation={state.done ? 'bounceIn' : 'bounceOut'} style={{ paddingBottom: 10}}>
+            <TouchableOpacity
+              // onPress={() => runAnimation()}
+              style={{
+                height: 50,
+
+                width: 50,
+                borderRadius: 100,
+                backgroundColor: 'white',
+
+                shadowColor: '#000',
+                shadowOffset: {
+                  width: 0,
+                  height: 2,
+                },
+                shadowOpacity: 0.25,
+                shadowRadius: 3.84,
+                elevation: 5,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}>
+              <Icon
+                style={{color: 'black', fontSize: 25}}
+                type={val.type}
+                name={val.name}
+              />
+            </TouchableOpacity>
+          </Animatable.View>
+        ))}
+        <TouchableOpacity
+          onPress={() => runAnimation()}
+          style={{
+            height: 50,
+            width: 50,
+            transform: [
+              {
+                rotate: state.anim.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: ['0deg', '-45deg'],
+                }),
+              },
+            ],
+            borderRadius: 100,
+            backgroundColor: 'white',
+
+            shadowColor: '#000',
+            shadowOffset: {
+              width: 0,
+              height: 2,
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+            elevation: 5,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+          <Icon style={{color: '#F6931B'}} type="AntDesign" name="plus" />
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };

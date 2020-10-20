@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 const DrawerItems = [
-  {title: 'My Profile', name: 'Home', icon: 'user'},
+  {title: 'My Profile', name: 'profile', icon: 'user'},
   {
     title: 'Hire Prople',
     name: 'hiresomeone',
@@ -39,19 +39,19 @@ const DrawerItems = [
 
   {
     title: 'Share UGGLAN',
-    name: 'settings',
+    name: 'shareUGGLAN',
     type: 'FontAwesome',
     icon: 'share',
   },
   {
     title: 'Help',
-    name: 'settings',
+    name: 'help',
     type: 'Entypo',
     icon: 'help-with-circle',
   },
   {
     title: 'Log Out',
-    name: 'football',
+    name: 'login',
     icon: 'logout',
   },
 ];

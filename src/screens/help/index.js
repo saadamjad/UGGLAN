@@ -2,11 +2,12 @@ import React from 'react';
 import {View, Text, ImageBackground, Image, SafeAreaView} from 'react-native';
 import {Button} from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
+import GlobalHeader from '../../components/header';
 
 const App = (props) => {
-  const Show=()=>{
-    props.navigation.navigate('settings')
-  }
+  const Show = () => {
+    props.navigation.navigate('settings');
+  };
   return (
     <ImageBackground
       source={require('../../assets/images/bg_image.png')}
@@ -14,6 +15,13 @@ const App = (props) => {
         height: '100%',
         width: '100%',
       }}>
+        <SafeAreaView>
+        <GlobalHeader
+          screenText={'Help'}
+          isBack={true}
+          navigation={props.navigation}
+        />
+        </SafeAreaView>
       <SafeAreaView
         style={{
           flex: 1,

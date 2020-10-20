@@ -12,10 +12,11 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
+import GlobalHeader from '../../components/header';
 
 const App = (props) => {
   const SgnUpFntn = () => {
-    props.navigation.navigate('otp');
+    props.navigation.navigate('HomeScreen');
   };
 
   return (
@@ -25,16 +26,16 @@ const App = (props) => {
         height: '100%',
         width: '100%',
       }}>
+      <SafeAreaView>
+        <GlobalHeader
+          isBack={true}
+          screenText={'My Profile'}
+          navigation={props.navigation}
+        />
+      </SafeAreaView>
       <SafeAreaView
         style={{flex: 1, marginTop: 20, width: '90%', alignSelf: 'center'}}>
-        <View
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            marginVertical: 20,
-          }}>
-          <Text style={{color: '#FFFFFF', fontSize: 25}}>Create Account</Text>
-        </View>
+       
 
         {/* ==========Profile Image========== */}
 
@@ -251,22 +252,7 @@ const App = (props) => {
         </View>
         {/* </View> */}
 
-        {/* ========Already Have An Account======== */}
-
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginVertical: 40,
-          }}>
-          <Text style={{color: '#808080', fontSize: 12}}>
-            Already have an Account?
-          </Text>
-          <Text style={{color: '#C0C0C0', paddingLeft: 5, height: 19}}>
-            Login
-          </Text>
-        </View>
+     
 
         {/* ========Sign Up Button======== */}
 
@@ -274,13 +260,14 @@ const App = (props) => {
           colors={['#F6931B', '#DE2516']}
           style={{
             width: 301,
+            marginTop: 40,
             height: 42,
             alignSelf: 'center',
             marginVertical: 10,
             borderRadius: 3,
           }}>
           <Button
-            title="Sign Up"
+            title="Save"
             onPress={() => SgnUpFntn()}
             buttonStyle={{backgroundColor: 'transparent'}}
           />

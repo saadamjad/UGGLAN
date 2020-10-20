@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   phoneTextInput: {
     color: 'white',
     width: '90%',
-    height: Platform.OS == 'ios' ? 40 : 0,
+    height: 40,
   },
   phoneIcon: {
     alignItems: 'flex-end',
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   passwordTextInput: {
     color: 'white',
     width: '90%',
-    height: Platform.OS == 'ios' ? 40 : 0,
+    height: 40,
   },
 
   passwordIcon: {

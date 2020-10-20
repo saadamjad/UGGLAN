@@ -3,7 +3,7 @@ import * as React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import login from '../screens/login';
-
+import Profile from '../screens/profile';
 import {Image, View, Text} from 'react-native';
 import signup from '../screens/signup';
 import loginpage from '../screens/login_Page';
@@ -30,7 +30,7 @@ import {Icon} from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import BottomTabNavigation from './bottomTabNavigation';
-import selectlangauge from '../screens/select_language' 
+import selectlangauge from '../screens/select_language';
 import Home from '../screens/Home';
 import HomeLiveLocation from '../screens/HomeLiveLocation';
 const Stack = createStackNavigator();
@@ -76,7 +76,6 @@ function AuthStack() {
         component={loginpage}
         options={{headerShown: false}}
       />
-
     </Stack.Navigator>
   );
 }
@@ -91,6 +90,11 @@ function HomeStack() {
       <Stack.Screen
         name="allcontacts"
         component={allcontacts}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="profile"
+        component={Profile}
         options={{headerShown: false}}
       />
       <Stack.Screen
@@ -171,11 +175,16 @@ function MainStack() {
         options={{headerShown: false}}
       />
       <Stack.Screen
+        name="profile"
+        component={Profile}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
         name="HomeScreen"
         component={Home}
         options={{headerShown: false}}
       />
-       <Stack.Screen
+      <Stack.Screen
         name="selectlangauge"
         component={selectlangauge}
         options={{headerShown: false}}

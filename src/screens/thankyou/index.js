@@ -7,7 +7,7 @@ import GlobalHeader from '../../components/header'
 
 const App = (props) => {
   const Track=()=> {
-    props.navigation.navigate('help')
+    props.navigation.navigate('trackperson')
   }
   return (
     <ImageBackground

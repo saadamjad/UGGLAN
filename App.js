@@ -24,12 +24,14 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import Stack from './src/navigations/stacknavigation';
+import Chat from './src/screens/chat';
 
 const App =  (props) => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
       <Stack navigation={props.navigation} />
+      {/* <Chat /> */}
     </>
   );
 };

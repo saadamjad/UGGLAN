@@ -32,8 +32,10 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import BottomTabNavigation from './bottomTabNavigation';
 import selectlangauge from '../screens/select_language';
 import Home from '../screens/Home';
-import history from '../screens/history'
+import history from '../screens/history';
 import HomeLiveLocation from '../screens/HomeLiveLocation';
+import Chat from '../screens/chat';
+import TrackPerson from '../screens/trackperson';
 const Stack = createStackNavigator();
 
 const Drawer = createDrawerNavigator();
@@ -88,6 +90,16 @@ function HomeStack() {
       <Stack.Screen
         name="HomeScreen"
         component={Home}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="chat"
+        component={Chat}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="trackperson"
+        component={TrackPerson}
         options={{headerShown: false}}
       />
       <Stack.Screen
@@ -178,6 +190,16 @@ function MainStack() {
         options={{headerShown: false}}
       />
       <Stack.Screen
+        name="trackperson"
+        component={TrackPerson}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="chat"
+        component={Chat}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
         name="profile"
         component={Profile}
         options={{headerShown: false}}
@@ -265,9 +287,19 @@ function MainStack() {
 function LiveLocationStack() {
   return (
     <Stack.Navigator>
-          <Stack.Screen
+      <Stack.Screen
         name="HomeLiveLocation"
         component={HomeLiveLocation}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="trackperson"
+        component={TrackPerson}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="chat"
+        component={Chat}
         options={{headerShown: false}}
       />
       <Stack.Screen
@@ -369,8 +401,18 @@ function CallStack() {
         options={{headerShown: false}}
       />
       <Stack.Screen
+        name="chat"
+        component={Chat}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
         name="allcontacts"
         component={allcontacts}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="trackperson"
+        component={TrackPerson}
         options={{headerShown: false}}
       />
       <Stack.Screen
@@ -464,7 +506,7 @@ function App() {
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="allcontacts"
+          name="HomeStacks"
           component={MyDrawer}
           options={{headerShown: false}}
         />

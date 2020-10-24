@@ -13,7 +13,7 @@ import styles from './styles';
 
 const App = (props) => {
   const LginFntn = () => {
-    props.navigation.navigate('allcontacts');
+    props.navigation.navigate('HomeStacks');
   };
 
   return (

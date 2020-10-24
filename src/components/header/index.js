@@ -29,7 +29,7 @@ const GlobalHeader = (props) => {
           <TouchableOpacity
             onPress={() => props.navigation.goBack()}
             style={{
-              width:props.isMonthPicker? '60%' : '90%',
+              width: props.isMonthPicker ? '60%' : '90%',
               flexDirection: 'row',
               alignItems: 'center',
             }}>
@@ -43,7 +43,8 @@ const GlobalHeader = (props) => {
             </Text>
           </TouchableOpacity>
           {props.isMonthPicker && (
-            <View
+            <TouchableOpacity
+              // onPress={() => co}
               style={{
                 borderWidth: 1,
                 borderColor: 'orange',
@@ -61,11 +62,24 @@ const GlobalHeader = (props) => {
                 name="down"
                 type="AntDesign"
               />
-            </View>
+            </TouchableOpacity>
           )}
         </>
       ) : (
-        <>
+        <View
+          style={{
+            elevation: 0,
+            borderBottomWidth: 0,
+            flexDirection: 'row',
+            // borderWidth: 1,
+            backgroundColor: '',
+            borderColor: 'red',
+            height: 50,
+            alignItems: 'center',
+            alignSelf: 'center',
+            width: '90%',
+            justifyContent: 'space-between',
+          }}>
           <TouchableOpacity
             onPress={() => props.navigation.toggleDrawer()}
             style={{
@@ -97,7 +111,7 @@ const GlobalHeader = (props) => {
             }}>
             <Icon style={{color: 'white'}} name="users" type="FontAwesome5" />
           </TouchableOpacity>
-        </>
+        </View>
       )}
     </LinearGradient>
   );

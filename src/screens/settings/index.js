@@ -7,10 +7,12 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import ToggleSwitch from 'toggle-switch-react-native';
 import Slider from '@react-native-community/slider';
 import GlobalHeader from '../../components/header';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 
 const App = (props) => {
   const [toggle, setToggle] = useState(false);
   const [isSlider, setSlider] = useState(5);
+  const [isSattle, setSattle] = useState(false);
   return (
     <SafeAreaView style={{backgroundColor: '#000000', flex: 1}}>
       <GlobalHeader
@@ -59,32 +61,59 @@ const App = (props) => {
           }}>
           {/* ====Box 1==== */}
           <View
-            style={{
-              width: '50%',
-              borderWidth: 1,
-              borderColor: '#F6931B',
-              borderRadius: 3,
-              backgroundColor: '#F6931B',
-              justifyContent: 'center',
-            }}>
-            <Text style={{color: '#FFFFFF', fontSize: 12, textAlign: 'center'}}>
-              Street View
-            </Text>
+            style={
+              isSattle
+                ? {
+                    width: '50%',
+                    borderWidth: 1,
+                    borderColor: '#F6931B',
+                    borderRadius: 3,
+                    //   marginLeft: 25,
+                    justifyContent: 'center',
+                  }
+                : {
+                    width: '50%',
+                    borderWidth: 1,
+                    borderColor: '#F6931B',
+                    borderRadius: 3,
+                    backgroundColor: '#F6931B',
+                    justifyContent: 'center',
+                  }
+            }>
+            <TouchableOpacity onPress={() => setSattle(false)}>
+              <Text
+                style={{color: '#FFFFFF', fontSize: 12, textAlign: 'center'}}>
+                Street View
+              </Text>
+            </TouchableOpacity>
           </View>
-
           {/* ====Box 2==== */}
           <View
-            style={{
-              width: '50%',
-              borderWidth: 1,
-              borderColor: '#F6931B',
-              borderRadius: 3,
-              //   marginLeft: 25,
-              justifyContent: 'center',
-            }}>
-            <Text style={{color: '#FFFFFF', fontSize: 12, textAlign: 'center'}}>
-              Satalite View
-            </Text>
+            style={
+              isSattle
+                ? {
+                    width: '50%',
+                    borderWidth: 1,
+                    borderColor: '#F6931B',
+                    borderRadius: 3,
+                    backgroundColor: '#F6931B',
+                    justifyContent: 'center',
+                  }
+                : {
+                    width: '50%',
+                    borderWidth: 1,
+                    borderColor: '#F6931B',
+                    borderRadius: 3,
+                    //   marginLeft: 25,
+                    justifyContent: 'center',
+                  }
+            }>
+            <TouchableOpacity onPress={() => setSattle(true)}>
+              <Text
+                style={{color: '#FFFFFF', fontSize: 12, textAlign: 'center'}}>
+                Satalite View
+              </Text>
+            </TouchableOpacity>
           </View>
         </View>
 

@@ -13,6 +13,7 @@ import {Icon} from 'native-base';
 import CheckBox from '../../components/checkBox';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import PayCardModal from '../../components/pay_master_card_popup';
+import GlobalHeader from '../../components/header';
 const App = (props) => {
   const Pay = () => {
     setVisible(true);
@@ -61,6 +62,13 @@ const App = (props) => {
         height: '100%',
         width: '100%',
       }}>
+      <SafeAreaView>
+        <GlobalHeader
+          screenText={'Pay online'}
+          isBack={true}
+          navigation={props.navigation}
+        />
+      </SafeAreaView>
       <SafeAreaView
         style={{
           flex: 1,
@@ -102,7 +110,7 @@ const App = (props) => {
             placeholder="Abdul Samad"
             keyboardType="name-phone-pad"
             placeholderTextColor="#FFFFFF"
-            style={{color: 'white', fontSize: 13}}
+            style={{color: 'white', fontSize: 13, height: 45}}
           />
         </View>
 
@@ -121,7 +129,7 @@ const App = (props) => {
               placeholder="4025 8303 4000 2867"
               placeholderTextColor="#FFFFFF"
               keyboardType="numeric"
-              style={{color: 'white', fontSize: 13}}
+              style={{color: 'white', fontSize: 13, height: 45}}
             />
           </View>
 
@@ -160,7 +168,7 @@ const App = (props) => {
               placeholder="04 / 25"
               placeholderTextColor="#FFFFFF"
               keyboardType="number-pad"
-              style={{color: 'white', fontSize: 13}}
+              style={{color: 'white', fontSize: 13, height: 45}}
             />
           </View>
 
@@ -178,7 +186,7 @@ const App = (props) => {
               placeholder="021"
               placeholderTextColor="#FFFFFF"
               keyboardType="numeric"
-              style={{color: 'white', fontSize: 13}}
+              style={{color: 'white', fontSize: 13, height: 45}}
             />
           </View>
         </View>

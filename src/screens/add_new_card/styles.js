@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
   NameTextInput: {
     color: 'white',
     fontSize: 13,
+    height: 40
   },
 
   /* ========Card no:========== */
@@ -39,6 +40,7 @@ const styles = StyleSheet.create({
   CardTextInput: {
     color: 'white',
     fontSize: 13,
+    height: 40
   },
 
   /* ======Expiry Date & CVV Row====== */
@@ -63,6 +65,7 @@ const styles = StyleSheet.create({
   DateTextInput: {
     color: 'white',
     fontSize: 13,
+    height: 40
   },
   /* ====+==== */
   CVVView: {

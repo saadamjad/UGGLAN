@@ -20,36 +20,43 @@ const App = (props) => {
       image: require('../../assets/images/1.jpg'),
       title: 'Abdul Samad',
       mobileNumber: '+92 3103844268',
+      sent: false,
     },
     {
       image: require('../../assets/images/2.jpg'),
       title: 'Logan',
       mobileNumber: '+92 3103844261',
+      sent: false,
     },
     {
       image: require('../../assets/images/3.jpg'),
       title: 'Babu Bhai',
       mobileNumber: '+92 3103844262',
+      sent: false,
     },
     {
       image: require('../../assets/images/4.jpg'),
       title: 'Samad Soomro',
       mobileNumber: '+92 3103844263',
+      sent: false,
     },
     {
       image: require('../../assets/images/5.jpg'),
       title: 'Jungle Book',
       mobileNumber: '+92 3103844264',
+      sent: false,
     },
     {
       image: require('../../assets/images/6.jpg'),
       title: 'Jet Ski',
       mobileNumber: '+92 3103844265',
+      sent: false,
     },
     {
       image: require('../../assets/images/7.jpg'),
       title: 'Desi Munda',
       mobileNumber: '+92 3103844266',
+      sent: false,
     },
   ]);
 
@@ -94,12 +101,34 @@ const App = (props) => {
                 {/* ==========Send Image Button========== */}
 
                 <View style={styles.sendView}>
-                  <TouchableOpacity onPress={() => sendfunction()}>
+                  <TouchableOpacity
+                    onPress={() => {
+                      Setarray(
+                        Array.map((val, index) => {
+                          if (index == i) {
+                            return {...item, sent: true};
+                          } else {
+                            return val;
+                          }
+                        }),
+                      );
+                    }}>
                     <Image
                       source={require('../../assets/images/send.png')}
                       style={styles.sendImageStyle}
                     />
                   </TouchableOpacity>
+                  {item.sent && (
+                    <Text
+                      style={{
+                        color: 'white',
+                        fontSize: 9,
+                        width: 70,
+                        marginTop: 5,
+                      }}>
+                      Invitation Sent
+                    </Text>
+                  )}
                 </View>
               </View>
             );

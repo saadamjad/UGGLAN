@@ -18,14 +18,13 @@ const App = (props) => {
     {
       image: require('../../assets/images/1.jpg'),
       name: 'Abdul Samad',
-      nickName: '(Accept)',
-      status: 'active',
+      nickName: '(Hired)',
+      status: 'hired',
       mobileNumber: '+92 3103844268',
       callImage: require('../../assets/images/call.png'),
       videoImage: require('../../assets/images/videocam.png'),
       chatImage: require('../../assets/images/chat.png'),
       gpsImage: require('../../assets/images/gps.png'),
-      status: 'active',
     },
     {
       image: require('../../assets/images/2.jpg'),
@@ -41,8 +40,8 @@ const App = (props) => {
     {
       image: require('../../assets/images/3.jpg'),
       name: 'Babu Bhai',
-      nickName: '(Accept)',
-      status: 'active',
+      nickName: '(Hired)',
+      status: 'hired',
       mobileNumber: '+92 3103844268',
       callImage: require('../../assets/images/call.png'),
       videoImage: require('../../assets/images/videocam.png'),
@@ -60,7 +59,7 @@ const App = (props) => {
       }}>
       <SafeAreaView>
         <GlobalHeader
-          screenText={'Call'}
+          screenText={'All Contacts'}
           navigation={props.navigation}
           isBack={true}
         />
@@ -122,7 +121,11 @@ const App = (props) => {
                         <Text
                           style={{
                             color:
-                              item.status == 'pending' ? '#A1A1A1' : '#29FF00',
+                              item.status == 'pending'
+                                ? '#A1A1A1'
+                                : item.status == 'hired'
+                                ? '#00B1FF'
+                                : '#29FF00',
                             marginLeft: 5,
                             fontSize: 12,
                             padding: 2,
@@ -143,90 +146,105 @@ const App = (props) => {
 
                   {/* ==========IconImages========== */}
 
-                  <View
-                    style={{
-                      flex: 1,
-                      flexDirection: 'row',
-                    }}>
-                    <TouchableOpacity
+                  {item.status !== 'hired' ? null : (
+                    <View
                       style={{
-                        marginLeft: 10,
-                        overflow: 'hidden',
-                        height: 23,
-                        width: 23,
-                        borderRadius: 23,
-                      }}
-                      onPress={() => callfunction()}>
-                      <Image
-                        source={item.callImage}
-                        style={{
-                          height: '100%',
-                          width: '100%',
-                          borderWidth: 0.5,
-                          borderColor: '#707070',
-                        }}
-                        resizeMode="contain"
-                      />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={{
-                        marginLeft: 10,
-                        overflow: 'hidden',
-                        height: 23,
-                        width: 23,
-                        borderRadius: 23,
+                        flex: 1,
+                        flexDirection: 'row',
                       }}>
-                      <Image
-                        source={item.videoImage}
+                      <TouchableOpacity
+                        disabled={item.status !== 'hired'}
                         style={{
-                          height: '100%',
-                          width: '100%',
-                          borderWidth: 0.5,
-                          borderColor: '#707070',
+                          marginLeft: 10,
+                          overflow: 'hidden',
+                          height: 23,
+                          width: 23,
+                          backgroundColor:
+                            item.status !== 'hired' ? 'grey' : 'white',
+                          borderRadius: 23,
                         }}
-                        resizeMode="contain"
-                      />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      onPress={() => props.navigation.navigate('chat')}
-                      style={{
-                        marginLeft: 10,
-                        overflow: 'hidden',
-                        height: 23,
-                        width: 23,
-                        borderRadius: 23,
-                      }}>
-                      <Image
-                        source={item.chatImage}
+                        onPress={() => callfunction()}>
+                        <Image
+                          source={item.callImage}
+                          style={{
+                            height: '100%',
+                            width: '100%',
+                            borderWidth: 0.5,
+                            borderColor: '#707070',
+                          }}
+                          resizeMode="contain"
+                        />
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        disabled={item.status !== 'hired'}
                         style={{
-                          height: '100%',
-                          width: '100%',
-                          borderWidth: 0.5,
-                          borderColor: '#707070',
-                        }}
-                        resizeMode="contain"
-                      />
-                    </TouchableOpacity>
-                    <TouchableOpacity
-                      style={{
-                        marginLeft: 10,
-                        overflow: 'hidden',
-                        height: 23,
-                        width: 23,
-                        borderRadius: 23,
-                      }}>
-                      <Image
-                        source={item.gpsImage}
+                          marginLeft: 10,
+                          overflow: 'hidden',
+                          height: 23,
+                          width: 23,
+                          backgroundColor:
+                            item.status !== 'hired' ? 'grey' : 'white',
+                          borderRadius: 23,
+                        }}>
+                        <Image
+                          source={item.videoImage}
+                          style={{
+                            height: '100%',
+                            width: '100%',
+                            borderWidth: 0.5,
+                            borderColor: '#707070',
+                          }}
+                          resizeMode="contain"
+                        />
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        onPress={() => props.navigation.navigate('chat')}
+                        disabled={item.status !== 'hired'}
                         style={{
-                          height: '100%',
-                          width: '100%',
-                          borderWidth: 0.5,
-                          borderColor: '#707070',
-                        }}
-                        resizeMode="contain"
-                      />
-                    </TouchableOpacity>
-                  </View>
+                          marginLeft: 10,
+                          overflow: 'hidden',
+                          height: 23,
+                          width: 23,
+                          backgroundColor:
+                            item.status !== 'hired' ? 'grey' : 'white',
+                          borderRadius: 23,
+                        }}>
+                        <Image
+                          source={item.chatImage}
+                          style={{
+                            height: '100%',
+                            width: '100%',
+                            borderWidth: 0.5,
+                            borderColor: '#707070',
+                          }}
+                          resizeMode="contain"
+                        />
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        disabled={item.status !== 'hired'}
+                        onPress={() => props.navigation.navigate("HomeLiveLocation")}
+                        style={{
+                          marginLeft: 10,
+                          overflow: 'hidden',
+                          height: 23,
+                          width: 23,
+                          backgroundColor:
+                            item.status !== 'hired' ? 'grey' : 'white',
+                          borderRadius: 23,
+                        }}>
+                        <Image
+                          source={item.gpsImage}
+                          style={{
+                            height: '100%',
+                            width: '100%',
+                            borderWidth: 0.5,
+                            borderColor: '#707070',
+                          }}
+                          resizeMode="contain"
+                        />
+                      </TouchableOpacity>
+                    </View>
+                  )}
                 </View>
               );
             })}

@@ -8,8 +8,10 @@ const RightDrawer = (props) => {
     {name: 'Ahmed', number: '+91 123 7665'},
     {name: 'Punjwani', number: '+91 123 7665'},
   ];
+  const NewView = Animatable.createAnimatableComponent(TouchableOpacity);
   return props.isVisible ? (
     <TouchableOpacity
+      activeOpacity={1}
       onPress={props.toggleDrawer}
       style={{
         position: 'absolute',
@@ -18,10 +20,11 @@ const RightDrawer = (props) => {
         bottom: 0,
         width: '100%',
         alignItems: 'flex-end',
-        backgroundColor: 'transparent',
       }}>
-      <Animatable.View
+      <NewView
+        onPress={() => {}}
         animation={'slideInRight'}
+        activeOpacity={1}
         style={{
           height: '100%',
           width: '75%',
@@ -71,15 +74,20 @@ const RightDrawer = (props) => {
           {contacts.map((val) => (
             <View style={{paddingBottom: 15}}>
               <Text style={{color: 'white', fontSize: 18}}>{val.name}</Text>
-              <Text style={{color: 'grey', fontSize: 16, paddingTop: 8}}>
-                {val.number}
-              </Text>
+              <TouchableOpacity>
+                <Text style={{color: 'grey', fontSize: 16, paddingTop: 8}}>
+                  {val.number}
+                </Text>
+              </TouchableOpacity>
             </View>
           ))}
         </View>
-      </Animatable.View>
+      </NewView>
     </TouchableOpacity>
   ) : null;
 };
 
 export default RightDrawer;
+
+
+// 6ddbaa144f51f192a105cdef803eb556cf76b317

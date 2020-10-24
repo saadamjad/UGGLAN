@@ -97,7 +97,7 @@ export default ({state, descriptors, navigation}) => {
         overflow: 'visible',
       }}
       colors={['#F6931B', '#DE2516']}>
-      {navs.map((val) => (
+      {navs.map((val, i) => (
         <View
           style={{
             height: '100%',
@@ -107,6 +107,7 @@ export default ({state, descriptors, navigation}) => {
           }}>
           <TouchableOpacity
             onPress={() => {
+
               const event = navigation.emit({
                 type: 'tabPress',
                 target: val.name,
@@ -114,6 +115,7 @@ export default ({state, descriptors, navigation}) => {
               });
               if (!event.defaultPrevented) navigation.navigate(val.name);
             }}
+            disabled={val.name == "Timer"}
             style={{
               width: '100%',
               height: '100%',

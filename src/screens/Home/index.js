@@ -91,6 +91,7 @@ export default (props) => {
         provider={PROVIDER_GOOGLE}
         style={{flex: 1}}
         showsUserLocation={true}
+        mapType="standard"
         coordinate={{
           latitude: state.position.latitude,
           longitude: state.position.longitude,

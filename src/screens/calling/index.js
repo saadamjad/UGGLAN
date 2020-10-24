@@ -66,26 +66,29 @@ const App = (props) => {
           }}>
           <View style={{flexDirection: 'row', width: '100%'}}>
             <View style={{width: '40%'}}>
-              <LinearGradient
-                colors={['#F6931B', '#DE2516']}
-                style={{
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderWidth: 0.5,
-                  borderColor: '#707070',
-                  backgroundColor: 'transparent',
-                  height: 55,
-                  width: 56,
-                  borderRadius: 56,
-                  overflow: 'hidden',
-                }}>
-                <Ionicons
-                  name="chatbubble-ellipses"
-                  size={19}
-                  color="#C0C0C0"
-                  style={{height: 19, width: 19}}
-                />
-              </LinearGradient>
+              <TouchableOpacity
+                onPress={() => props.navigation.navigate('chat')}>
+                <LinearGradient
+                  colors={['#F6931B', '#DE2516']}
+                  style={{
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderWidth: 0.5,
+                    borderColor: '#707070',
+                    backgroundColor: 'transparent',
+                    height: 55,
+                    width: 56,
+                    borderRadius: 56,
+                    overflow: 'hidden',
+                  }}>
+                  <Ionicons
+                    name="chatbubble-ellipses"
+                    size={19}
+                    color="#C0C0C0"
+                    style={{height: 19, width: 19}}
+                  />
+                </LinearGradient>
+              </TouchableOpacity>
             </View>
             <View style={{width: '40%'}}>
               <LinearGradient

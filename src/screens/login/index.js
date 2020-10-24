@@ -10,13 +10,15 @@ const App = (props) => {
     // alert('Ruko Zara');
     props.navigation.navigate('loginpage');
   };
-
+  
   const function2 = () => {
-    alert('Sabar Karo');
+    props.navigation.navigate('signup');
+    // alert('Sabar Karo');
   };
-
+  
   const function3 = () => {
-    alert('Aagaya Tou Jawan Hoke');
+    props.navigation.navigate('HomeStacks');
+    // alert('Aagaya Tou Jawan Hoke');
   };
 
   return (

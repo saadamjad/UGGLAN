@@ -1,11 +1,11 @@
 import React from 'react';
 import {View, Text, ImageBackground, SafeAreaView} from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Zocial from 'react-native-vector-icons/Zocial';
-
+import GlobalHeader from '../../components/header';
 const App = (props) => {
   const shareFunction = () => {
     props.navigation.navigate('addPayment');
@@ -24,6 +24,11 @@ const App = (props) => {
           width: '90%',
           alignSelf: 'center',
         }}>
+        <GlobalHeader
+          isBack={true}
+          screenText={'Share UGGLAN'}
+          navigation={props.navigation}
+        />
         <View
           style={{
             alignItems: 'center',
@@ -174,7 +179,7 @@ const App = (props) => {
             height: 40,
             marginVertical: 5,
           }}
-          onPress={()=>shareFunction()}>
+          onPress={() => shareFunction()}>
           <View style={{width: '10%', marginLeft: 5}}>
             <Zocial
               name="email"

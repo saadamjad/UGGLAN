@@ -4,7 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import login from '../screens/login';
 import Profile from '../screens/profile';
-import {Image, View, Text} from 'react-native';
+import {Image, View, Text, Settings} from 'react-native';
 import signup from '../screens/signup';
 import loginpage from '../screens/login_Page';
 import otp from '../screens/otp';
@@ -32,6 +32,7 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import BottomTabNavigation from './bottomTabNavigation';
 import selectlangauge from '../screens/select_language';
 import Home from '../screens/Home';
+import history from '../screens/history'
 import HomeLiveLocation from '../screens/HomeLiveLocation';
 const Stack = createStackNavigator();
 
@@ -49,6 +50,8 @@ function MyDrawer() {
       }}
       drawerContent={(props) => <DrawerContent {...props} />}>
       <Drawer.Screen name="My Profile" component={MyTabs} />
+      <Drawer.Screen name="Settings" component={settings} />
+      <Drawer.Screen name="History" component={history} />
     </Drawer.Navigator>
   );
 }
@@ -259,6 +262,198 @@ function MainStack() {
   );
 }
 
+function LiveLocationStack() {
+  return (
+    <Stack.Navigator>
+          <Stack.Screen
+        name="HomeLiveLocation"
+        component={HomeLiveLocation}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="call"
+        component={call}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="allcontacts"
+        component={allcontacts}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="profile"
+        component={Profile}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="HomeScreen"
+        component={Home}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="selectlangauge"
+        component={selectlangauge}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SosPopup"
+        component={SosPopup}
+        options={{headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="settings"
+        component={settings}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="calling"
+        component={calling}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="hiresomeone"
+        component={hiresomeone}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="hireProfile"
+        component={hireProfile}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="shareUGGLAN"
+        component={shareUGGLAN}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="payMasterCard"
+        component={payMasterCard}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="help"
+        component={help}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="addPayment"
+        component={addPayment}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="addNewCard"
+        component={addNewCard}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="selectPaymentMethod"
+        component={selectPaymentMethod}
+        options={{headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="thankyou"
+        component={thankyou}
+        options={{headerShown: false}}
+      />
+    </Stack.Navigator>
+  );
+}
+function CallStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="call"
+        component={call}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="allcontacts"
+        component={allcontacts}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="profile"
+        component={Profile}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="HomeScreen"
+        component={Home}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="selectlangauge"
+        component={selectlangauge}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="SosPopup"
+        component={SosPopup}
+        options={{headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="settings"
+        component={settings}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="calling"
+        component={calling}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="hiresomeone"
+        component={hiresomeone}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="hireProfile"
+        component={hireProfile}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="shareUGGLAN"
+        component={shareUGGLAN}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="payMasterCard"
+        component={payMasterCard}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="help"
+        component={help}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="addPayment"
+        component={addPayment}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="addNewCard"
+        component={addNewCard}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="selectPaymentMethod"
+        component={selectPaymentMethod}
+        options={{headerShown: false}}
+      />
+
+      <Stack.Screen
+        name="thankyou"
+        component={thankyou}
+        options={{headerShown: false}}
+      />
+    </Stack.Navigator>
+  );
+}
+
 function App() {
   return (
     <NavigationContainer headerMode="none">
@@ -326,7 +521,7 @@ function MyTabs() {
             />
           ),
         }}
-        component={call}
+        component={CallStack}
       />
       <Tab.Screen
         name="Pop"
@@ -353,7 +548,7 @@ function MyTabs() {
           ),
         }}
         name="Live Location"
-        component={HomeLiveLocation}
+        component={LiveLocationStack}
       />
       <Tab.Screen
         options={{

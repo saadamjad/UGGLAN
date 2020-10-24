@@ -32,7 +32,7 @@ const DrawerItems = [
   },
   {
     title: 'History',
-    name: 'settings',
+    name: 'History',
     type: 'FontAwesome5',
     icon: 'history',
   },

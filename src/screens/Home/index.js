@@ -13,7 +13,7 @@ import {
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 import GlobalHeader from '../../components/header';
 import RightDrawer from '../../components/rightSideDrawer';
-import * as Animatable from "react-native-animatable";
+import * as Animatable from 'react-native-animatable';
 export default (props) => {
   //  state here
 
@@ -62,6 +62,18 @@ export default (props) => {
           {enableHighAccuracy: false, timeout: 20000, maximumAge: 1000},
         );
       }
+    } else {
+      Geolocation.setRNConfiguration({skipPermissionRequests: false});
+      Geolocation.watchPosition(
+        (position) => {
+          console.log('CHECK POSITION', position);
+          setState({...state, position: position.coords});
+        },
+        (err) => {
+          console.log('MAP ERROR', err);
+        },
+        {enableHighAccuracy: false, timeout: 20000, maximumAge: 1000},
+      );
     }
     // console.log('LOCATION HERE', location);
   };
@@ -79,17 +91,20 @@ export default (props) => {
         provider={PROVIDER_GOOGLE}
         style={{flex: 1}}
         showsUserLocation={true}
-        // initialRegion={
-        //   Object.keys(state.position).length > 0
-        //     ? {...state.position, latitudeDelta: 0.0922, longitudeDelta: 0.0421}
-        //     : {
-        //         latitude: 37.78825,
-        //         longitude: -122.4324,
-        //         latitudeDelta: 0.0922,
-        //         longitudeDelta: 0.0421,
-        //       }
-        // }
-      >
+        coordinate={{
+          latitude: state.position.latitude,
+          longitude: state.position.longitude,
+        }}
+        initialRegion={{
+          latitude: state.position.latitude
+            ? state.position.latitude
+            : 37.78825,
+          longitude: state.position.longitude
+            ? state.position.longitude
+            : -122.4324,
+          latitudeDelta: 0.0922,
+          longitudeDelta: 0.0421,
+        }}>
         {/* {this.state.markers.map((marker, index) => ( */}
         {Object.keys(state.position).length > 0 && (
           <Marker
@@ -121,7 +136,9 @@ export default (props) => {
           {type: 'Feather', name: 'mic', name1: 'mic-off'},
           {type: 'SimpleLineIcons', name: 'location-pin', name1: 'mic-off'},
         ].map((val) => (
-          <Animatable.View animation={state.done ? 'bounceIn' : 'bounceOut'} style={{ paddingBottom: 10}}>
+          <Animatable.View
+            animation={state.done ? 'bounceIn' : 'bounceOut'}
+            style={{paddingBottom: 10}}>
             <TouchableOpacity
               // onPress={() => runAnimation()}
               style={{

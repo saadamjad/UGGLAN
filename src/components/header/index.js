@@ -25,22 +25,45 @@ const GlobalHeader = (props) => {
         justifyContent: 'space-around',
       }}>
       {props.isBack ? (
-        <TouchableOpacity
-          onPress={() => props.navigation.goBack()}
-          style={{
-            width: '95%',
-            flexDirection: 'row',
-            alignItems: 'center',
-          }}>
-          <Icon
-            style={{color: 'white', fontSize: 17}}
-            name="left"
-            type="AntDesign"
-          />
-          <Text style={{color: 'white', marginLeft: 5, fontSize: 16}}>
-            {props.screenText}
-          </Text>
-        </TouchableOpacity>
+        <>
+          <TouchableOpacity
+            onPress={() => props.navigation.goBack()}
+            style={{
+              width:props.isMonthPicker? '60%' : '90%',
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}>
+            <Icon
+              style={{color: 'white', fontSize: 17}}
+              name="left"
+              type="AntDesign"
+            />
+            <Text style={{color: 'white', marginLeft: 5, fontSize: 16}}>
+              {props.screenText}
+            </Text>
+          </TouchableOpacity>
+          {props.isMonthPicker && (
+            <View
+              style={{
+                borderWidth: 1,
+                borderColor: 'orange',
+                width: 80,
+                alignItems: 'center',
+                justifyContent: 'space-around',
+                height: 28,
+                paddingHorizontal: 5,
+                borderRadius: 5,
+                flexDirection: 'row',
+              }}>
+              <Text style={{color: 'white'}}>Month</Text>
+              <Icon
+                style={{color: 'white', fontSize: 12}}
+                name="down"
+                type="AntDesign"
+              />
+            </View>
+          )}
+        </>
       ) : (
         <>
           <TouchableOpacity

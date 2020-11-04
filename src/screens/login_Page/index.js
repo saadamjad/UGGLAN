@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Button} from 'react-native-elements';
 import {
   View,
@@ -9,13 +9,33 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Fontisto from 'react-native-vector-icons/Fontisto';
-import Globalinputs from '../../components/inputfields'
+import Globalinputs from '../../components/inputfields';
 import styles from './styles';
+import {connect} from 'react-redux';
+import {AuthAction} from '../../store/actions';
 
 const App = (props) => {
-  const LginFntn = () => {
-    // alert('Login Hoga');
-    props.navigation.navigate('signup');
+  const [state, setState] = useState({
+    phone: '',
+    password: '',
+  });
+
+  const _CheckValidation = () => {
+    let email = state.phone;
+    let password = state.password;
+
+    if ((email, password) == '') {
+      alert('kindly fill inputs correctly');
+    } else {
+      alert('ok ha ');
+    }
+  };
+  const _Login = () => {
+    let data = {
+      email: state.phone,
+      password: state.password,
+    };
+    props.loginAction(data);
   };
 
   return (
@@ -42,6 +62,12 @@ const App = (props) => {
               placeholderTextColor="#696969"
               keyboardType="numeric"
               style={styles.phoneTextInput}
+              onChangeText={(text) =>
+                setState({
+                  ...state,
+                  phone: text,
+                })
+              }
             />
             <Fontisto
               name="phone"
@@ -58,8 +84,15 @@ const App = (props) => {
               placeholder="Password"
               placeholderTextColor="#696969"
               keyboardType="default"
-                secureTextEntry
+              secureTextEntry
               style={styles.passwordTextInput}
+              // onChangeText={(text) => setPassword(text)}
+              onChangeText={(text) =>
+                setState({
+                  ...state,
+                  password: text,
+                })
+              }
             />
             <Fontisto
               name="key"
@@ -89,7 +122,7 @@ const App = (props) => {
             style={styles.loginLG}>
             <Button
               title="Login"
-              onPress={() => LginFntn()}
+              onPress={() => _Login()}
               buttonStyle={{backgroundColor: 'transparent'}}
             />
           </LinearGradient>
@@ -99,4 +132,12 @@ const App = (props) => {
   );
 };
 
-export default App;
+mapStateToProps = (state) => ({
+  isLoading: state.AuthReducer.isLoading,
+  token: state.AuthReducer.token,
+});
+mapDispatchToProps = {
+  loginAction: AuthAction.Login,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,25 +1,30 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Button} from 'react-native-elements';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import LinearGradient from 'react-native-linear-gradient';
 import {View, Text, ImageBackground, Image} from 'react-native';
 import styles from './styles';
+import {connect} from 'react-redux';
+import {AuthAction} from '../../store/actions';
 
 const App = (props) => {
   const function1 = () => {
     // alert('Ruko Zara');
     props.navigation.navigate('loginpage');
   };
-  
+
   const function2 = () => {
     props.navigation.navigate('signup');
     // alert('Sabar Karo');
   };
-  
+
   const function3 = () => {
     props.navigation.navigate('HomeStacks');
     // alert('Aagaya Tou Jawan Hoke');
   };
+  useEffect(() => {
+    props.loginAction();
+  }, []);
 
   return (
     <ImageBackground
@@ -89,4 +94,12 @@ const App = (props) => {
   );
 };
 
-export default App;
+mapStateToProps = (state) => ({
+  isLoading: state.AuthReducer.isLoading,
+  token: state.AuthReducer.token,
+});
+mapDispatchToProps = {
+  loginAction: AuthAction.Login,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

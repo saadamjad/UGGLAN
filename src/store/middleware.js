@@ -1,6 +1,6 @@
-import { createLogger } from 'redux-logger';
+import {createLogger} from 'redux-logger';
 import promise from 'redux-promise-middleware';
-import { logger } from 'redux-logger';
+import {logger} from 'redux-logger';
 import thunk from 'redux-thunk';
 
 const middlewares = [];
@@ -10,13 +10,13 @@ const middlewares = [];
 //   'root',
 // );
 
-if (__DEV__) {
-  middlewares.push(createLogger());
-}
+// if (__DEV__) {
+//   middlewares.push(createLogger());
+// }
 
 // middlewares.push(reactNavigation);
 middlewares.push(promise);
-middlewares.push(logger);
+// middlewares.push(logger);
 middlewares.push(thunk);
 
 export default middlewares;

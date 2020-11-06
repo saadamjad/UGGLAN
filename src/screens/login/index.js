@@ -23,7 +23,7 @@ const App = (props) => {
     // alert('Aagaya Tou Jawan Hoke');
   };
   useEffect(() => {
-    props.loginAction();
+    // props.loginAction();
   }, []);
 
   return (

@@ -88,11 +88,11 @@ export function login(path, obj) {
   }
 }
 
-export function signup(path, obj) {
+export function signup(path, data) {
   const API_REQ_URL = `${API_URL}/api/users/${path}`;
   // console.log(API_REQ_URL, ...obj);
   try {
-    return axios.post(API_REQ_URL, obj);
+    return axios.post(API_REQ_URL, data);
   } catch (error) {
     console.log('throw chal gya', error);
     throw error;

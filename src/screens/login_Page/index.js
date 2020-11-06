@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button} from 'react-native-elements';
 import {
   View,
@@ -24,10 +24,10 @@ const App = (props) => {
     let email = state.phone;
     let password = state.password;
 
-    if ((email, password) == '') {
+    if ((email, password == '')) {
       alert('kindly fill inputs correctly');
     } else {
-      alert('ok ha ');
+      _Login();
     }
   };
   const _Login = () => {
@@ -35,8 +35,11 @@ const App = (props) => {
       email: state.phone,
       password: state.password,
     };
-    props.loginAction(data);
+    props.loginAction(data, props.navigation);
   };
+  // useEffect(()=>{
+
+  // },[props.])
 
   return (
     <ImageBackground
@@ -58,9 +61,9 @@ const App = (props) => {
 
           <View style={styles.phoneView}>
             <TextInput
-              placeholder="Phone number"
+              placeholder="email"
               placeholderTextColor="#696969"
-              keyboardType="numeric"
+              // keyboardType="numeric"
               style={styles.phoneTextInput}
               onChangeText={(text) =>
                 setState({
@@ -122,7 +125,7 @@ const App = (props) => {
             style={styles.loginLG}>
             <Button
               title="Login"
-              onPress={() => _Login()}
+              onPress={() => _CheckValidation()}
               buttonStyle={{backgroundColor: 'transparent'}}
             />
           </LinearGradient>

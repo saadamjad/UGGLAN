@@ -29,21 +29,30 @@ export default class AuthAction {
         });
     };
   };
-  static signup = (data, navigation) => {
+  static Signup = (data, navigation) => {
     return (dispatch) => {
+      console.log('singup=====', data);
       dispatch({type: ActionType.SIGNUP});
 
-      signup('register', data)
+      signup('signUp', data)
         .then((res) => {
           console.log('res', res.data);
           if (res.data.success) {
-            dispatch({type: ActionType.SIGNUP, payload: res.data});
+            navigation.navigate('otp');
+            dispatch({type: ActionType.SIGNUP_SUCCESS});
+          } else if (!res.data.success) {
+            console.log('esle if ');
+            dispatch({type: ActionType.SIGNUP_FAIL});
+            ToastError(res.data.message);
           } else {
-            dispatch({type: ActionType.SIGNUP_UNSUCCESS});
+            console.log('else');
+            dispatch({type: ActionType.SIGNUP_FAIL});
+            ToastError(res.data.message);
           }
         })
         .catch((err) => {
-          dispatch({type: ActionType.SIGNUP_UNSUCCESS});
+          dispatch({type: ActionType.SIGNUP_FAIL});
+
           console.log('Err', err);
         });
     };

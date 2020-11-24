@@ -9,18 +9,15 @@ import {AuthAction} from '../../store/actions';
 
 const App = (props) => {
   const function1 = () => {
-    // alert('Ruko Zara');
     props.navigation.navigate('loginpage');
   };
 
   const function2 = () => {
     props.navigation.navigate('signup');
-    // alert('Sabar Karo');
   };
 
   const function3 = () => {
     props.navigation.navigate('HomeStacks');
-    // alert('Aagaya Tou Jawan Hoke');
   };
   useEffect(() => {
     // props.loginAction();

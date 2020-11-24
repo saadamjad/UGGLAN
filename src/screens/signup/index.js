@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button} from 'react-native-elements';
 import {
   View,
@@ -12,10 +12,64 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
-
+import {connect} from 'react-redux';
+import {AuthAction} from '../../store/actions';
 const App = (props) => {
+  const [state, setState] = useState({
+    fullName: '',
+    code: '',
+    phone: '',
+    email: '',
+    password: '',
+  });
   const SgnUpFntn = () => {
-    props.navigation.navigate('otp');
+    const data = {
+      fullName: 'saad',
+      code: 'saad',
+      phone: 'saasssdsdsdsed',
+      email: 'saassdss@gmail.com',
+      password: 'saad',
+    };
+    props._Signup(data, props.navigation);
+
+    // props.navigation.navigate('otp');
+  };
+  // useEffect(() => {
+  //   const data = {
+  //     fullName: 'saad',
+  //     code: 'saad',
+  //     phone: 'saad',
+  //     email: 'saad',
+  //     password: 'saad',
+  //   };
+  //   props._Signup(data, props.navigation);
+  // }, []);
+
+  const _OnChangeText = async (text, name) => {
+    setState({...state, [name]: text});
+    console.log('full name', state.fullName);
+    console.log('te', text);
+  };
+
+  const _Signup = () => {
+    let key = Object.keys(state);
+
+    let fieldIsMissing = false;
+    let emptyField = '';
+    console.log('skey', state.fullName);
+    key.map((item, i) => {
+      console.log('item laoo beta ', item);
+      if (state[item] == '') {
+        fieldIsMissing = true;
+        emptyField = item;
+      }
+    });
+    if (fieldIsMissing) {
+      // console.log('THIS FIELD IS MISSING ', emptyField);
+      alert('kindly Fill All Inputs ' + emptyField);
+    } else if (!fieldIsMissing) {
+      props._Signup(state, props.navigation);
+    }
   };
 
   return (
@@ -96,6 +150,7 @@ const App = (props) => {
               width: '90%',
               height: 40,
             }}
+            onChangeText={(text) => _OnChangeText(text, 'fullName')}
           />
           <Ionicons
             name="person"
@@ -134,6 +189,7 @@ const App = (props) => {
                 width: '85%',
                 height: 40,
               }}
+              onChangeText={(text) => _OnChangeText(text, 'code')}
             />
             <View style={{width: '15%'}}>
               <AntDesign
@@ -167,6 +223,7 @@ const App = (props) => {
                 width: '85%',
                 height: 40,
               }}
+              onChangeText={(text) => _OnChangeText(text, 'phone')}
             />
             <Fontisto
               name="phone"
@@ -200,6 +257,7 @@ const App = (props) => {
               width: '90%',
               height: 40,
             }}
+            onChangeText={(text) => _OnChangeText(text, 'email')}
           />
           <View style={{width: '15%'}}>
             <Fontisto
@@ -235,6 +293,7 @@ const App = (props) => {
               width: '90%',
               height: 40,
             }}
+            onChangeText={(text) => _OnChangeText(text, 'password')}
           />
           <View style={{width: '15%'}}>
             <Fontisto
@@ -281,6 +340,8 @@ const App = (props) => {
           }}>
           <Button
             title="Sign Up"
+            loading={props.isLoading}
+            // onPress={() => _Signup()}
             onPress={() => SgnUpFntn()}
             buttonStyle={{backgroundColor: 'transparent'}}
           />
@@ -290,4 +351,11 @@ const App = (props) => {
   );
 };
 
-export default App;
+mapStateToProp = (state) => ({
+  isLoading: state.AuthReducer.isLoading,
+});
+mapDispatchToProps = {
+  _Signup: AuthAction.Signup,
+  // loginAction: AuthAction.Login,
+};
+export default connect(mapStateToProp, mapDispatchToProps)(App);

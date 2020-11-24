@@ -16,7 +16,6 @@ export default class ActionType {
   static LOGIN_UNSUCCESS = 'LOGIN_UNSUCESS';
   static LOGIN_FAIL = 'LOGIN__FAIL';
 
-
   static SET_ROLE = 'SET_ROLE';
 
   static FACEBOOK_AUTH = 'FACEBOOK_AUTH';
@@ -28,7 +27,6 @@ export default class ActionType {
   static GMAIL_AUTH_SUCCESS = 'GMAIL_AUTH_SUCCESS';
   static GMAIL_AUTH_UNSUCCESS = 'GMAIL_AUTH_UNSUCESS';
   static GMAIL_AUTH_FAIL = 'GMAIL_AUTH_FAIL';
-
 
   static FORGOT_PASSWORD = 'FORGOT_PASSWORD';
   static FORGOT_PASSWORD_SUCCESS = 'FORGOT_PASSWORD_SUCCESS';
@@ -43,7 +41,6 @@ export default class ActionType {
 
   static SIGNUP = 'SIGNUP';
   static SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
-  static SIGNUP_UNSUCCESS = 'SIGNUP_UNSUCCESS';
   static SIGNUP_FAIL = 'SIGNUP_FAIL';
 
   static UPDATE_USER = 'UPDATE_USER';
@@ -57,6 +54,4 @@ export default class ActionType {
 | Product Action
 |--------------------------------------------------
 */
-
-
 }

@@ -1,4 +1,3 @@
-// import Toast, {DURATION} from 'react-native-easy-toast';
 import Toast from 'react-native-simple-toast';
 import {ToastAndroid, Platform} from 'react-native';
 export function ToastError(msg) {
@@ -6,7 +5,7 @@ export function ToastError(msg) {
     ToastAndroid.showWithGravityAndOffset(
       msg,
       ToastAndroid.LONG,
-      ToastAndroid.TOP,
+      ToastAndroid.BOTTOM,
       0,
       200,
     );

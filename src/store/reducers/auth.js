@@ -20,8 +20,8 @@ export default (state = initialState, action) => {
     case ActionType.SIGNUP:
       return {...state, isLoading: true};
     case ActionType.SIGNUP_SUCCESS:
-      return {...state, isLoading: false};
-    case ActionType.SIGNUP_UNSUCCESS:
+      return {...state, isLoading: false, userData: action.payload};
+    case ActionType.SIGNUP_FAIL:
       return {...state, isLoading: false};
 
     default:

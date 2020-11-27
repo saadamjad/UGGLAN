@@ -16,6 +16,9 @@ export default class ActionType {
   static LOGIN_UNSUCCESS = 'LOGIN_UNSUCESS';
   static LOGIN_FAIL = 'LOGIN__FAIL';
 
+  static OTP = 'OTP';
+  static OTP_SUCCESS = 'OTP_SUCCESS';
+  static OTP_FAIL = 'OTP_FAIL';
   static SET_ROLE = 'SET_ROLE';
 
   static FACEBOOK_AUTH = 'FACEBOOK_AUTH';

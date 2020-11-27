@@ -1,7 +1,7 @@
 // import {handleApiErrors} from './api-errors';
 import axios from 'axios';
 // export const API_URL = 'http://192.168.1.107:5000';
-export const API_URL = 'http://192.168.18.69:5000';
+export const API_URL = 'https://ugglanapp.herokuapp.com';
 
 // function processRequest(request) {
 //   return request
@@ -36,6 +36,24 @@ export const API_URL = 'http://192.168.18.69:5000';
 //   return request;
 // }
 
+// export function put(path, obj, id, token) {
+//   const API_REQ_URL = `${API_URL}/${path}/${id}`;
+//   console.log(API_REQ_URL);
+//   let request;
+//   try {
+//     request = fetch(API_REQ_URL, {
+//       method: 'PUT',
+//       headers: {
+//         'Content-Type': 'application/json',
+//         Authorization: `Bearer ${token}`,
+//       },
+//       body: JSON.stringify(obj),
+//     });
+//   } catch (error) {
+//     throw error;
+//   }
+//   return request;
+// }
 // export function post(path, obj, token) {
 //   const API_REQ_URL = API_URL + path;
 //   let request;
@@ -58,27 +76,20 @@ export const API_URL = 'http://192.168.18.69:5000';
 //   return request;
 // }
 
-// export function put(path, obj, id, token) {
-//   const API_REQ_URL = `${API_URL}/${path}/${id}`;
-//   console.log(API_REQ_URL);
-//   let request;
-//   try {
-//     request = fetch(API_REQ_URL, {
-//       method: 'PUT',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         Authorization: `Bearer ${token}`,
-//       },
-//       body: JSON.stringify(obj),
-//     });
-//   } catch (error) {
-//     throw error;
-//   }
-//   return request;
-// }
+export function Otp(path, obj) {
+  console.log('api call ', path, obj);
+  const API_REQ_URL = `${API_URL}/api/users/${path}`;
+  try {
+    return axios.post(API_REQ_URL, obj);
+  } catch (error) {
+    console.log('error', error);
+    throw error;
+  }
+}
 
 export function login(path, obj) {
   const API_REQ_URL = `${API_URL}/api/users/${path}`;
+  console.log('api url', API_REQ_URL);
   // console.log(API_REQ_URL, ...obj);
   try {
     return axios.post(API_REQ_URL, obj);
@@ -89,8 +100,9 @@ export function login(path, obj) {
 }
 
 export function signup(path, data) {
+  console.log('DATAAAAAA', data);
   const API_REQ_URL = `${API_URL}/api/users/${path}`;
-  // console.log(API_REQ_URL, ...obj);
+  console.log(API_REQ_URL);
   try {
     return axios.post(API_REQ_URL, data);
   } catch (error) {

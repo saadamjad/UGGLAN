@@ -5,11 +5,13 @@ import {
   Text,
   SafeAreaView,
   ImageBackground,
+  Keyboard,
   TextInput,
   Image,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {set} from 'react-native-reanimated';
+import {connect} from 'react-redux';
+import {AuthAction} from '../../store/actions';
 const App = (props) => {
   const [state, setState] = useState({
     otpInputs: [
@@ -22,6 +24,11 @@ const App = (props) => {
   const otpfunction = () => {
     props.navigation.navigate('newpassword');
   };
+  const Submit = async () => {
+    let otp = await getValueOtp();
+    console.log('otp', otp);
+    props._Otp(otp, props.navigation);
+  };
 
   const getValueOtp = async () => {
     let {otpInputs} = state;
@@ -32,6 +39,7 @@ const App = (props) => {
 
   const onSetValueOtp = (old, val, i, nextRef, prevRef) => {
     let {otpInputs} = state;
+
     if (i == otpInputs.length - 1) {
       otpInputs[i].value = val;
       setState({...state, otpInputs});
@@ -54,8 +62,14 @@ const App = (props) => {
       setState({...state, otpInputs});
       prevRef.focus();
     }
+    if (i == state.otpInputs.length - 1) {
+      if (val.length > 0) {
+        // state.otpInputs[i].ref.;
+        Keyboard.dismiss();
+        Submit();
+      }
+    }
   };
-
   return (
     <ImageBackground
       source={require('../../assets/images/bg_image.png')}
@@ -83,56 +97,78 @@ const App = (props) => {
           <View
             style={{
               flexDirection: 'row',
-              justifyContent: 'center',
+              justifyContent: 'space-between',
               alignItems: 'center',
+              paddingHorizontal: 15,
+              marginVertical: 10,
+              // borderWidth: 1,
             }}>
             {state.otpInputs.map((val, i) => (
-              <TextInput
-                onKeyPress={({nativeEvent}) => {
-                  if (nativeEvent.key === 'Backspace') {
-                    state.otpInputs[
-                      i == 0 ? state.otpInputs.length - 1 : i - 1
-                    ].ref.focus();
-                  }
-                }}
-                placeholder={val.placeholder}
-                value={val.value}
-                maxLength={1}
-                onFocus={() => {
-                  if (state.value !== '') {
-                    let {otpInputs} = state;
-                    otpInputs[i].value = '';
-                    setState({...state, otpInputs});
-                  }
-                }}
-                ref={(input) => {
-                  val.ref = input;
-                }}
-                onChangeText={(text) =>
-                  onSetValueOtp(
-                    val.value,
-                    text,
-                    i,
-                    state.otpInputs[i == state.otpInputs.length - 1 ? 0 : i + 1]
-                      .ref,
-                    state.otpInputs[i == 0 ? state.otpInputs.length - 1 : i - 1]
-                      .ref,
-                  )
-                }
-                placeholderTextColor="#696969"
+              <View
                 style={{
-                  width: 50,
-                  color: '#000000',
-                  textAlign: 'center',
-                  height: 50,
-                  fontSize: 20,
-                  backgroundColor: '#FFFFFF',
-                  marginRight: 10,
-                  borderWidth: 0.5,
-                  borderColor: '#696969',
-                  borderRadius: 10,
-                }}
-              />
+                  width: '15%',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  color: 'black',
+                  // textAlign: 'center',
+                  height: 70,
+                  fontSize: 26,
+                  backgroundColor: 'white',
+                  marginRight: 7,
+                  borderWidth: 1,
+                  // borderColor:
+                  //   state.selectedIndex == i
+                  //     ? theme.secondaryColor
+                  //     : theme.borderColor,
+                  // borderRadius: 1.5,
+                  // marginVertical: 10,
+                }}>
+                <TextInput
+                  onKeyPress={({nativeEvent}) => {
+                    if (nativeEvent.key === 'Backspace') {
+                      state.otpInputs[
+                        i == 0 ? state.otpInputs.length - 1 : i - 1
+                      ].ref.focus();
+                    }
+                  }}
+                  placeholder={val.placeholder}
+                  value={val.value}
+                  maxLength={1}
+                  onFocus={() => {
+                    if (state.value !== '') {
+                      let {otpInputs} = state;
+                      otpInputs[i].value = '';
+                      setState({...state, otpInputs, selectedIndex: i});
+                    }
+                  }}
+                  ref={(input) => {
+                    val.ref = input;
+                  }}
+                  keyboardType="number-pad"
+                  onChangeText={(text) => {
+                    // if (i == state.otpInputs.length - 1) {
+                    //   if (text.length > 0) {
+                    //     // called function
+                    //   }
+                    // }
+                    onSetValueOtp(
+                      val.value,
+                      text,
+                      i,
+                      state.otpInputs[
+                        i == state.otpInputs.length - 1 ? 0 : i + 1
+                      ].ref,
+                      state.otpInputs[i == 0 ? state.otpInputs.length - 1 : 0]
+                        .ref,
+                    );
+                  }}
+                  // placeholderTextColor={theme.textColorGray}
+                  style={{
+                    // color: theme.textColorBlack,
+                    fontSize: 18,
+                  }}
+                />
+              </View>
             ))}
           </View>
           {/* ==========OTP End========== */}
@@ -174,6 +210,7 @@ const App = (props) => {
               borderRadius: 3,
             }}>
             <Button
+              loading={props.isLoading}
               title="Continue"
               onPress={() => otpfunction()}
               buttonStyle={{
@@ -187,4 +224,11 @@ const App = (props) => {
   );
 };
 
-export default App;
+mapStateToProp = (state) => ({
+  isLoading: state.AuthReducer.isLoading,
+});
+mapDispatchToProps = {
+  _Otp: AuthAction.Otp,
+  // loginAction: AuthAction.Login,
+};
+export default connect(mapStateToProp, mapDispatchToProps)(App);

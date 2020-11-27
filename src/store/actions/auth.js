@@ -1,7 +1,7 @@
 import {Alert, Keyboard, BackHandler} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import {ActionType} from '../actions';
-import {login, post, put, signup, get} from '../../../utils/api-call';
+import {login, post, put, signup, get, Otp} from '../../../utils/api-call';
 // import {actionDispatch} from '../../utils/return-obj';
 import {ToastError} from '../../../utils/toastErr';
 // import {API_URL} from '../../../utils/api-call';
@@ -31,7 +31,6 @@ export default class AuthAction {
   };
   static Signup = (data, navigation) => {
     return (dispatch) => {
-      console.log('singup=====', data);
       dispatch({type: ActionType.SIGNUP});
 
       signup('signUp', data)
@@ -54,6 +53,22 @@ export default class AuthAction {
           dispatch({type: ActionType.SIGNUP_FAIL});
 
           console.log('Err', err);
+        });
+    };
+  };
+  static Otp = (data, navigation) => {
+    console.log('otp===', data);
+    return (dispatch) => {
+      dispatch({type: ActionType.OTP, isLoading: true});
+
+      Otp('otp', {to: data})
+        .then((res) => {
+          dispatch({type: ActionType.OTP_SUCCESS, isLoading: false});
+          console.log('response from otp', res.data);
+        })
+        .catch((err) => {
+          console.log('err', err);
+          dispatch({type: ActionType.OTP_FAIL, isLoading: false});
         });
     };
   };

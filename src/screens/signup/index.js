@@ -24,8 +24,8 @@ const App = (props) => {
   });
   const SgnUpFntn = () => {
     const data = {
-      fullName: 'saad',
-      code: 'saad',
+      // fullName: 'saad',
+      // code: 'saad',
       phone: 'saasssdsdsdsed',
       email: 'saassdss@gmail.com',
       password: 'saad',

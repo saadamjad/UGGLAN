@@ -30,6 +30,7 @@ export default class AuthAction {
     };
   };
   static Signup = (data, navigation) => {
+    console.log('data,', data);
     return (dispatch) => {
       dispatch({type: ActionType.SIGNUP});
 
@@ -38,7 +39,7 @@ export default class AuthAction {
           console.log('res', res.data);
           if (res.data.success) {
             navigation.navigate('otp');
-            dispatch({type: ActionType.SIGNUP_SUCCESS});
+            dispatch({type: ActionType.SIGNUP_SUCCESS, payload: res.data});
           } else if (!res.data.success) {
             console.log('esle if ');
             dispatch({type: ActionType.SIGNUP_FAIL});

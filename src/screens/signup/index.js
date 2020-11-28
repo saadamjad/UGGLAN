@@ -26,24 +26,14 @@ const App = (props) => {
     const data = {
       // fullName: 'saad',
       // code: 'saad',
-      phone: 'saasssdsdsdsed',
-      email: 'saassdss@gmail.com',
+      phone: 'sassasssssxsd7787ddddsdsdsed',
+      email: 'saassspddsspxsppppps@gmail.com',
       password: 'saad',
     };
     props._Signup(data, props.navigation);
 
     // props.navigation.navigate('otp');
   };
-  // useEffect(() => {
-  //   const data = {
-  //     fullName: 'saad',
-  //     code: 'saad',
-  //     phone: 'saad',
-  //     email: 'saad',
-  //     password: 'saad',
-  //   };
-  //   props._Signup(data, props.navigation);
-  // }, []);
 
   const _OnChangeText = async (text, name) => {
     setState({...state, [name]: text});

@@ -79,6 +79,7 @@ export const API_URL = 'https://ugglanapp.herokuapp.com';
 export function Otp(path, obj) {
   console.log('api call ', path, obj);
   const API_REQ_URL = `${API_URL}/api/users/${path}`;
+  console.log('api', API_REQ_URL);
   try {
     return axios.post(API_REQ_URL, obj);
   } catch (error) {

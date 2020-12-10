@@ -45,9 +45,10 @@ const App = (props) => {
     }
   };
   useEffect(() => {
-    console.log('userdata', props._userData);
+    console.log('userdata', props._userData.user);
+    // props._Otp(newText, props.navigation);
     setOtp(props._userData);
-  });
+  }, []);
 
   const getValueOtp = async () => {
     let {otpInputs} = state;
@@ -101,6 +102,7 @@ const App = (props) => {
             width: '100%',
           }}>
           <TextInput
+            keyboardType="email-address"
             placeholder="Full Name"
             placeholderTextColor="#696969"
             style={{
@@ -125,6 +127,16 @@ const App = (props) => {
     );
   };
 
+  const _resendOtp = () => {
+    console.log('sssss');
+    if (!newText.length > 0) {
+      alert('Kindly Enter Phone/Email Address');
+    } else {
+      props._Otp(newText, props.navigation);
+
+      console.log('newText', newText);
+    }
+  };
   const _RenderOtp = () => {
     return state.otpInputs.map((val, i) => (
       <View
@@ -133,18 +145,11 @@ const App = (props) => {
           justifyContent: 'center',
           alignItems: 'center',
           color: 'black',
-          // textAlign: 'center',
           height: 70,
           fontSize: 26,
           backgroundColor: 'white',
           marginRight: 7,
           borderWidth: 1,
-          // borderColor:
-          //   state.selectedIndex == i
-          //     ? theme.secondaryColor
-          //     : theme.borderColor,
-          // borderRadius: 1.5,
-          // marginVertical: 10,
         }}>
         <TextInput
           onKeyPress={({nativeEvent}) => {
@@ -206,19 +211,21 @@ const App = (props) => {
 
         <View style={{width: '100%', alignItems: 'center'}}>
           {/* ==========OTP Start========== */}
-
           <View
             style={{
               alignItems: 'center',
               borderWidth: 1,
               width: '100%',
             }}>
-            <Text style={{color: '#FFFFFF', fontSize: 14}}>
+            <Text style={{color: '#FFFFFF', fontSize: 14, textAlign: 'center'}}>
               {console.log(
                 'props.userData?.user?.phone',
                 userData?.user?.phone,
               )}
-              We have sent OTP to this number {'\n'} {userData?.user?.phone}
+              We have sent OTP to {'\n'}
+              {userData?.user?.phone
+                ? userData.user.phone
+                : userData?.user?.email}
             </Text>
             <Text
               style={{color: '#FFFFFF', fontSize: 14, marginVertical: 10}}
@@ -226,7 +233,6 @@ const App = (props) => {
               wrong number ? Click here to update
             </Text>
           </View>
-
           <View
             style={{
               flexDirection: 'row',
@@ -236,7 +242,7 @@ const App = (props) => {
               marginVertical: 10,
               // borderWidth: 1,
             }}>
-            {resendOtp ? <_TextBox /> : <_RenderOtp />}
+            {_RenderOtp()}
           </View>
 
           <LinearGradient
@@ -250,8 +256,8 @@ const App = (props) => {
             }}>
             <Button
               loading={props.isLoading}
-              title={resendOtp ? 'done' : ' Resend Otp'}
-              onPress={() => otpfunction()}
+              title={' Resend Otp'}
+              onPress={() => _resendOtp()}
               buttonStyle={{
                 backgroundColor: 'transparent',
               }}

@@ -64,11 +64,17 @@ export default class AuthAction {
 
       Otp('otp', {to: data})
         .then((res) => {
-          dispatch({type: ActionType.OTP_SUCCESS, isLoading: false});
-          console.log('response from otp', res.data);
+          if (res.data.success) {
+            dispatch({type: ActionType.OTP_SUCCESS, isLoading: false});
+            console.log('response from otp', res.data);
+            return res.data;
+            // navigation.navigate('otp');
+          } else {
+            alert(res.data.message);
+          }
         })
         .catch((err) => {
-          console.log('err', err);
+          console.log('err', err.response?.data?.message);
           dispatch({type: ActionType.OTP_FAIL, isLoading: false});
         });
     };

@@ -23,13 +23,16 @@ const App = (props) => {
     password: '',
   });
   const SgnUpFntn = () => {
-    const data = {
-      // fullName: 'saad',
-      // code: 'saad',
-      phone: 'sassasssssxsd7787ddddsdsdsed',
-      email: 'saassspddsspxsppppps@gmail.com',
-      password: 'saad',
-    };
+    console.log('sss', Number(state.email) ? 'number' : 'email');
+    const data = Number(state.email)
+      ? {
+          phone: state.email,
+          password: 'saad',
+        }
+      : {
+          email: state.email,
+          password: 'saad',
+        };
     props._Signup(data, props.navigation);
 
     // props.navigation.navigate('otp');
@@ -38,7 +41,7 @@ const App = (props) => {
   const _OnChangeText = async (text, name) => {
     setState({...state, [name]: text});
     console.log('full name', state.fullName);
-    console.log('te', text);
+    // console.log('te', text);
   };
 
   const _Signup = () => {
@@ -162,7 +165,7 @@ const App = (props) => {
             alignSelf: 'center',
             width: '100%',
           }}>
-          <View
+          {/* <View
             style={{
               flexDirection: 'row',
               borderBottomWidth: 1,
@@ -194,8 +197,9 @@ const App = (props) => {
               />
             </View>
           </View>
+           */}
           {/* ====+==== */}
-          <View
+          {/* <View
             style={{
               flexDirection: 'row',
               borderBottomWidth: 1,
@@ -225,7 +229,7 @@ const App = (props) => {
                 width: 14.33,
               }}
             />
-          </View>
+          </View> */}
         </View>
 
         {/* ==========Email Row==========   */}
@@ -239,7 +243,7 @@ const App = (props) => {
             width: '100%',
           }}>
           <TextInput
-            placeholder="Email"
+            placeholder="Email or phone"
             placeholderTextColor="#696969"
             keyboardType="email-address"
             style={{

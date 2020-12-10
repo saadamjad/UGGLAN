@@ -23,6 +23,12 @@ export default (state = initialState, action) => {
       return {...state, isLoading: false, userData: action.payload};
     case ActionType.SIGNUP_FAIL:
       return {...state, isLoading: false};
+    case ActionType.OTP:
+      return {isLoading: true};
+    case ActionType.OTP_SUCCESS:
+      return {isLoading: false};
+    case ActionType.OTP_FAIL:
+      return {isLoading: false};
 
     default:
       return state;

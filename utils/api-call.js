@@ -77,13 +77,12 @@ export const API_URL = 'https://ugglanapp.herokuapp.com';
 // }
 
 export function Otp(path, obj) {
-  console.log('api call ', path, obj);
   const API_REQ_URL = `${API_URL}/api/users/${path}`;
-  console.log('api', API_REQ_URL);
+  console.log('api url', API_REQ_URL, obj);
   try {
     return axios.post(API_REQ_URL, obj);
   } catch (error) {
-    console.log('error', error);
+    console.log('throw chal gya', error);
     throw error;
   }
 }
@@ -91,7 +90,6 @@ export function Otp(path, obj) {
 export function login(path, obj) {
   const API_REQ_URL = `${API_URL}/api/users/${path}`;
   console.log('api url', API_REQ_URL);
-  // console.log(API_REQ_URL, ...obj);
   try {
     return axios.post(API_REQ_URL, obj);
   } catch (error) {

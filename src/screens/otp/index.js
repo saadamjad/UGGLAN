@@ -36,19 +36,23 @@ const App = (props) => {
   };
   const Submit = async () => {
     let otp = await getValueOtp();
-    console.log('otp', otp);
-
-    if (userData.otp == otp) {
-      props.navigation.navigate('HomeStacks');
+    console.log('data', userData);
+    if (props.userData.otp == otp) {
+      alert('Email Is Verified');
+      props.updateUser(
+        {emailVerified: true},
+        props.navigation,
+        props.userData.token,
+      );
+      // props.navigation.navigate('login');
     } else {
       alert('Otp does not match');
     }
   };
   useEffect(() => {
-    console.log('userdata', props._userData.user);
     // props._Otp(newText, props.navigation);
-    setOtp(props._userData);
-  }, []);
+    setOtp(props.userData);
+  }, [props.userData]);
 
   const getValueOtp = async () => {
     let {otpInputs} = state;
@@ -271,10 +275,11 @@ const App = (props) => {
 
 mapStateToProp = (state) => ({
   isLoading: state.AuthReducer.isLoading,
-  _userData: state.AuthReducer.userData,
+  userData: state.AuthReducer.userData,
 });
 mapDispatchToProps = {
   _Otp: AuthAction.Otp,
+  updateUser: AuthAction.UpdateUser,
   // loginAction: AuthAction.Login,
 };
 export default connect(mapStateToProp, mapDispatchToProps)(App);

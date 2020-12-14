@@ -1,7 +1,7 @@
 // import {handleApiErrors} from './api-errors';
 import axios from 'axios';
 // export const API_URL = 'http://192.168.1.107:5000';
-export const API_URL = 'https://ugglanapp.herokuapp.com';
+export const API_URL = 'http://localhost:5000';
 
 // function processRequest(request) {
 //   return request
@@ -36,24 +36,24 @@ export const API_URL = 'https://ugglanapp.herokuapp.com';
 //   return request;
 // }
 
-// export function put(path, obj, id, token) {
-//   const API_REQ_URL = `${API_URL}/${path}/${id}`;
-//   console.log(API_REQ_URL);
-//   let request;
-//   try {
-//     request = fetch(API_REQ_URL, {
-//       method: 'PUT',
-//       headers: {
-//         'Content-Type': 'application/json',
-//         Authorization: `Bearer ${token}`,
-//       },
-//       body: JSON.stringify(obj),
-//     });
-//   } catch (error) {
-//     throw error;
-//   }
-//   return request;
-// }
+export function put(path, obj, id, token) {
+  const API_REQ_URL = id ? `${API_URL}/api/${path}/${id}` : `${API_URL}/api/${path}`;
+  console.log(API_REQ_URL);
+  let request;
+  try {
+    request = fetch(API_REQ_URL, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(obj),
+    });
+  } catch (error) {
+    throw error;
+  }
+  return request;
+}
 // export function post(path, obj, token) {
 //   const API_REQ_URL = API_URL + path;
 //   let request;

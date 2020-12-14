@@ -27,11 +27,11 @@ const App = (props) => {
     const data = Number(state.email)
       ? {
           phone: state.email,
-          password: 'saad',
+          password: state.password,
         }
       : {
           email: state.email,
-          password: 'saad',
+          password: state.password,
         };
     props._Signup(data, props.navigation);
 
@@ -40,8 +40,6 @@ const App = (props) => {
 
   const _OnChangeText = async (text, name) => {
     setState({...state, [name]: text});
-    console.log('full name', state.fullName);
-    // console.log('te', text);
   };
 
   const _Signup = () => {

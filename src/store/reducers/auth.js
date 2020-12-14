@@ -17,6 +17,15 @@ export default (state = initialState, action) => {
 
     case ActionType.LOGIN_UNSUCCESS:
       return {...state, isLoading: false};
+    case ActionType.UPDATE_USER:
+      return {...state, isLoading: true};
+
+    case ActionType.UPDATE_USER_SUCCESS:
+      return {...state, isLoading: false};
+    case ActionType.LOGOUT:
+      return initialState;
+    case ActionType.UPDATE_USER_FAIL:
+      return {...state, isLoading: false};
     case ActionType.SIGNUP:
       return {...state, isLoading: true};
     case ActionType.SIGNUP_SUCCESS:

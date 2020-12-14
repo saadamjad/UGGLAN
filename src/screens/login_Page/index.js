@@ -16,15 +16,14 @@ import {AuthAction} from '../../store/actions';
 
 const App = (props) => {
   const [state, setState] = useState({
-    phone: '',
-    password: '',
+    email: 'moizyousuf24@gmail.com',
+    password: '12345678',
   });
 
   const _CheckValidation = () => {
     let email = state.phone;
-    let password = state.password;
 
-    if ((email, password == '')) {
+    if (email == '') {
       alert('kindly fill inputs correctly');
     } else {
       _Login();
@@ -32,7 +31,7 @@ const App = (props) => {
   };
   const _Login = () => {
     let data = {
-      email: state.phone,
+      email: state.email,
       password: state.password,
     };
     props.loginAction(data, props.navigation);
@@ -68,7 +67,7 @@ const App = (props) => {
               onChangeText={(text) =>
                 setState({
                   ...state,
-                  phone: text,
+                  email: text,
                 })
               }
             />
@@ -125,6 +124,7 @@ const App = (props) => {
             style={styles.loginLG}>
             <Button
               title="Login"
+              loading={props.isLoading}
               onPress={() => _CheckValidation()}
               buttonStyle={{backgroundColor: 'transparent'}}
             />

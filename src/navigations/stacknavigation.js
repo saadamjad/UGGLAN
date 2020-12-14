@@ -36,6 +36,7 @@ import history from '../screens/history';
 import HomeLiveLocation from '../screens/HomeLiveLocation';
 import Chat from '../screens/chat';
 import TrackPerson from '../screens/trackperson';
+import {connect} from 'react-redux';
 const Stack = createStackNavigator();
 
 const Drawer = createDrawerNavigator();
@@ -496,10 +497,14 @@ function CallStack() {
   );
 }
 
-function App() {
+function App(props) {
+  let isUser =
+    (Object.keys(props.userData?.user || {}).length > 0 &&
+      props.userData.user.emailVerified) ||
+    false;
   return (
     <NavigationContainer headerMode="none">
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName={isUser ? 'HomeStacks' : 'Auth'}>
         <Stack.Screen
           name="Auth"
           component={AuthStack}
@@ -610,5 +615,8 @@ function MyTabs() {
     // </LinearGradient>
   );
 }
+mapStateToProp = (state) => ({
+  userData: state.AuthReducer.userData,
+});
 
-export default App;
+export default connect(mapStateToProp, null)(App);

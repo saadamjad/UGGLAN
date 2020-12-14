@@ -18,10 +18,31 @@ export default class AuthAction {
           console.log('res', res.data);
           if (res.data.success) {
             dispatch({type: ActionType.LOGIN_SUCCESS, payload: res.data});
-            navigation.navigate('signup');
+            navigation.navigate('HomeStacks');
           } else {
             dispatch({type: ActionType.LOGIN_UNSUCCESS});
             ToastError(res.data.message);
+            if (res.data.messageCode == 1) {
+              Alert.alert(
+                'Verification',
+                'are you want to confirm your email address',
+                [
+                  {
+                    text: 'Cancel',
+                    onPress: () => {},
+                  },
+                  {
+                    text: 'OK',
+                    onPress: () => {
+                      dispatch(
+                        this.Otp(data.email, navigation, res.data.token),
+                      );
+                      navigation.navigate('otp');
+                    },
+                  },
+                ],
+              );
+            }
           }
         })
         .catch((err) => {
@@ -57,7 +78,32 @@ export default class AuthAction {
         });
     };
   };
-  static Otp = (data, navigation) => {
+  static UpdateUser = (data, navigation, token) => {
+    console.log('otp===', data);
+    return (dispatch) => {
+      dispatch({type: ActionType.UPDATE_USER});
+
+      put('users', data, null, token)
+        .then(async (res) => {
+          let data = await res.json();
+          console.log('HERE IS DATA', data);
+          if (data.success) {
+            dispatch({type: ActionType.UPDATE_USER_SUCCESS});
+            navigation.navigate('login');
+            // navigation.navigate('otp');
+          } else {
+            dispatch({type: ActionType.UPDATE_USER_FAIL});
+            ToastError(data.message);
+          }
+        })
+        .catch((err) => {
+          dispatch({type: ActionType.UPDATE_USER_FAIL});
+          console.log('err', err);
+          dispatch({type: ActionType.OTP_FAIL, isLoading: false});
+        });
+    };
+  };
+  static Otp = (data, navigation, token) => {
     console.log('otp===', data);
     return (dispatch) => {
       dispatch({type: ActionType.OTP, isLoading: true});
@@ -66,6 +112,10 @@ export default class AuthAction {
         .then((res) => {
           if (res.data.success) {
             dispatch({type: ActionType.OTP_SUCCESS, isLoading: false});
+            dispatch({
+              type: ActionType.SIGNUP_SUCCESS,
+              payload: {user: {}, otp: res.data.otp, token},
+            });
             console.log('response from otp', res.data);
             return res.data;
             // navigation.navigate('otp');
@@ -77,6 +127,11 @@ export default class AuthAction {
           console.log('err', err.response?.data?.message);
           dispatch({type: ActionType.OTP_FAIL, isLoading: false});
         });
+    };
+  };
+  static Logout = (data, navigation, token) => {
+    return (dispatch) => {
+      dispatch({type: ActionType.LOGOUT});
     };
   };
 }

@@ -9,6 +9,8 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
+import {connect} from 'react-redux';
+import {AuthAction} from '../store/actions';
 
 const DrawerItems = [
   {title: 'My Profile', name: 'profile', icon: 'user'},
@@ -51,7 +53,7 @@ const DrawerItems = [
   },
   {
     title: 'Log Out',
-    name: 'login',
+    name: 'Auth',
     icon: 'logout',
   },
 ];
@@ -69,7 +71,14 @@ const DrawerContent = (props) => {
       <View style={{flex: 1, paddingTop: 10, marginTop: 60}}>
         {DrawerItems.map((val) => (
           <TouchableOpacity
-            onPress={() => props.navigation.navigate(val.name)}
+            onPress={() => {
+              if (val.name == 'Auth') {
+                props.Logout();
+                props.navigation.navigate(val.name);
+              } else {
+                props.navigation.navigate(val.name);
+              }
+            }}
             style={{
               flexDirection: 'row',
               alignItems: 'center',
@@ -106,4 +115,8 @@ const DrawerContent = (props) => {
     </ImageBackground>
   );
 };
-export default DrawerContent;
+mapStateToProp = (state) => ({});
+mapDispatchToProps = {
+  Logout: AuthAction.Logout,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(DrawerContent);

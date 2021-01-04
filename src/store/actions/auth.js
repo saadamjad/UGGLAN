@@ -46,7 +46,7 @@ export default class AuthAction {
           }
         })
         .catch((err) => {
-          console.log('Err', err);
+          console.log('Err====', err);
         });
     };
   };
@@ -88,7 +88,7 @@ export default class AuthAction {
           let data = await res.json();
           console.log('HERE IS DATA', data);
           if (data.success) {
-            dispatch({type: ActionType.UPDATE_USER_SUCCESS});
+            dispatch({type: ActionType.UPDATE_USER_SUCCESS, payload: data.whatIsNew});
             navigation.navigate('login');
             // navigation.navigate('otp');
           } else {

@@ -55,7 +55,13 @@ export default class ActionType {
 
   /**
 |--------------------------------------------------
-| Product Action
+| Updated Profile Data Action
 |--------------------------------------------------
 */
+
+static UPDATE_USER_PROFILE = 'UPDATE_USER_PROFILE'
+static UPDATE_USER_PROFILE_SUCCESS='UPDATE_USER_PROFILE_SUCCESS'
+static UPDATE_USERDATA_PROFILE_SUCCESS='UPDATE_USERDATA_PROFILE_SUCCESS'
+static UPDATE_USER_PROFILE_UNSUCCESS= 'UPDATE_USER_PROFILE_UNSUCCESS'
+static UPDATE_USER_PROFILE_FAIL = 'UPDATE_USER_PROFILE_FAIL'
 }

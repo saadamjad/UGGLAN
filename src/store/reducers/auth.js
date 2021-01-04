@@ -21,7 +21,15 @@ export default (state = initialState, action) => {
       return {...state, isLoading: true};
 
     case ActionType.UPDATE_USER_SUCCESS:
-      return {...state, isLoading: false};
+      console.log('I AM HERE', {...state.userData, ...action.payload});
+      return {
+        ...state,
+        userData: {
+          ...state.userData,
+          user: {...state.userData.user, ...action.payload},
+        },
+        isLoading: false,
+      };
     case ActionType.LOGOUT:
       return initialState;
     case ActionType.UPDATE_USER_FAIL:

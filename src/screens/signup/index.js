@@ -332,7 +332,7 @@ const App = (props) => {
           }}>
           <Button
             title="Sign Up"
-            loading={props.isLoading}
+            // loading={props.isLoading}
             // onPress={() => _Signup()}
             onPress={() => SgnUpFntn()}
             buttonStyle={{backgroundColor: 'transparent'}}

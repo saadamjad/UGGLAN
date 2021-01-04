@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Button} from 'react-native-elements';
 import {
   View,
@@ -13,12 +13,57 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
 import GlobalHeader from '../../components/header';
+import {connect} from 'react-redux';
+import {AuthAction, ProfileAction} from '../../store/actions';
 
 const App = (props) => {
-  const SgnUpFntn = () => {
-    props.navigation.navigate('HomeScreen');
+  //   //usefect
+  //   //
+  //   let data=props.userData.user
+
+  //   setState({...state,userData:data})
+
+  const [state, setState] = useState({
+    // fullName:'Moiz',
+    // email:props.userData.user.email,
+    // phoneNumber:props.userData.user.phone,
+    // password:props.userData.user.password
+    userData: {},
+  });
+
+  useEffect(() => {
+    let data = props.userData.user;
+    setState({...state, userData: data});
+  }, []);
+  // useEffect(() => {
+  //   let data = props.userData.user;
+  //   setState({...state, userData: data});
+  // }, [props.userData]);
+  const saveChanges = () => {
+    // props.navigation.navigate('HomeScreen');
+
+    _saveChanges();
   };
 
+  const _saveChanges = () => {
+    let updatedData = {
+      userName: state.userData.userName,
+      phone: state.userData.phone,
+      email: state.userData.email,
+    };
+
+    // let id=state.userData._id
+    // let token =props.userData.token
+    console.log('updted data in profile', updatedData);
+    // console.log('id', id)
+    // console.log('token', token)
+
+    props.updatedUserAction(
+      updatedData,
+      props.navigation,
+      props.userData.token,
+    );
+  };
   return (
     <ImageBackground
       source={require('../../assets/images/bg_image.png')}
@@ -35,8 +80,6 @@ const App = (props) => {
       </SafeAreaView>
       <SafeAreaView
         style={{flex: 1, marginTop: 20, width: '90%', alignSelf: 'center'}}>
-       
-
         {/* ==========Profile Image========== */}
 
         <View style={{alignItems: 'center'}}>
@@ -91,12 +134,19 @@ const App = (props) => {
           }}>
           <TextInput
             placeholder="Full Name"
+            value={state.userData.userName}
             placeholderTextColor="#696969"
             style={{
               color: 'white',
               width: '90%',
               height: 40,
             }}
+            onChangeText={(text) =>
+              setState({
+                ...state,
+                userData: {...state.userData, userName: text},
+              })
+            }
           />
           <Ionicons
             name="person"
@@ -109,74 +159,43 @@ const App = (props) => {
             }}
           />
         </View>
-
-        {/* ======Code & Phone Row====== */}
+        {console.log('userdata in profile console', props.userData)}
+        {/* ====== Phone Row====== */}
 
         <View
           style={{
             flexDirection: 'row',
-            alignSelf: 'center',
+            borderBottomWidth: 1,
+            borderColor: '#C0C0C0',
+            alignItems: 'center',
             width: '100%',
           }}>
-          <View
+          <TextInput
+            placeholder="Phone"
+            value={state.userData.phone}
+            placeholderTextColor="#696969"
+            keyboardType="email-address"
             style={{
-              flexDirection: 'row',
-              borderBottomWidth: 1,
-              borderColor: '#C0C0C0',
-              width: '35%',
-              alignItems: 'center',
-            }}>
-            <TextInput
-              placeholder="Code"
-              placeholderTextColor="#696969"
-              keyboardType="number-pad"
-              style={{
-                color: 'white',
-                width: '85%',
-                height: 40,
-              }}
-            />
-            <View style={{width: '15%'}}>
-              <AntDesign
-                name="down"
-                size={12}
-                color="#C0C0C0"
-                style={{
-                  alignItems: 'flex-end',
-                  // height: 5.21,
-                  // width: 9.12,
-                }}
-              />
-            </View>
-          </View>
-          {/* ====+==== */}
-          <View
-            style={{
-              flexDirection: 'row',
-              borderBottomWidth: 1,
-              borderColor: '#C0C0C0',
-              width: '55%',
-              marginHorizontal: 28,
-              alignItems: 'center',
-            }}>
-            <TextInput
-              placeholder="Phone"
-              placeholderTextColor="#696969"
-              keyboardType="numeric"
-              style={{
-                color: 'white',
-                width: '85%',
-                height: 40,
-              }}
-            />
+              color: 'white',
+              width: '90%',
+              height: 40,
+            }}
+            onChangeText={(text) =>
+              setState({
+                ...state,
+                userData: {...state.userData, phone: text},
+              })
+            }
+          />
+          <View style={{width: '15%'}}>
             <Fontisto
               name="phone"
               // size={14}
               color="#C0C0C0"
               style={{
                 alignItems: 'flex-end',
-                height: 14.33,
-                width: 14.33,
+                height: 13.31,
+                width: 20.07,
               }}
             />
           </View>
@@ -194,6 +213,7 @@ const App = (props) => {
           }}>
           <TextInput
             placeholder="Email"
+            value={state.userData.email}
             placeholderTextColor="#696969"
             keyboardType="email-address"
             style={{
@@ -201,6 +221,12 @@ const App = (props) => {
               width: '90%',
               height: 40,
             }}
+            onChangeText={(text) =>
+              setState({
+                ...state,
+                userData: {...state.userData, email: text},
+              })
+            }
           />
           <View style={{width: '15%'}}>
             <Fontisto
@@ -216,43 +242,7 @@ const App = (props) => {
           </View>
         </View>
 
-        {/* ==========Password Row==========   */}
-
-        <View
-          style={{
-            flexDirection: 'row',
-            borderBottomWidth: 1,
-            borderColor: '#C0C0C0',
-            alignItems: 'center',
-            width: '100%',
-          }}>
-          <TextInput
-            placeholder="Password"
-            placeholderTextColor="#696969"
-            keyboardType="default"
-            //   secureTextEntry= {secure}
-            style={{
-              color: 'white',
-              width: '90%',
-              height: 40,
-            }}
-          />
-          <View style={{width: '15%'}}>
-            <Fontisto
-              name="key"
-              // size={14}
-              color="#C0C0C0"
-              style={{
-                alignItems: 'flex-end',
-                height: 13.5,
-                width: 13.5,
-              }}
-            />
-          </View>
-        </View>
         {/* </View> */}
-
-     
 
         {/* ========Sign Up Button======== */}
 
@@ -267,8 +257,9 @@ const App = (props) => {
             borderRadius: 3,
           }}>
           <Button
+          loading={props.isLoading}
             title="Save"
-            onPress={() => SgnUpFntn()}
+            onPress={() => saveChanges()}
             buttonStyle={{backgroundColor: 'transparent'}}
           />
         </LinearGradient>
@@ -277,4 +268,12 @@ const App = (props) => {
   );
 };
 
-export default App;
+mapStateToProps = (state) => ({
+  isLoading:state.AuthReducer.isLoading,
+  userData: state.AuthReducer.userData,
+});
+mapDispatchToProps = {
+  updatedUserAction: ProfileAction.SaveChanges,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

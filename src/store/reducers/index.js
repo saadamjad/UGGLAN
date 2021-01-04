@@ -1,3 +1,4 @@
 import AuthReducer from './auth'
+import ProfileReducer from './profile'
 
-export { AuthReducer };
+export { AuthReducer,ProfileReducer };

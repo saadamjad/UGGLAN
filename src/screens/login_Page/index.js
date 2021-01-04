@@ -129,6 +129,7 @@ const App = (props) => {
               buttonStyle={{backgroundColor: 'transparent'}}
             />
           </LinearGradient>
+          
         </View>
       </SafeAreaView>
     </ImageBackground>

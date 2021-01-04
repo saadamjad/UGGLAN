@@ -5,10 +5,12 @@ import middlewares from './middleware';
 
 import {
   AuthReducer,
+  // ProfileReducer
 } from './reducers';
 
 export const rootReducer = combineReducers({
   AuthReducer,
+  // ProfileReducer
 });
 
 const persistConfig = {

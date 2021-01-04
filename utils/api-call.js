@@ -1,40 +1,8 @@
 // import {handleApiErrors} from './api-errors';
 import axios from 'axios';
-// export const API_URL = 'http://192.168.1.107:5000';
-export const API_URL = 'http://localhost:5000';
+export const API_URL = 'http://192.168.18.69:4500';
+// export const API_URL = 'http://localhost:5000';
 
-// function processRequest(request) {
-//   return request
-//     .then((json) => {
-//       if (!json.ok) throw json._bodyInit;
-//       else return json();
-//     })
-//     .catch((error) => {
-//       throw error;
-//     });
-// }
-
-// export function get(path, token, check) {
-//   const API_REQ_URL = API_URL + path;
-//   console.log(API_REQ_URL, {check});
-
-//   let request;
-//   try {
-//     check !== 'no'
-//       ? (request = fetch(API_REQ_URL, {
-//           method: 'GET',
-//           headers: {
-//             Authorization: `Bearer ${token}`,
-//           },
-//         }))
-//       : (request = fetch(API_REQ_URL, {
-//           method: 'GET',
-//         }));
-//   } catch (error) {
-//     throw error;
-//   }
-//   return request;
-// }
 
 export function put(path, obj, id, token) {
   const API_REQ_URL = id ? `${API_URL}/api/${path}/${id}` : `${API_URL}/api/${path}`;
@@ -54,27 +22,6 @@ export function put(path, obj, id, token) {
   }
   return request;
 }
-// export function post(path, obj, token) {
-//   const API_REQ_URL = API_URL + path;
-//   let request;
-//   try {
-//     request = fetch(API_REQ_URL, {
-//       method: 'POST',
-//       headers: token
-//         ? {
-//           'Content-Type': 'application/json',
-//           Authorization: `Bearer ${token}`,
-//         }
-//         : {
-//           'Content-Type': 'application/json',
-//         },
-//       body: JSON.stringify(obj),
-//     });
-//   } catch (error) {
-//     throw error;
-//   }
-//   return request;
-// }
 
 export function Otp(path, obj) {
   const API_REQ_URL = `${API_URL}/api/users/${path}`;

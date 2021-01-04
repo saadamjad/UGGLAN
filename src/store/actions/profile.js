@@ -12,7 +12,7 @@ export default class ProfileAction {
   static SaveChanges = (data, navigation, token) => {
   
 
-     console.log('profile data', data);
+     console.log('profile data', data  );
     return (dispatch) => {
       dispatch({type: ActionType.UPDATE_USER});
 

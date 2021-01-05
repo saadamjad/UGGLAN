@@ -17,11 +17,7 @@ import {connect} from 'react-redux';
 import {AuthAction, ProfileAction} from '../../store/actions';
 
 const App = (props) => {
-  //   //usefect
-  //   //
-  //   let data=props.userData.user
-
-  //   setState({...state,userData:data})
+  
 
   const [state, setState] = useState({
     // fullName:'Moiz',

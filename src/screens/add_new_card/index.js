@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {Button} from 'react-native-elements';
 import {
   View,
@@ -10,10 +10,42 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './styles';
 import GlobalHeader from '../../components/header';
+import {connect} from 'react-redux';
+import {PaymentMethodAction} from '../../store/actions';
 const App = (props) => {
-  const Save = () => {
-    props.navigation.goBack();
+  const [state, setState] = useState({
+    cardName: '',
+    cardNumber: '',
+    expiry: '',
+    cvv: '',
+  });
+  const AddPaymentMethod = () => {
+    // props.navigation.goBack();
+    _AddPaymentMethod();
   };
+
+  const _AddPaymentMethod = () => {
+    let token = props.userData.token;
+    let addPaymentData = {
+      cardName: state.cardName,
+      cardNumber: state.cardNumber,
+      expiry: state.expiry,
+      cvv: state.cvv,
+    };
+
+    console.log('addpayment data', addPaymentData);
+
+    props.AddPaymentMethodAction(addPaymentData, token, props.navigation);
+  };
+
+  const _OnChangeText = async (text, name) => {
+    setState({...state, [name]: text});
+    // console.log(text)
+  };
+
+  const Cancel =()=>{
+        props.navigation.goBack();
+  }
   return (
     <ImageBackground
       source={require('../../assets/images/bg_image.png')}
@@ -32,10 +64,11 @@ const App = (props) => {
           <View style={styles.NameView}>
             <Text style={styles.NameText}>Name on Card</Text>
             <TextInput
-              placeholder="Abdul Samad"
+              placeholder="Card Name"
               keyboardType="name-phone-pad"
               placeholderTextColor="#696969"
               style={styles.NameTextInput}
+              onChangeText={(text) => _OnChangeText(text, 'cardName')}
             />
           </View>
 
@@ -47,6 +80,7 @@ const App = (props) => {
               placeholderTextColor="#696969"
               keyboardType="numeric"
               style={styles.CardTextInput}
+              onChangeText={(text) => _OnChangeText(text, 'cardNumber')}
             />
           </View>
 
@@ -60,6 +94,7 @@ const App = (props) => {
                 placeholderTextColor="#696969"
                 keyboardType="number-pad"
                 style={styles.DateTextInput}
+                onChangeText={(text) => _OnChangeText(text, 'expiry')}
               />
             </View>
 
@@ -72,6 +107,7 @@ const App = (props) => {
                 placeholderTextColor="#696969"
                 keyboardType="numeric"
                 style={styles.CVVTextInput}
+                onChangeText={(text) => _OnChangeText(text, 'cvv')}
               />
             </View>
           </View>
@@ -79,13 +115,15 @@ const App = (props) => {
           <LinearGradient colors={['#F6931B', '#DE2516']} style={styles.SaveLG}>
             <Button
               title="Save"
-              onPress={() => Save()}
+              loading={props.isLoading}
+              onPress={() => AddPaymentMethod()}
               buttonStyle={{backgroundColor: 'transparent'}}
             />
           </LinearGradient>
           <View style={styles.CancelView}>
             <Button
               title="Cancel"
+              
               onPress={() => Cancel()}
               titleStyle={{
                 color: '#727272',
@@ -99,4 +137,11 @@ const App = (props) => {
   );
 };
 
-export default App;
+mapStateToProps = (state) => ({
+  isLoading: state.PaymentMethodReducer.isLoading,
+  userData: state.AuthReducer.userData,
+});
+mapDispatchToProps = {
+  AddPaymentMethodAction: PaymentMethodAction.AddPaymentMethod,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -14,6 +14,14 @@ const styles = StyleSheet.create({
     borderColor: '#707070',
   },
 
+   /* ==========Indicator========== */
+
+indicator:{
+justifyContent:'center',
+flex:1,
+alignItems:'center'
+},
+
   /* ==========Image========== */
 
   imageMainView: {

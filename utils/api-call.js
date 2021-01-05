@@ -3,9 +3,10 @@ import axios from 'axios';
 export const API_URL = 'http://192.168.18.69:4500';
 // export const API_URL = 'http://localhost:5000';
 
-
 export function put(path, obj, id, token) {
-  const API_REQ_URL = id ? `${API_URL}/api/${path}/${id}` : `${API_URL}/api/${path}`;
+  const API_REQ_URL = id
+    ? `${API_URL}/api/${path}/${id}`
+    : `${API_URL}/api/${path}`;
   console.log(API_REQ_URL);
   let request;
   try {
@@ -16,6 +17,23 @@ export function put(path, obj, id, token) {
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify(obj),
+    });
+  } catch (error) {
+    throw error;
+  }
+  return request;
+}
+
+export function get(path, token, check) {
+  const API_REQ_URL = `${API_URL}/api/${path}`;
+  console.log(API_REQ_URL);
+
+  let request;
+  try {
+    request = axios(API_REQ_URL, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
   } catch (error) {
     throw error;
@@ -53,6 +71,21 @@ export function signup(path, data) {
     return axios.post(API_REQ_URL, data);
   } catch (error) {
     console.log('throw chal gya', error);
+    throw error;
+  }
+}
+
+export function post(path, obj,token) {
+  const API_REQ_URL = `${API_URL}/api/${path}`;
+  console.log('api url', API_REQ_URL);
+  try {
+    return axios.post(API_REQ_URL, obj, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (error) {
+    console.log('error', error);
     throw error;
   }
 }

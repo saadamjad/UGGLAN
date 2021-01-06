@@ -22,16 +22,37 @@ const styles = StyleSheet.create({
   NameTextInput: {
     color: 'white',
     fontSize: 13,
-    height: 40
+    height: 40,
   },
 
   /* ========Card no:========== */
 
-  CardView: {
+  rowView: {
+    flexDirection: 'row',
     borderBottomWidth: 1,
     borderColor: '#C0C0C0',
-    width: '100%',
+  },
+  cardTypeImageView: {
+    width: '25%',
+    // height: 90,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
+    marginRight: 5,
+    top:10
+  },
+  cardTypeImageStyle: {
+    // height: 20.94,
+    // width: 18.85,
+    width: 29,
+    height: 18,
+    margin: 2,
+  },
+  CardView: {
+    width: '70%',
+    height:60,
     marginVertical: 10,
+    // flexDirection:'row'
   },
   CardText: {
     color: '#FFFFFF',
@@ -40,7 +61,7 @@ const styles = StyleSheet.create({
   CardTextInput: {
     color: 'white',
     fontSize: 13,
-    height: 40
+    height: 40,
   },
 
   /* ======Expiry Date & CVV Row====== */
@@ -65,7 +86,7 @@ const styles = StyleSheet.create({
   DateTextInput: {
     color: 'white',
     fontSize: 13,
-    height: 40
+    height: 40,
   },
   /* ====+==== */
   CVVView: {

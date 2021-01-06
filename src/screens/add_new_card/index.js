@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   ImageBackground,
   TextInput,
+  Image,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './styles';
@@ -18,6 +19,7 @@ const App = (props) => {
     cardNumber: '',
     expiry: '',
     cvv: '',
+    cardType: '',
   });
   const AddPaymentMethod = () => {
     // props.navigation.goBack();
@@ -26,11 +28,13 @@ const App = (props) => {
 
   const _AddPaymentMethod = () => {
     let token = props.userData.token;
+
     let addPaymentData = {
       cardName: state.cardName,
       cardNumber: state.cardNumber,
       expiry: state.expiry,
       cvv: state.cvv,
+      cardType: state.cardType,
     };
 
     console.log('addpayment data', addPaymentData);
@@ -38,14 +42,34 @@ const App = (props) => {
     props.AddPaymentMethodAction(addPaymentData, token, props.navigation);
   };
 
-  const _OnChangeText = async (text, name) => {
+  // {=========onChangeText For CardNumber Input====== }
+  const _OnChangeTextCardNumber = async (text, name) => {
+    let changeType = String(text);
+
+    if (changeType.substring(0, 1) === '5') {
+      setState({...state, [name]: text, cardType: 'Master Card'});
+    } else if (changeType.substring(0, 1) === '4') {
+      setState({...state, [name]: text, cardType: 'Visa Card'});
+    } else if (changeType.substring(0, 1) === '3') {
+      if (
+        changeType.substring(1, 2) === '4' ||
+        changeType.substring(1, 2) === '7'
+      ) {
+        setState({...state, [name]: text, cardType: 'American Express'});
+      }
+      // setState({...state, [name]: text, cardType: 'American Express'});
+    } else {
+      setState({...state, [name]: text, cardType: ''});
+    }
+  };
+// {=========onChangeText For Other Input====== }
+  const _OnChangeTextOthers = async (text, name) => {
     setState({...state, [name]: text});
-    // console.log(text)
   };
 
-  const Cancel =()=>{
-        props.navigation.goBack();
-  }
+  const Cancel = () => {
+    props.navigation.goBack();
+  };
   return (
     <ImageBackground
       source={require('../../assets/images/bg_image.png')}
@@ -53,6 +77,7 @@ const App = (props) => {
         height: '100%',
         width: '100%',
       }}>
+      {console.log(' check krnay  lye', state)}
       <SafeAreaView style={{flex: 1}}>
         <GlobalHeader
           screenText={'Pay online'}
@@ -60,6 +85,65 @@ const App = (props) => {
           navigation={props.navigation}
         />
         <SafeAreaView style={styles.mainView}>
+          {/* ========Card no:========== */}
+
+          <View style={styles.rowView}>
+            <View
+              style={{
+                flex: 1,
+              }}>
+              <View style={styles.CardView}>
+                <Text style={styles.NameText}>Card Number</Text>
+                <TextInput
+                  maxLength={16}
+                  placeholder="4025 8303 4000 2867"
+                  placeholderTextColor="#696969"
+                  keyboardType="numeric"
+                  style={styles.CardTextInput}
+                  onChangeText={(text) =>
+                    _OnChangeTextCardNumber(text, 'cardNumber')
+                  }
+                />
+              </View>
+            </View>
+
+            {/* ==========Card Type Images========== */}
+
+            <View style={styles.cardTypeImageView}>
+              {state.cardType === 'Master Card' ? (
+                <Image
+                  source={require('../../assets/images/mastercard.png')}
+                  style={styles.cardTypeImageStyle}
+                />
+              ) : null}
+              {state.cardType === 'Visa Card' ? (
+                <Image
+                  source={require('../../assets/images/visa.png')}
+                  style={styles.cardTypeImageStyle}
+                />
+              ) : null}
+              {state.cardType === 'American Express' ? (
+                <Image
+                  source={require('../../assets/images/americanexp.png')}
+                  style={styles.cardTypeImageStyle}
+                />
+              ) : null}
+
+              {/* <Image
+                source={require('../../assets/images/mastercard.png')}
+                style={styles.cardTypeImageStyle}
+              />
+              <Image
+                source={require('../../assets/images/visa.png')}
+                style={styles.cardTypeImageStyle}
+              />
+              <Image
+                source={require('../../assets/images/americanexp.png')}
+                style={styles.cardTypeImageStyle}
+              /> */}
+            </View>
+          </View>
+
           {/* ==========Name On Card========== */}
           <View style={styles.NameView}>
             <Text style={styles.NameText}>Name on Card</Text>
@@ -68,19 +152,7 @@ const App = (props) => {
               keyboardType="name-phone-pad"
               placeholderTextColor="#696969"
               style={styles.NameTextInput}
-              onChangeText={(text) => _OnChangeText(text, 'cardName')}
-            />
-          </View>
-
-          {/* ========Card no:========== */}
-          <View style={styles.CardView}>
-            <Text style={styles.NameText}>Card Number</Text>
-            <TextInput
-              placeholder="4025 8303 4000 2867"
-              placeholderTextColor="#696969"
-              keyboardType="numeric"
-              style={styles.CardTextInput}
-              onChangeText={(text) => _OnChangeText(text, 'cardNumber')}
+              onChangeText={(text) => _OnChangeTextOthers(text, 'cardName')}
             />
           </View>
 
@@ -94,7 +166,7 @@ const App = (props) => {
                 placeholderTextColor="#696969"
                 keyboardType="number-pad"
                 style={styles.DateTextInput}
-                onChangeText={(text) => _OnChangeText(text, 'expiry')}
+                onChangeText={(text) => _OnChangeTextOthers(text, 'expiry')}
               />
             </View>
 
@@ -107,7 +179,7 @@ const App = (props) => {
                 placeholderTextColor="#696969"
                 keyboardType="numeric"
                 style={styles.CVVTextInput}
-                onChangeText={(text) => _OnChangeText(text, 'cvv')}
+                onChangeText={(text) => _OnChangeTextOthers(text, 'cvv')}
               />
             </View>
           </View>
@@ -123,7 +195,6 @@ const App = (props) => {
           <View style={styles.CancelView}>
             <Button
               title="Cancel"
-              
               onPress={() => Cancel()}
               titleStyle={{
                 color: '#727272',

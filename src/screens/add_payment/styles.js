@@ -73,7 +73,7 @@ alignItems:'center'
     width: 301,
     height: 42,
     alignSelf: 'center',
-    marginVertical: 50,
+    marginVertical: 20,
     borderRadius: 3,
   },
 });

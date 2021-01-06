@@ -52,18 +52,22 @@ const App = (props) => {
           screenText={'Add payment'}
         />
 
-        {props.isLoading === true ? (
-          <View style={styles.indicator} >
-          <ActivityIndicator size="large" color="#DE2516" />
-          </View>
-        ) : (
-          state.userPayments &&
-          state.userPayments.map((item, i) => {
-            return (
-              // console.log("hello",item.cardName)
-            
-              <SafeAreaView style={styles.mainView}>
-                <View style={styles.rowView}>
+        {/* {======All Payment Data Of User======} */}
+<ScrollView showsVerticalScrollIndicator={false}>
+
+  <SafeAreaView style={styles.mainView}>
+    {
+      props.isLoading === true ?
+      (
+        <View style={styles.indicator} >
+        <ActivityIndicator size="large" color="#DE2516" />
+        </View>
+      )
+      :
+      (
+        state.userPayments && state.userPayments.map((item,i)=>{
+          return (
+          <View style={styles.rowView}>
                   {/* ==========Image========== */}
 
                   <View style={styles.imageMainView}>
@@ -106,11 +110,15 @@ const App = (props) => {
                   </View>
                 </View>
 
-               
-              </SafeAreaView>
-            );
-          })
-        )}
+          )
+        })
+      )
+    }
+
+  </SafeAreaView>
+
+</ScrollView>
+      
  {/* ==========Button========== */}
         <LinearGradient colors={['#F6931B', '#DE2516']} style={styles.LGButton}>
           <Button

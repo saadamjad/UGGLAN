@@ -20,10 +20,23 @@ const App = (props) => {
     expiry: '',
     cvv: '',
     cardType: '',
+    rongCardNumber: false,
   });
+  
   const AddPaymentMethod = () => {
-    // props.navigation.goBack();
-    _AddPaymentMethod();
+    if (state.rongCardNumber) {
+      alert('Please enter a valid CardNumber');
+     
+    } else if (
+      state.cardNumber == '' ||
+      state.cardName == '' ||
+      state.expiry == '' ||
+      state.cvv == ''
+    ) {
+      alert('Please fill all fields');
+    } else {
+      _AddPaymentMethod();
+    }
   };
 
   const _AddPaymentMethod = () => {
@@ -47,22 +60,40 @@ const App = (props) => {
     let changeType = String(text);
 
     if (changeType.substring(0, 1) === '5') {
-      setState({...state, [name]: text, cardType: 'Master Card'});
+      setState({
+        ...state,
+        [name]: text,
+        cardType: 'Master Card',
+        rongCardNumber: false,
+      });
     } else if (changeType.substring(0, 1) === '4') {
-      setState({...state, [name]: text, cardType: 'Visa Card'});
-    } else if (changeType.substring(0, 1) === '3') {
-      if (
-        changeType.substring(1, 2) === '4' ||
-        changeType.substring(1, 2) === '7'
-      ) {
-        setState({...state, [name]: text, cardType: 'American Express'});
-      }
-      // setState({...state, [name]: text, cardType: 'American Express'});
+      setState({
+        ...state,
+        [name]: text,
+        cardType: 'Visa Card',
+        rongCardNumber: false,
+      });
+    } else if (
+      changeType.substring(0, 2) === '34' ||
+      changeType.substring(0, 2) === '37'
+    ) {
+      // if (
+      //   changeType.substring(1, 2) === '4' ||
+      //   changeType.substring(1, 2) === '7'
+      // ) {
+      //   setState({...state, [name]: text, cardType: 'American Express'});
+      // }
+      setState({
+        ...state,
+        [name]: text,
+        cardType: 'American Express',
+        rongCardNumber: false,
+      });
     } else {
-      setState({...state, [name]: text, cardType: ''});
+      setState({...state, [name]: text, cardType: '', rongCardNumber: true});
     }
   };
-// {=========onChangeText For Other Input====== }
+  // {=========onChangeText For Other Input====== }
   const _OnChangeTextOthers = async (text, name) => {
     setState({...state, [name]: text});
   };
@@ -77,7 +108,7 @@ const App = (props) => {
         height: '100%',
         width: '100%',
       }}>
-      {console.log(' check krnay  lye', state)}
+      {/* {console.log(' check krnay  lye', state.cardNumber)} */}
       <SafeAreaView style={{flex: 1}}>
         <GlobalHeader
           screenText={'Pay online'}
@@ -87,7 +118,19 @@ const App = (props) => {
         <SafeAreaView style={styles.mainView}>
           {/* ========Card no:========== */}
 
-          <View style={styles.rowView}>
+          <View
+            style={[
+              styles.rowView,
+              {
+                // {====Change Border Color If cardNumber Is rong =====}
+                borderColor:
+                  state.cardNumber.length > 0
+                    ? state.rongCardNumber == true
+                      ? 'red'
+                      : 'white'
+                    : 'white',
+              },
+            ]}>
             <View
               style={{
                 flex: 1,
@@ -99,7 +142,7 @@ const App = (props) => {
                   placeholder="4025 8303 4000 2867"
                   placeholderTextColor="#696969"
                   keyboardType="numeric"
-                  style={styles.CardTextInput}
+                  style={[styles.CardTextInput]}
                   onChangeText={(text) =>
                     _OnChangeTextCardNumber(text, 'cardNumber')
                   }
@@ -143,6 +186,16 @@ const App = (props) => {
               /> */}
             </View>
           </View>
+
+          {/* 
+           {====Alert Text When Enter Rong Card Number =====} */}
+          <Text style={{color: 'red', fontSize: 12}}>
+            {state.cardNumber.length > 0
+              ? state.rongCardNumber == true
+                ? 'you enter a rong card number'
+                : ''
+              : ''}
+          </Text>
 
           {/* ==========Name On Card========== */}
           <View style={styles.NameView}>

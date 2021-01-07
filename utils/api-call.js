@@ -89,3 +89,23 @@ export function post(path, obj,token) {
     throw error;
   }
 }
+
+
+
+
+export function Delete(path, id,token) {
+  const API_REQ_URL = `${API_URL}/api/${path}/${id}`;
+  console.log(API_REQ_URL);
+
+  let request;
+  try {
+    request = axios.delete(API_REQ_URL, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  } catch (error) {
+    throw error;
+  }
+  return request;
+}

@@ -8,6 +8,7 @@ import {
   signup,
   get,
   Otp,
+  Delete,
 } from '../../../utils/api-call';
 // import {actionDispatch} from '../../utils/return-obj';
 import {ToastError} from '../../../utils/toastErr';
@@ -42,15 +43,16 @@ export default class PaymentMethodAction {
     };
   };
 
-  static AddPaymentMethod = (data, token,navigation) => {
-    console.log('payment data in action', data);
+  static AddPaymentMethod = (data, token, navigation) => {
     return (dispatch) => {
       dispatch({type: ActionType.ADD_PAYMENT_METHOD});
-      post('payments', data,token).then((res) => {
-        if (res.data.success) {
+      post('payments', data, token)
+        .then((res) => {
+          // console.log('payment data in action', res.data);
+          if (res.data.success) {
             dispatch({
               type: ActionType.ADD_PAYMENT_METHOD_SUCCESS,
-              payload: res.data,
+              payload: res.data.data,
             });
             ToastError(res.data.message);
             navigation.navigate('addPayment');
@@ -58,11 +60,42 @@ export default class PaymentMethodAction {
             dispatch({type: ActionType.ADD_PAYMENT_METHOD_FAIL});
             ToastError(res.data.message);
           }
-      })
-      .catch((err) => {
-        console.log('err', err);
-        dispatch({type: ActionType.ADD_PAYMENT_METHOD_FAIL, isLoading: false});
-      });
+        })
+        .catch((err) => {
+          console.log('err', err);
+          dispatch({
+            type: ActionType.ADD_PAYMENT_METHOD_FAIL,
+            isLoading: false,
+          });
+        });
+    };
+  };
+
+  static DeletePaymentMethod = (id, token) => {
+    console.log('delete payment ', id);
+    return (dispatch) => {
+      dispatch({type: ActionType.DELETE_PAYMENT_METHOD});
+
+      Delete('payments', id, token)
+        .then((res) => {
+          if (res.data.success) {
+            dispatch({
+              type: ActionType.DELETE_PAYMENT_METHOD_SUCCESS,
+              payload: id,
+            });
+            ToastError(res.data.message);
+          } else {
+            dispatch({type: ActionType.DELETE_PAYMENT_METHOD_FAIL});
+            ToastError(res.data.message);
+          }
+        })
+        .catch((err) => {
+          console.log('err', err);
+          dispatch({
+            type: ActionType.DELETE_PAYMENT_METHOD_FAIL,
+            isLoading: false,
+          });
+        });
     };
   };
 }

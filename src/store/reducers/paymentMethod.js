@@ -2,7 +2,7 @@ import {ActionType} from '../actions';
 
 const initialState = {
   isLoading: false,
-  userPayments: {},
+  userPayments: [],
 };
 
 export default (state = initialState, action) => {

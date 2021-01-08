@@ -6,6 +6,7 @@ import {
   ImageBackground,
   SafeAreaView,
   TextInput,
+  TouchableOpacity
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Fontisto from 'react-native-vector-icons/Fontisto';
@@ -13,33 +14,52 @@ import Globalinputs from '../../components/inputfields';
 import styles from './styles';
 import {connect} from 'react-redux';
 import {AuthAction} from '../../store/actions';
+import AlertPopup from '../../components/popup_for_alerts';
+
 
 const App = (props) => {
   const [state, setState] = useState({
-    email: 'moizyousuf24@gmail.com',
-    password: '12345678',
+    email: '',
+    password: '',
+    popupText:''
   });
+  const [visible, setVisible] = useState(false);
 
   const _CheckValidation = () => {
-    let email = state.phone;
+    // let email = state.phone;
 
-    if (email == '') {
-      alert('kindly fill inputs correctly');
-    } else {
-      _Login();
+    if (state.email == '' || state.password == ''  ) {
+      setVisible(!visible);
+      // alert('kindly fill inputs correctly');
+      state.popupText='Kindly fill all fields Correctly'
+     
+    } 
+    else{
+    // alert('good')
+        _Login();
     }
   };
   const _Login = () => {
     let data = {
-      email: state.email,
+      email: state.email.toLocaleLowerCase(),
       password: state.password,
     };
+
+    console.log('login data', data)
     props.loginAction(data, props.navigation);
   };
   // useEffect(()=>{
 
   // },[props.])
 
+  const signupPage =()=>{
+    props.navigation.navigate('signup')
+  }
+
+  const newPassword =()=>{
+    props.navigation.navigate('newpassword')
+
+  }
   return (
     <ImageBackground
       source={require('../../assets/images/bg_image.png')}
@@ -60,8 +80,9 @@ const App = (props) => {
 
           <View style={styles.phoneView}>
             <TextInput
-              placeholder="email"
+              placeholder="email or phone"
               placeholderTextColor="#696969"
+              autoCapitalize="none"
               // keyboardType="numeric"
               style={styles.phoneTextInput}
               onChangeText={(text) =>
@@ -87,6 +108,8 @@ const App = (props) => {
               placeholderTextColor="#696969"
               keyboardType="default"
               secureTextEntry
+              autoCapitalize="none"
+              // maxLength={8}
               style={styles.passwordTextInput}
               // onChangeText={(text) => setPassword(text)}
               onChangeText={(text) =>
@@ -107,14 +130,25 @@ const App = (props) => {
           {/* ========Forgot Password======== */}
 
           <View style={styles.forgotView}>
+          <TouchableOpacity 
+          onPress={() => newPassword()}
+          >
             <Text style={styles.forgotText}>Forgot Password ?</Text>
+          </TouchableOpacity>
+        
           </View>
 
           {/* ========Dont Have An Account======== */}
 
           <View style={styles.dontView}>
             <Text style={styles.dontText}>Dont have an Account?</Text>
-            <Text style={styles.signupText}>Sign Up</Text>
+            <TouchableOpacity 
+          onPress={() => signupPage()}
+          >
+          <Text style={{color: '#C0C0C0', paddingLeft: 5, height: 19}}>
+            Sign Up
+          </Text>
+          </TouchableOpacity>
           </View>
 
           {/* ========Login Button======== */}
@@ -129,7 +163,18 @@ const App = (props) => {
               buttonStyle={{backgroundColor: 'transparent'}}
             />
           </LinearGradient>
-          
+          <AlertPopup
+      visible={visible}
+      toggleVisible={() => setVisible(!visible)}
+      popupText={state.popupText}
+      onConfirm={() => {
+        setVisible(false);
+        // deletePaymentCard();
+        // props.navigation.navigate('thankyou');
+        // alert('Deleted')
+
+      }}
+    />
         </View>
       </SafeAreaView>
     </ImageBackground>

@@ -12,16 +12,19 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
+import AlertPopup from '../../components/popup_for_alerts';
 import {connect} from 'react-redux';
 import {AuthAction} from '../../store/actions';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 const App = (props) => {
   const [state, setState] = useState({
     fullName: '',
-    code: '',
-    phone: '',
     email: '',
     password: '',
   });
+
+  const [visible, setVisible] = useState(false);
+  const [popupText, setPopupText] = useState(false);
   const SgnUpFntn = () => {
     console.log('sss', Number(state.email) ? 'number' : 'email');
     const data = Number(state.email)
@@ -30,10 +33,12 @@ const App = (props) => {
           password: state.password,
         }
       : {
-          email: state.email,
+          email: state.email.toLocaleLowerCase(),
           password: state.password,
         };
-    props._Signup(data, props.navigation);
+    // console.log('signup',data)
+    // props._Signup(data, props.navigation);
+    _Signup();
 
     // props.navigation.navigate('otp');
   };
@@ -44,25 +49,61 @@ const App = (props) => {
 
   const _Signup = () => {
     let key = Object.keys(state);
+    console.log(key);
+     let value= /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(state.email) 
+
 
     let fieldIsMissing = false;
     let emptyField = '';
-    console.log('skey', state.fullName);
     key.map((item, i) => {
       console.log('item laoo beta ', item);
       if (state[item] == '') {
         fieldIsMissing = true;
-        emptyField = item;
       }
     });
     if (fieldIsMissing) {
       // console.log('THIS FIELD IS MISSING ', emptyField);
-      alert('kindly Fill All Inputs ' + emptyField);
-    } else if (!fieldIsMissing) {
-      props._Signup(state, props.navigation);
+      state.popupText = 'Kindly fill all fields ';
+      setVisible(!visible);
+    }
+    
+    else if (!fieldIsMissing) {
+      let data = state;
+       if (!value){
+        state.popupText = 'Email is not valid';
+        setVisible(!visible);
+      }
+     else  if (state.password.length <= 8) {
+        state.popupText = 'Password should be greater than 8';
+        setVisible(!visible);
+      }
+     
+      else {
+         if (Number(state.email)) {
+          console.log('number  ');
+         
+          data['phone'] = state.email;
+          // props._Signup(state, props.navigation);
+  
+        } 
+        else if (!Number(state.email)) {
+         
+          console.log('string  ');
+  
+          data['email'] = state.email;
+          // props._Signup(state, props.navigation);
+          
+        }
+        
+      }
+    
+
     }
   };
 
+  const loginPage = () => {
+    props.navigation.navigate('loginpage');
+  };
   return (
     <ImageBackground
       source={require('../../assets/images/bg_image.png')}
@@ -136,6 +177,7 @@ const App = (props) => {
           <TextInput
             placeholder="Full Name"
             placeholderTextColor="#696969"
+            autoCapitalize="none"
             style={{
               color: 'white',
               width: '90%',
@@ -143,14 +185,14 @@ const App = (props) => {
             }}
             onChangeText={(text) => _OnChangeText(text, 'fullName')}
           />
-          <Ionicons
-            name="person"
-            // size={14}
+          <AntDesign
+            name="user"
+            size={14}
             color="#C0C0C0"
             style={{
               alignItems: 'flex-end',
               height: 15.87,
-              width: 13.34,
+              // width: 13.34,
             }}
           />
         </View>
@@ -244,6 +286,7 @@ const App = (props) => {
             placeholder="Email or phone"
             placeholderTextColor="#696969"
             keyboardType="email-address"
+            autoCapitalize="none"
             style={{
               color: 'white',
               width: '90%',
@@ -279,6 +322,7 @@ const App = (props) => {
             placeholder="Password"
             placeholderTextColor="#696969"
             keyboardType="default"
+            autoCapitalize="none"
             //   secureTextEntry= {secure}
             style={{
               color: 'white',
@@ -314,9 +358,11 @@ const App = (props) => {
           <Text style={{color: '#808080', fontSize: 12}}>
             Already have an Account?
           </Text>
-          <Text style={{color: '#C0C0C0', paddingLeft: 5, height: 19}}>
-            Login
-          </Text>
+          <TouchableOpacity onPress={() => loginPage()}>
+            <Text style={{color: '#C0C0C0', paddingLeft: 5, height: 19}}>
+              Login
+            </Text>
+          </TouchableOpacity>
         </View>
 
         {/* ========Sign Up Button======== */}
@@ -332,12 +378,24 @@ const App = (props) => {
           }}>
           <Button
             title="Sign Up"
-            // loading={props.isLoading}
+            loading={props.isLoading}
             // onPress={() => _Signup()}
             onPress={() => SgnUpFntn()}
             buttonStyle={{backgroundColor: 'transparent'}}
           />
         </LinearGradient>
+
+        <AlertPopup
+          visible={visible}
+          toggleVisible={() => setVisible(!visible)}
+          popupText={state.popupText}
+          onConfirm={() => {
+            setVisible(false);
+            // deletePaymentCard();
+            // props.navigation.navigate('thankyou');
+            // alert('Deleted')
+          }}
+        />
       </SafeAreaView>
     </ImageBackground>
   );

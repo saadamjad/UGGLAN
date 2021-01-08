@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
+
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
 import GlobalHeader from '../../components/header';
@@ -31,10 +32,10 @@ const App = (props) => {
     let data = props.userData.user;
     setState({...state, userData: data});
   }, []);
-  // useEffect(() => {
-  //   let data = props.userData.user;
-  //   setState({...state, userData: data});
-  // }, [props.userData]);
+  useEffect(() => {
+    let data = props.userData.user;
+    setState({...state, userData: data});
+  }, [props.userData]);
   const saveChanges = () => {
     // props.navigation.navigate('HomeScreen');
 
@@ -130,7 +131,7 @@ const App = (props) => {
           }}>
           <TextInput
             placeholder="Full Name"
-            value={state.userData.userName}
+            value={state?.userData?.userName}
             placeholderTextColor="#696969"
             style={{
               color: 'white',
@@ -144,14 +145,14 @@ const App = (props) => {
               })
             }
           />
-          <Ionicons
-            name="person"
-            // size={14}
+          <AntDesign
+            name="user"
+            size={14}
             color="#C0C0C0"
             style={{
               alignItems: 'flex-end',
               height: 15.87,
-              width: 13.34,
+              // width: 13.34,
             }}
           />
         </View>
@@ -168,7 +169,7 @@ const App = (props) => {
           }}>
           <TextInput
             placeholder="Phone"
-            value={state.userData.phone}
+            value={state?.userData?.phone}
             placeholderTextColor="#696969"
             keyboardType="email-address"
             style={{
@@ -209,7 +210,7 @@ const App = (props) => {
           }}>
           <TextInput
             placeholder="Email"
-            value={state.userData.email}
+            value={state?.userData?.email}
             placeholderTextColor="#696969"
             keyboardType="email-address"
             style={{

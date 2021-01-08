@@ -10,12 +10,12 @@ import {ToastError} from '../../../utils/toastErr';
 
 export default class AuthAction {
   static Login = (data, navigation) => {
-    console.log('data', data);
+    console.log('data>>>>>>>>>', data);
     return (dispatch) => {
       dispatch({type: ActionType.LOGIN}); //loader for login
       login('login', data)
         .then((res) => {
-          console.log('res', res.data);
+          console.log('res=======================>>>>>', res);
           if (res.data.success) {
             dispatch({type: ActionType.LOGIN_SUCCESS, payload: res.data});
             navigation.navigate('HomeStacks');
@@ -54,8 +54,14 @@ export default class AuthAction {
     console.log('data,', data);
     return (dispatch) => {
       dispatch({type: ActionType.SIGNUP});
+      let sendData = {fullName: data.fullName, password: data.password};
+      if (data.email !== '') {
+        sendData['email'] = data.email;
+      } else {
+        sendData['phone'] = data.phone;
+      }
 
-      signup('signUp', data)
+      signup('signUp', sendData)
         .then((res) => {
           console.log('res', res.data);
           if (res.data.success) {
@@ -88,7 +94,10 @@ export default class AuthAction {
           let data = await res.json();
           console.log('HERE IS DATA', data);
           if (data.success) {
-            dispatch({type: ActionType.UPDATE_USER_SUCCESS, payload: data.whatIsNew});
+            dispatch({
+              type: ActionType.UPDATE_USER_SUCCESS,
+              payload: data.whatIsNew,
+            });
             navigation.navigate('login');
             // navigation.navigate('otp');
           } else {

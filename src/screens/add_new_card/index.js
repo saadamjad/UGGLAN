@@ -138,7 +138,7 @@ const App = (props) => {
               <View style={styles.CardView}>
                 <Text style={styles.NameText}>Card Number</Text>
                 <TextInput
-                  maxLength={16}
+                  maxLength={state.cardType === 'Master Card' ? 16 : state.cardType === 'Visa Card' ? 16 : state.cardType === 'American Express' ? 15 : 16 }
                   placeholder="4025 8303 4000 2867"
                   placeholderTextColor="#696969"
                   keyboardType="numeric"
@@ -190,7 +190,7 @@ const App = (props) => {
           {/* 
            {====Alert Text When Enter Rong Card Number =====} */}
           <Text style={{color: 'red', fontSize: 12}}>
-            {state.cardNumber.length > 0
+            {state.cardNumber.length > 5
               ? state.rongCardNumber == true
                 ? 'you enter a rong card number'
                 : ''
@@ -217,7 +217,7 @@ const App = (props) => {
               <TextInput
                 placeholder="04/25"
                 placeholderTextColor="#696969"
-                keyboardType="number-pad"
+                keyboardType="name-phone-pad"
                 style={styles.DateTextInput}
                 onChangeText={(text) => _OnChangeTextOthers(text, 'expiry')}
               />

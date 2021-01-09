@@ -6,37 +6,43 @@ import {
   ImageBackground,
   SafeAreaView,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Fontisto from 'react-native-vector-icons/Fontisto';
+import Feather from 'react-native-vector-icons/Feather';
+
 import Globalinputs from '../../components/inputfields';
 import styles from './styles';
 import {connect} from 'react-redux';
 import {AuthAction} from '../../store/actions';
 import AlertPopup from '../../components/popup_for_alerts';
-
+import {Icon} from 'native-base';
 
 const App = (props) => {
   const [state, setState] = useState({
     email: '',
     password: '',
-    popupText:''
+    popupText: '',
   });
   const [visible, setVisible] = useState(false);
+  const [eye, setEye] = useState(true);
+
+  const toggleEye = () => {
+    setEye(!eye);
+    // console.log('EYE ', eye);
+  };
 
   const _CheckValidation = () => {
     // let email = state.phone;
 
-    if (state.email == '' || state.password == ''  ) {
+    if (state.email == '' || state.password == '') {
       setVisible(!visible);
       // alert('kindly fill inputs correctly');
-      state.popupText='Kindly fill all fields Correctly'
-     
-    } 
-    else{
-    // alert('good')
-        _Login();
+      state.popupText = 'Kindly fill all fields Correctly';
+    } else {
+      // alert('good')
+      _Login();
     }
   };
   const _Login = () => {
@@ -45,21 +51,20 @@ const App = (props) => {
       password: state.password,
     };
 
-    console.log('login data', data)
+    console.log('login data', data);
     props.loginAction(data, props.navigation);
   };
   // useEffect(()=>{
 
   // },[props.])
 
-  const signupPage =()=>{
-    props.navigation.navigate('signup')
-  }
+  const signupPage = () => {
+    props.navigation.navigate('signup');
+  };
 
-  const newPassword =()=>{
-    props.navigation.navigate('newpassword')
-
-  }
+  const newPassword = () => {
+    props.navigation.navigate('newpassword');
+  };
   return (
     <ImageBackground
       source={require('../../assets/images/bg_image.png')}
@@ -107,7 +112,7 @@ const App = (props) => {
               placeholder="Password"
               placeholderTextColor="#696969"
               keyboardType="default"
-              secureTextEntry
+              secureTextEntry={eye == false ? false : true}
               autoCapitalize="none"
               // maxLength={8}
               style={styles.passwordTextInput}
@@ -119,36 +124,35 @@ const App = (props) => {
                 })
               }
             />
-            <Fontisto
-              name="key"
-              // size={14}
-              color="#C0C0C0"
-              style={styles.passwordIcon}
-            />
+            <TouchableOpacity onPress={() => toggleEye()}>
+              <Icon
+                name={eye == false ? 'eye' : 'eye-with-line'}
+                type="Entypo"
+                // color="#C0C0C0"
+                // size={19}
+                style={styles.passwordIcon}
+              />
+            </TouchableOpacity>
+           
           </View>
 
           {/* ========Forgot Password======== */}
 
           <View style={styles.forgotView}>
-          <TouchableOpacity 
-          onPress={() => newPassword()}
-          >
-            <Text style={styles.forgotText}>Forgot Password ?</Text>
-          </TouchableOpacity>
-        
+            <TouchableOpacity onPress={() => newPassword()}>
+              <Text style={styles.forgotText}>Forgot Password ?</Text>
+            </TouchableOpacity>
           </View>
 
           {/* ========Dont Have An Account======== */}
 
           <View style={styles.dontView}>
             <Text style={styles.dontText}>Dont have an Account?</Text>
-            <TouchableOpacity 
-          onPress={() => signupPage()}
-          >
-          <Text style={{color: '#C0C0C0', paddingLeft: 5, height: 19}}>
-            Sign Up
-          </Text>
-          </TouchableOpacity>
+            <TouchableOpacity onPress={() => signupPage()}>
+              <Text style={{color: '#C0C0C0', paddingLeft: 5, height: 19}}>
+                Sign Up
+              </Text>
+            </TouchableOpacity>
           </View>
 
           {/* ========Login Button======== */}
@@ -164,17 +168,16 @@ const App = (props) => {
             />
           </LinearGradient>
           <AlertPopup
-      visible={visible}
-      toggleVisible={() => setVisible(!visible)}
-      popupText={state.popupText}
-      onConfirm={() => {
-        setVisible(false);
-        // deletePaymentCard();
-        // props.navigation.navigate('thankyou');
-        // alert('Deleted')
-
-      }}
-    />
+            visible={visible}
+            toggleVisible={() => setVisible(!visible)}
+            popupText={state.popupText}
+            onConfirm={() => {
+              setVisible(false);
+              // deletePaymentCard();
+              // props.navigation.navigate('thankyou');
+              // alert('Deleted')
+            }}
+          />
         </View>
       </SafeAreaView>
     </ImageBackground>

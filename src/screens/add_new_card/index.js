@@ -11,8 +11,10 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './styles';
 import GlobalHeader from '../../components/header';
+import AlertPopup from '../../components/popup_for_alerts';
 import {connect} from 'react-redux';
 import {PaymentMethodAction} from '../../store/actions';
+import {SystemMessage} from 'react-native-gifted-chat';
 const App = (props) => {
   const [state, setState] = useState({
     cardName: '',
@@ -21,20 +23,48 @@ const App = (props) => {
     cvv: '',
     cardType: '',
     rongCardNumber: false,
-  });
   
+  });
+  const [visible, setVisible] = useState(false);
+  const [showMessage, setMessage] = useState(false);
+
   const AddPaymentMethod = () => {
-    if (state.rongCardNumber) {
-      alert('Please enter a valid CardNumber');
-     
-    } else if (
+    if (
       state.cardNumber == '' ||
       state.cardName == '' ||
       state.expiry == '' ||
       state.cvv == ''
     ) {
-      alert('Please fill all fields');
+      setVisible(!visible);
+      setMessage(false);
+
+      state.popupText = 'kindly fill inputs correctly';
+    } else if (state.rongCardNumber) {
+      // setMessage('Right')
+      // setVisible(!visible)
+      setMessage(true);
+    } else if (
+      state.cardType === 'Master Card' &&
+      state.cardNumber.length !== 16
+    ) {
+      // console.log('rong master card');
+      setMessage(true);
+    } else if (
+      state.cardType === 'Visa Card' &&
+      state.cardNumber.length !== 16
+    ) {
+      // console.log('rong visa card');
+      setMessage(true);
+    } else if (
+      state.cardType === 'American Express' &&
+      state.cardNumber.length !== 15
+    ) {
+      // console.log('rong American Express');
+      setMessage(true);
     } else {
+      console.log('good hogaya');
+      setMessage(false);
+
       _AddPaymentMethod();
     }
   };
@@ -58,6 +88,7 @@ const App = (props) => {
   // {=========onChangeText For CardNumber Input====== }
   const _OnChangeTextCardNumber = async (text, name) => {
     let changeType = String(text);
+    setMessage(false);
 
     if (changeType.substring(0, 1) === '5') {
       setState({
@@ -65,6 +96,7 @@ const App = (props) => {
         [name]: text,
         cardType: 'Master Card',
         rongCardNumber: false,
+      
       });
     } else if (changeType.substring(0, 1) === '4') {
       setState({
@@ -72,6 +104,7 @@ const App = (props) => {
         [name]: text,
         cardType: 'Visa Card',
         rongCardNumber: false,
+      
       });
     } else if (
       changeType.substring(0, 2) === '34' ||
@@ -88,9 +121,16 @@ const App = (props) => {
         [name]: text,
         cardType: 'American Express',
         rongCardNumber: false,
+     
       });
     } else {
-      setState({...state, [name]: text, cardType: '', rongCardNumber: true});
+      setState({
+        ...state,
+        [name]: text,
+        cardType: '',
+        rongCardNumber: true,
+       
+      });
     }
   };
   // {=========onChangeText For Other Input====== }
@@ -124,7 +164,8 @@ const App = (props) => {
               {
                 // {====Change Border Color If cardNumber Is rong =====}
                 borderColor:
-                  state.cardNumber.length > 0
+                  // state.cardNumber.length > 15
+                  showMessage
                     ? state.rongCardNumber == true
                       ? 'red'
                       : 'white'
@@ -138,7 +179,15 @@ const App = (props) => {
               <View style={styles.CardView}>
                 <Text style={styles.NameText}>Card Number</Text>
                 <TextInput
-                  maxLength={state.cardType === 'Master Card' ? 16 : state.cardType === 'Visa Card' ? 16 : state.cardType === 'American Express' ? 15 : 16 }
+                  maxLength={
+                    state.cardType === 'Master Card'
+                      ? 16
+                      : state.cardType === 'Visa Card'
+                      ? 16
+                      : state.cardType === 'American Express'
+                      ? 15
+                      : 16
+                  }
                   placeholder="4025 8303 4000 2867"
                   placeholderTextColor="#696969"
                   keyboardType="numeric"
@@ -171,31 +220,17 @@ const App = (props) => {
                   style={styles.cardTypeImageStyle}
                 />
               ) : null}
-
-              {/* <Image
-                source={require('../../assets/images/mastercard.png')}
-                style={styles.cardTypeImageStyle}
-              />
-              <Image
-                source={require('../../assets/images/visa.png')}
-                style={styles.cardTypeImageStyle}
-              />
-              <Image
-                source={require('../../assets/images/americanexp.png')}
-                style={styles.cardTypeImageStyle}
-              /> */}
             </View>
           </View>
 
           {/* 
            {====Alert Text When Enter Rong Card Number =====} */}
-          <Text style={{color: 'red', fontSize: 12}}>
-            {state.cardNumber.length > 5
-              ? state.rongCardNumber == true
-                ? 'you enter a rong card number'
-                : ''
-              : ''}
-          </Text>
+
+          {showMessage ? (
+            <Text style={{color: 'red', fontSize: 12}}>
+              you enter a rong card number
+            </Text>
+          ) : null}
 
           {/* ==========Name On Card========== */}
           <View style={styles.NameView}>
@@ -255,6 +290,18 @@ const App = (props) => {
               buttonStyle={{backgroundColor: '#FFFFFF'}}
             />
           </View>
+
+          <AlertPopup
+            visible={visible}
+            toggleVisible={() => setVisible(!visible)}
+            popupText={state.popupText}
+            onConfirm={() => {
+              setVisible(false);
+              // deletePaymentCard();
+              // props.navigation.navigate('thankyou');
+              // alert('Deleted')
+            }}
+          />
         </SafeAreaView>
       </SafeAreaView>
     </ImageBackground>

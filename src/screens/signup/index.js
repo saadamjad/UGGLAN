@@ -83,7 +83,7 @@ const App = (props) => {
           console.log('number  ');
          
           data['phone'] = state.email;
-          // props._Signup(state, props.navigation);
+          props._Signup(state, props.navigation);
   
         } 
         else if (!Number(state.email)) {
@@ -91,7 +91,7 @@ const App = (props) => {
           console.log('string  ');
   
           data['email'] = state.email;
-          // props._Signup(state, props.navigation);
+          props._Signup(state, props.navigation);
           
         }
         

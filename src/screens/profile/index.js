@@ -18,14 +18,10 @@ import {connect} from 'react-redux';
 import {AuthAction, ProfileAction} from '../../store/actions';
 
 const App = (props) => {
-  
-
   const [state, setState] = useState({
-    // fullName:'Moiz',
-    // email:props.userData.user.email,
-    // phoneNumber:props.userData.user.phone,
-    // password:props.userData.user.password
+   
     userData: {},
+    editable: false,
   });
 
   useEffect(() => {
@@ -36,6 +32,9 @@ const App = (props) => {
     let data = props.userData.user;
     setState({...state, userData: data});
   }, [props.userData]);
+  const editableText = () => {
+    setState({...state, editable: !state.editable});
+  };
   const saveChanges = () => {
     // props.navigation.navigate('HomeScreen');
 
@@ -59,6 +58,7 @@ const App = (props) => {
       updatedData,
       props.navigation,
       props.userData.token,
+      () => setState({...state, editable: false}),
     );
   };
   return (
@@ -133,6 +133,7 @@ const App = (props) => {
             placeholder="Full Name"
             value={state?.userData?.userName}
             placeholderTextColor="#696969"
+            editable={state.editable}
             style={{
               color: 'white',
               width: '90%',
@@ -156,7 +157,7 @@ const App = (props) => {
             }}
           />
         </View>
-        {console.log('userdata in profile console', props.userData)}
+        {/* {console.log('userdata in profile console', props.userData)} */}
         {/* ====== Phone Row====== */}
 
         <View
@@ -172,6 +173,7 @@ const App = (props) => {
             value={state?.userData?.phone}
             placeholderTextColor="#696969"
             keyboardType="email-address"
+            editable={state.editable}
             style={{
               color: 'white',
               width: '90%',
@@ -213,6 +215,7 @@ const App = (props) => {
             value={state?.userData?.email}
             placeholderTextColor="#696969"
             keyboardType="email-address"
+            editable={state.editable}
             style={{
               color: 'white',
               width: '90%',
@@ -254,9 +257,11 @@ const App = (props) => {
             borderRadius: 3,
           }}>
           <Button
-          loading={props.isLoading}
-            title="Save"
-            onPress={() => saveChanges()}
+            loading={props.isLoading}
+            title={state.editable ? 'Save' : 'Edit'}
+            onPress={() => {
+              state.editable ? saveChanges() : editableText();
+            }}
             buttonStyle={{backgroundColor: 'transparent'}}
           />
         </LinearGradient>
@@ -266,7 +271,7 @@ const App = (props) => {
 };
 
 mapStateToProps = (state) => ({
-  isLoading:state.AuthReducer.isLoading,
+  isLoading: state.AuthReducer.isLoading,
   userData: state.AuthReducer.userData,
 });
 mapDispatchToProps = {

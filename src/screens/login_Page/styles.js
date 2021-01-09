@@ -60,8 +60,10 @@ const styles = StyleSheet.create({
 
   passwordIcon: {
     alignItems: 'flex-end',
-    height: 13.5,
-    width: 13.5,
+    height: 25,
+    color: '#C0C0C0',
+    fontSize: 19,
+    width: 50,
   },
 
   /* ========Forgot Password======== */

@@ -9,10 +9,8 @@ import {ToastError} from '../../../utils/toastErr';
 // import {Toast} from 'native-base';
 
 export default class ProfileAction {
-  static SaveChanges = (data, navigation, token) => {
-  
-
-     console.log('profile data', data  );
+  static SaveChanges = (data, navigation, token, func) => {
+    console.log('profile data', data);
     return (dispatch) => {
       dispatch({type: ActionType.UPDATE_USER});
 
@@ -21,7 +19,11 @@ export default class ProfileAction {
           let data = await res.json();
           console.log('HERE IS DATA', data);
           if (data.success) {
-            dispatch({type: ActionType.UPDATE_USER_SUCCESS, payload: data.whatIsNew});
+            func(); 
+            dispatch({
+              type: ActionType.UPDATE_USER_SUCCESS,
+              payload: data.whatIsNew,
+            });
             ToastError(data.message);
             // navigation.navigate('otp');
           } else {
@@ -32,7 +34,7 @@ export default class ProfileAction {
         .catch((err) => {
           dispatch({type: ActionType.UPDATE_USER_FAIL, isLoading: false});
           console.log('err', err);
-        //   dispatch({type: ActionType.OTP_FAIL, isLoading: false});
+          //   dispatch({type: ActionType.OTP_FAIL, isLoading: false});
         });
     };
   };

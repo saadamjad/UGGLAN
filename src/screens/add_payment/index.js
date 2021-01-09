@@ -28,7 +28,7 @@ const App = (props) => {
 
   useEffect(() => {
     let data = props.userPayments;
-    console.log('payment data', data);
+    // console.log('payment data', data);
     setState({...state, userPayments: data});
     getAllUserPayment();
   }, []);

@@ -86,6 +86,21 @@ static DELETE_PAYMENT_METHOD_SUCCESS = 'DELETE_PAYMENT_METHOD_SUCCESS'
 static DELETE_PAYMENT_METHOD_FAIL = 'DELETE_PAYMENT_METHOD_FAIL'
 
 
+/**
+|--------------------------------------------------
+| Hire SomeOne   Action
+|--------------------------------------------------
+*/
+
+static HIRE_SOME_ONE='HIRE_SOME_ONE'
+static HIRE_SOME_ONE_SUCCESS='HIRE_SOME_ONE_SUCCESS'
+static HIRE_SOME_ONE_FAILD='HIRE_SOME_ONE_FAILD'
+
+static HIRE_NOW='HIRE_NOW'
+static HIRE_NOW_SUCCESS='HIRE_NOW_SUCCESS'
+static HIRE_NOW_FAILD='HIRE_NOW_FAILD'
+
+static HIRE_PERSON_DATA='HIRE_PERSON_DATA'
 
 
 

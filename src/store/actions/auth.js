@@ -54,7 +54,7 @@ export default class AuthAction {
     console.log('data,', data);
     return (dispatch) => {
       dispatch({type: ActionType.SIGNUP});
-      let sendData = {fullName: data.fullName, password: data.password};
+      let sendData = {userName: data.fullName, password: data.password};
       if (data.email !== '') {
         sendData['email'] = data.email;
       } else {

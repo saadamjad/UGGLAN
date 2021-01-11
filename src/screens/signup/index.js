@@ -50,8 +50,11 @@ const App = (props) => {
   const _Signup = () => {
     let key = Object.keys(state);
     console.log(key);
-     let value= /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(state.email) 
-
+    let value = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
+      state.email,
+    );
+    // let pass =Number(state.email)
+    // let check =
 
     let fieldIsMissing = false;
     let emptyField = '';
@@ -65,39 +68,33 @@ const App = (props) => {
       // console.log('THIS FIELD IS MISSING ', emptyField);
       state.popupText = 'Kindly fill all fields ';
       setVisible(!visible);
-    }
-    
-    else if (!fieldIsMissing) {
+    } else if (!fieldIsMissing) {
       let data = state;
-       if (!value){
+      if (!value) {
         state.popupText = 'Email is not valid';
         setVisible(!visible);
       }
-     else  if (state.password.length <= 8) {
+      // else if (isNaN(state.email)){
+      //   state.popupText('Number is not valid')
+      //   setVisible(!visible)
+      // }
+      else if (state.password.length <= 8) {
         state.popupText = 'Password should be greater than 8';
         setVisible(!visible);
-      }
-     
-      else {
-         if (Number(state.email)) {
+      } else {
+        if (Number(state.email)) {
           console.log('number  ');
-         
+
           data['phone'] = state.email;
           props._Signup(state, props.navigation);
-  
-        } 
-        else if (!Number(state.email)) {
-         
+        } else if (!Number(state.email)) {
           console.log('string  ');
-  
+
           data['email'] = state.email;
           props._Signup(state, props.navigation);
-          
+          s;
         }
-        
       }
-    
-
     }
   };
 

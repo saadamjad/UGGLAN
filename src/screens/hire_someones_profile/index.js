@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {Button} from 'react-native-elements';
 import {View, Text, ImageBackground, SafeAreaView, Image} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import StarRating from 'react-native-star-rating';
 import GlobalHeader from '../../components/header';
+import {connect} from 'react-redux';
+import {HireSomeOneAction} from '../../store/actions';
 
 const App = (props) => {
   const hireNowFunction = () => {
@@ -12,6 +14,10 @@ const App = (props) => {
   const random = () => {
     return Math.random() * 5;
   };
+  useEffect(()=>{
+ let data=props.hirePersonelData
+ console.log('hire some profile',data)
+  })
   return (
     <ImageBackground
       source={require('../../assets/images/bg_image.png')}
@@ -32,6 +38,7 @@ const App = (props) => {
             alignItems: 'center',
             justifyContent: 'center',
           }}>
+          
           <View
             style={{
               alignItems: 'center',
@@ -160,4 +167,10 @@ const App = (props) => {
     </ImageBackground>
   );
 };
-export default App;
+
+
+mapStateToProps = (state) => ({
+  isLoading: state.HireSomeOneReducer.isLoading,
+ hirePersonelData:state.HireSomeOneReducer.hirePersonelData
+});
+export default connect(mapStateToProps,null) (App);

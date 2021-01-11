@@ -6,13 +6,16 @@ import middlewares from './middleware';
 import {
   AuthReducer,
   // ProfileReducer
-  PaymentMethodReducer
+  PaymentMethodReducer,
+  HireSomeOneReducer
 } from './reducers';
 
 export const rootReducer = combineReducers({
   AuthReducer,
   // ProfileReducer
-  PaymentMethodReducer
+  PaymentMethodReducer,
+  HireSomeOneReducer
+
 });
 
 const persistConfig = {

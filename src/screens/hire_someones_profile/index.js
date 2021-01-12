@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import {Button} from 'react-native-elements';
 import {View, Text, ImageBackground, SafeAreaView, Image} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
@@ -8,16 +8,30 @@ import {connect} from 'react-redux';
 import {HireSomeOneAction} from '../../store/actions';
 
 const App = (props) => {
-  const hireNowFunction = () => {
-    props.navigation.navigate('selectPaymentMethod');
+  useEffect(() => {
+    let data = props.hirePersonelData;
+    setState({...state, hirePersonelData: data});
+    // console.log('hire some profile',data)
+    
+  }, []);
+
+  const [state, setState] = useState({
+    hirePersonelData: {},
+  });
+  const hireNowFunction = (personID) => {
+    // props.navigation.navigate('selectPaymentMethod');
+    _hireNowFunction(personID);
   };
-  const random = () => {
-    return Math.random() * 5;
+
+  const _hireNowFunction = (personID) => {
+    let token = props.userData.token;
+    console.log('person ID', personID, token);
+    props.HireNow(personID, token,props.navigation);
   };
-  useEffect(()=>{
- let data=props.hirePersonelData
- console.log('hire some profile',data)
-  })
+  // const random = () => {
+  //   return Math.random() * 5;
+  // };
+
   return (
     <ImageBackground
       source={require('../../assets/images/bg_image.png')}
@@ -38,7 +52,6 @@ const App = (props) => {
             alignItems: 'center',
             justifyContent: 'center',
           }}>
-          
           <View
             style={{
               alignItems: 'center',
@@ -50,6 +63,7 @@ const App = (props) => {
               // height: 400,
               width: '80%',
             }}>
+           {/* {console.log('message',props.message)} */}
             <View
               style={{
                 // marginTop: 50,
@@ -67,7 +81,9 @@ const App = (props) => {
               />
             </View>
             <View style={{marginVertical: 3}}>
-              <Text style={{color: '#FFFFFF', fontSize: 17}}>Abdul Samad</Text>
+              <Text style={{color: '#FFFFFF', fontSize: 17}}>
+                {state?.hirePersonelData?.name}
+              </Text>
             </View>
             <View style={{alignItems: 'center'}}>
               <Text
@@ -77,7 +93,8 @@ const App = (props) => {
                   fontSize: 13,
                   marginTop: 5,
                 }}>
-                David Charge $50
+                {state?.hirePersonelData?.name} Charges $
+                {state?.hirePersonelData?.price}
               </Text>
             </View>
             <View>
@@ -107,13 +124,13 @@ const App = (props) => {
                 // iconSet={'Ionicons'}
                 starSize={25}
                 containerStyle={{marginTop: 0}}
-                rating={random()}
+                rating={state?.hirePersonelData?.stars}
               />
             </View>
 
             <View style={{marginVertical: 8}}>
               <Text style={{height: 20, color: '#FFFFFF', fontSize: 15}}>
-                About David
+                About {state?.hirePersonelData?.name}
               </Text>
             </View>
             <View style={{width: '85%', alignSelf: 'center'}}>
@@ -124,8 +141,9 @@ const App = (props) => {
                   fontSize: 13,
                   textAlign: 'center',
                 }}>
-                I'm just here for good times, man. I want people to have the
-                best time ever. Especially if they're around me.
+                {/* I'm just here for good times, man. I want people to have the
+                best time ever. Especially if they're around me. */}
+                {state?.hirePersonelData?.about}
               </Text>
             </View>
             <View style={{flexDirection: 'row', marginVertical: 30}}>
@@ -150,7 +168,8 @@ const App = (props) => {
                 style={{borderRadius: 3}}>
                 <Button
                   title="Hire Now"
-                  onPress={() => hireNowFunction()}
+                  loading={props.isLoading}
+                  onPress={() => hireNowFunction(state.hirePersonelData.id)}
                   buttonStyle={{
                     backgroundColor: 'transparent',
                     width: 90,
@@ -168,9 +187,14 @@ const App = (props) => {
   );
 };
 
-
 mapStateToProps = (state) => ({
   isLoading: state.HireSomeOneReducer.isLoading,
- hirePersonelData:state.HireSomeOneReducer.hirePersonelData
+  hirePersonelData: state.HireSomeOneReducer.hirePersonelData,
+  userData: state.AuthReducer.userData,
+
+
 });
-export default connect(mapStateToProps,null) (App);
+mapDispatchToProps = {
+  HireNow: HireSomeOneAction.HireNow,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

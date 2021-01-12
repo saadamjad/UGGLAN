@@ -12,8 +12,8 @@ import PayModal from '../../components/pay_on_cash';
 import GlobalHeader from '../../components/header';
 const App = (props) => {
   const Continue = () => {
-    // setVisible(true);
-    props.navigation.navigate('payMasterCard');
+    setVisible(true);
+    // props.navigation.navigate('payMasterCard');
   };
 
   const [isRadio1, setRadio1] = useState(false);
@@ -45,7 +45,7 @@ const App = (props) => {
             visible={visible}
             onConfirm={() => {
               setVisible(false);
-              props.navigation.navigate('payMasterCard');
+              props.navigation.navigate('thankyou');
             }}
             toggleVisible={() => setVisible(!visible)}
           />
@@ -94,7 +94,7 @@ const App = (props) => {
                   label: 'Pay online',
                 }}
                 onPress={(value) => {
-                  setRadio1(!isRadio1);
+                  setRadio2(!isRadio2);
                 }}
                 labelHorizontal={true}
                 labelStyle={{
@@ -106,7 +106,7 @@ const App = (props) => {
             <RadioButton>
               <RadioButtonInput
                 obj={{
-                  label: 'samad',
+                  label: 'Pay on cash',
                 }}
                 isSelected={isRadio2}
                 onPress={() => {

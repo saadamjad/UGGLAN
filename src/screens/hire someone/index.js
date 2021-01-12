@@ -15,6 +15,12 @@ import {connect} from 'react-redux';
 import {HireSomeOneAction} from '../../store/actions';
 import GlobalHeader from '../../components/header';
 const App = (props) => {
+  useEffect(() => {
+    let data = props.hireSomeOneData;
+    // console.log('hireSome One data', data);
+    setState({...state, hireSomeOneData: data});
+    getAllSecurityUser();
+  }, []);
   const [state, setState] = useState({
     hireSomeOneData: [],
     // someOneId:''
@@ -22,7 +28,7 @@ const App = (props) => {
 
   const Hirefunction = (id, name, price, stars, about) => {
     const hirePersonelData = {
-      id:id,
+      id: id,
       name: name,
       price: price,
       stars: stars,
@@ -45,13 +51,6 @@ const App = (props) => {
   const random = () => {
     return Math.random() * 5;
   };
-
-  useEffect(() => {
-    let data = props.hireSomeOneData;
-    // console.log('hireSome One data', data);
-    setState({...state, hireSomeOneData: data});
-    getAllSecurityUser();
-  }, []);
 
   const getAllSecurityUser = () => {
     _getAllSecurityUser();
@@ -148,13 +147,15 @@ const App = (props) => {
             ) : (
               state?.hireSomeOneData?.map((item, i) => {
                 return (
-                  <View
+                  <View 
+                  key={i}
                     style={{
                       flexDirection: 'row',
                       width: '100%',
                       marginVertical: 10,
                       borderBottomWidth: 0.5,
                       borderColor: '#707070',
+                      
                     }}>
                     {/* ==========Image========== */}
 
@@ -189,7 +190,7 @@ const App = (props) => {
                       }}>
                       <View style={{flexDirection: 'row'}}>
                         <Text style={{fontSize: 15, color: '#FFFFFF'}}>
-                          {item.userName}
+                          {item?.userName}
                           {'   |'}
                         </Text>
                         <Text
@@ -200,7 +201,7 @@ const App = (props) => {
                             fontSize: 12,
                             padding: 2,
                           }}>
-                          {item.price}
+                          {item?.price}
                         </Text>
                       </View>
                       <View style={{marginVertical: 5}}>
@@ -226,7 +227,7 @@ const App = (props) => {
                             marginLeft: 5,
                             marginTop: -5,
                           }}
-                          rating={item.stars}
+                          rating={item?.stars}
                         />
                       </View>
                     </View>
@@ -244,6 +245,7 @@ const App = (props) => {
                         style={{borderRadius: 3}}>
                         <Button
                           title="Hire Now"
+                          loading={props.isLoading}
                           onPress={() =>
                             Hirefunction(
                               item._id,

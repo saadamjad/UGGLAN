@@ -1,11 +1,24 @@
-import React from 'react';
+import React ,{useEffect,useState}from 'react';
 import {Button} from 'react-native-elements';
 import {View, Text, SafeAreaView, ImageBackground, Image} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import GlobalHeader from '../../components/header'
+import {connect} from 'react-redux';
+import {HireSomeOneAction} from '../../store/actions';
 
 const App = (props) => {
+
+  useEffect(() => {
+    let data = props.hirePersonelData;
+    setState({...state, hirePersonelData: data});
+    // console.log('hire some profile',data)
+  }, []);
+
+  
+  const [state, setState] = useState({
+    hirePersonelData: {},
+  });
   const Track=()=> {
     props.navigation.navigate('trackperson')
   }
@@ -54,7 +67,7 @@ const App = (props) => {
         </View>
         <View style={{justifyContent: 'center', alignItems: 'center'}}>
           <Text style={{color: '#FFFFFF', fontSize: 13}}>
-            Now contact the Abdul Samad
+            Now contact the  {state.hirePersonelData.name}
           </Text>
         </View>
 
@@ -82,4 +95,11 @@ const App = (props) => {
     </ImageBackground>
   );
 };
-export default App;
+
+
+mapStateToProps = (state) => ({
+  isLoading: state.HireSomeOneReducer.isLoading,
+  hirePersonelData: state.HireSomeOneReducer.hirePersonelData,
+  userData: state.AuthReducer.userData,
+});
+export default connect(mapStateToProps,null)(App);

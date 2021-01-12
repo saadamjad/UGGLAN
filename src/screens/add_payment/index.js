@@ -89,7 +89,7 @@ const App = (props) => {
             ) : (
               state?.userPayments?.map((item, i) => {
                 return (
-                  <View style={styles.rowView}>
+                  <View style={styles.rowView} key={i}>
                     {/* ==========Image========== */}
 
                     <View style={styles.imageMainView}>

@@ -7,14 +7,17 @@ import {
   AuthReducer,
   // ProfileReducer
   PaymentMethodReducer,
-  HireSomeOneReducer
+  HireSomeOneReducer,
+  AllContactsReducer
 } from './reducers';
 
 export const rootReducer = combineReducers({
   AuthReducer,
   // ProfileReducer
   PaymentMethodReducer,
-  HireSomeOneReducer
+  HireSomeOneReducer,
+  AllContactsReducer
+
 
 });
 

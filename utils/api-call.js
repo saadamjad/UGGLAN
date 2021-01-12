@@ -76,7 +76,7 @@ export function signup(path, data) {
 }
 
 export function post(path, obj, token) {
-  console.log('=====', path, obj, token);
+  // console.log('=====', path, obj, token);
   const API_REQ_URL = `${API_URL}/api/${path}`;
   console.log('api url', API_REQ_URL);
   try {

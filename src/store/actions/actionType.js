@@ -101,7 +101,20 @@ static HIRE_NOW_SUCCESS='HIRE_NOW_SUCCESS'
 static HIRE_NOW_FAILD='HIRE_NOW_FAILD'
 
 static HIRE_PERSON_DATA='HIRE_PERSON_DATA'
+static HIRE_PERSON_DATA_SUCCESS='HIRE_PERSON_DATA_SUCCESS'
+static HIRE_PERSON_DATA_FAILD='HIRE_PERSON_DATA_FAILD'
 
 
+
+
+/**
+|--------------------------------------------------
+| All Contacts of Security   Action
+|--------------------------------------------------
+*/
+
+static GET_ALL_CONTACTS='GET_ALL_CONTACTS'
+static GET_ALL_CONTACTS_SUCCESS='GET_ALL_CONTACTS_SUCCESS'
+static GET_ALL_CONTACTS_FAILD='GET_ALL_CONTACTS_FAILD'
 
 }

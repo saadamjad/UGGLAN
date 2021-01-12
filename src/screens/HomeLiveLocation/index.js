@@ -63,7 +63,7 @@ export default (props) => {
         Geolocation.setRNConfiguration({skipPermissionRequests: false});
         Geolocation.watchPosition(
           (position) => {
-            console.log('CHECK POSITION', position);
+            // console.log('CHECK POSITION', position);
             setState({...state, position: position.coords});
           },
           (err) => {

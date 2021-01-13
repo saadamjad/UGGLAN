@@ -60,7 +60,7 @@ export default class HireSomeOneAction {
           else{
             dispatch({type:ActionType.HIRE_NOW_FAILD})
             ToastError(res.data.message);
-            // navigation.navigate('selectPaymentMethod');
+            navigation.navigate('selectPaymentMethod');
 
           }
         })

@@ -17,7 +17,7 @@ import allContacts from '../../store/reducers/allContacts';
 const App = (props) => {
   useEffect(() => {
     let data = props.allContacts;
-    console.log('data of cntanj', data);
+    // console.log('data of cntanj', data);
     setState({...state, allContacts: data});
 
     getAllContacts();
@@ -39,42 +39,42 @@ const App = (props) => {
   const callfunction = () => {
     props.navigation.navigate('calling');
   };
-  const [Data, SetData] = useState([
-    {
-      image: require('../../assets/images/1.jpg'),
-      name: 'Abdul Samad',
-      nickName: '(Accept)',
-      status: 'active',
-      mobileNumber: '+92 3103844268',
-      callImage: require('../../assets/images/call.png'),
-      videoImage: require('../../assets/images/videocam.png'),
-      chatImage: require('../../assets/images/chat.png'),
-      gpsImage: require('../../assets/images/gps.png'),
-      status: 'active',
-    },
-    {
-      image: require('../../assets/images/2.jpg'),
-      name: 'Logan',
-      nickName: '(Pending...)',
-      status: 'pending',
-      mobileNumber: '+92 3103844268',
-      callImage: require('../../assets/images/call.png'),
-      videoImage: require('../../assets/images/videocam.png'),
-      chatImage: require('../../assets/images/chat.png'),
-      gpsImage: require('../../assets/images/gps.png'),
-    },
-    {
-      image: require('../../assets/images/3.jpg'),
-      name: 'Babu Bhai',
-      nickName: '(Accept)',
-      status: 'active',
-      mobileNumber: '+92 3103844268',
-      callImage: require('../../assets/images/call.png'),
-      videoImage: require('../../assets/images/videocam.png'),
-      chatImage: require('../../assets/images/chat.png'),
-      gpsImage: require('../../assets/images/gps.png'),
-    },
-  ]);
+  // const [Data, SetData] = useState([
+  //   {
+  //     image: require('../../assets/images/1.jpg'),
+  //     name: 'Abdul Samad',
+  //     nickName: '(Accept)',
+  //     status: 'active',
+  //     mobileNumber: '+92 3103844268',
+  //     callImage: require('../../assets/images/call.png'),
+  //     videoImage: require('../../assets/images/videocam.png'),
+  //     chatImage: require('../../assets/images/chat.png'),
+  //     gpsImage: require('../../assets/images/gps.png'),
+  //     status: 'active',
+  //   },
+  //   {
+  //     image: require('../../assets/images/2.jpg'),
+  //     name: 'Logan',
+  //     nickName: '(Pending...)',
+  //     status: 'pending',
+  //     mobileNumber: '+92 3103844268',
+  //     callImage: require('../../assets/images/call.png'),
+  //     videoImage: require('../../assets/images/videocam.png'),
+  //     chatImage: require('../../assets/images/chat.png'),
+  //     gpsImage: require('../../assets/images/gps.png'),
+  //   },
+  //   {
+  //     image: require('../../assets/images/3.jpg'),
+  //     name: 'Babu Bhai',
+  //     nickName: '(Accept)',
+  //     status: 'active',
+  //     mobileNumber: '+92 3103844268',
+  //     callImage: require('../../assets/images/call.png'),
+  //     videoImage: require('../../assets/images/videocam.png'),
+  //     chatImage: require('../../assets/images/chat.png'),
+  //     gpsImage: require('../../assets/images/gps.png'),
+  //   },
+  // ]);
 
   return (
     <ImageBackground
@@ -178,7 +178,9 @@ const App = (props) => {
                             marginLeft: 10,
                             fontSize: 13,
                           }}>
-                             {item?.securityUserId?.phone}
+                             {/* {item?.securityUserId?.phone} */}
+                             +92 3103844268
+
                         </Text>
                       </View>
                     </View>

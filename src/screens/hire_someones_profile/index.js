@@ -18,6 +18,14 @@ const App = (props) => {
   const [state, setState] = useState({
     hirePersonelData: {},
   });
+
+
+const chatWithPerson=()=>{
+
+
+  props.navigation.navigate('chat')
+}
+
   const hireNowFunction = (personID) => {
     // props.navigation.navigate('selectPaymentMethod');
     _hireNowFunction(personID);
@@ -152,7 +160,7 @@ const App = (props) => {
                 style={{marginRight: 20, borderRadius: 3}}>
                 <Button
                   title="Chat"
-                  onPress={() => props.navigation.navigate('chat')}
+                  onPress={() =>chatWithPerson() }
                   buttonStyle={{
                     backgroundColor: 'transparent',
                     width: 90,

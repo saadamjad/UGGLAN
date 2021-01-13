@@ -8,7 +8,8 @@ import {
   // ProfileReducer
   PaymentMethodReducer,
   HireSomeOneReducer,
-  AllContactsReducer
+  AllContactsReducer,
+  UserMessageReducer
 } from './reducers';
 
 export const rootReducer = combineReducers({
@@ -16,7 +17,8 @@ export const rootReducer = combineReducers({
   // ProfileReducer
   PaymentMethodReducer,
   HireSomeOneReducer,
-  AllContactsReducer
+  AllContactsReducer,
+  UserMessageReducer
 
 
 });

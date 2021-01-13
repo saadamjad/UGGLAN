@@ -4,30 +4,60 @@ import {GiftedChat, Bubble, Send} from 'react-native-gifted-chat';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Icon} from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
+import {connect} from 'react-redux';
+import {HireSomeOneAction, UserMessageAction} from '../../store/actions';
 
 function Chat(props) {
   const [messages, setMessages] = useState([]);
+  const [state, setState] = useState({
+    hirePersonelData: {},
+    UserData: {},
+    userMessage: '',
+  });
 
   useEffect(() => {
-    setMessages([
-      {
-        _id: 1,
-        text: 'Hello developer',
-        createdAt: new Date(),
-        user: {
-          _id: 2,
-          name: 'React Native',
-          avatar: 'https://placeimg.com/140/140/any',
-        },
-      },
-    ]);
+    let user = props.userData.user;
+   
+    let data = props.hirePersonelData;
+    
+    // console.log('data in chat', data);
+    setState({...state, userData: user,hirePersonelData: data});
+   
+
   }, []);
 
-  const onSend = useCallback((messages = []) => {
-    setMessages((previousMessages) =>
-      GiftedChat.append(previousMessages, messages),
-    );
-  }, []);
+  // const onSend = useCallback((messages=[]) => {
+  //   console.log('mes in send ',messages)
+  //   setMessages((previousMessages) =>
+  //     GiftedChat.append(...previousMessages, messages),
+
+  //   );
+
+  // }, []);
+
+  const onSend = () => {
+    //  console.log('data',state.userMessages)
+    _onSend();
+  };
+
+  const _onSend = () => {
+    // console.log('user messages',state.userMessage)
+    let token=props.userData.token
+    let data = {
+      userName: state.userData.userName,
+      userId: state.userData._id,
+      userEmail: state.userData.email,
+      to:state.hirePersonelData.id,
+      message: state.userMessage,
+    };
+
+    console.log('sending data', data,token);
+    props.UserMessage(data,token,props.navigation)
+  };
+  const setCustomText = async (value, name) => {
+    // console.log('messages of user',value)
+    setState({...state, [name]: value});
+  };
   const ChatHeader = () => (
     <View
       style={{
@@ -49,7 +79,9 @@ function Chat(props) {
         />
       </TouchableOpacity>
       <View style={{justifyContent: 'center', alignItems: 'center'}}>
-        <Text style={{color: 'white', fontSize: 18}}>David</Text>
+        <Text style={{color: 'white', fontSize: 18}}>
+          {state?.hirePersonelData?.name}
+        </Text>
         <Text style={{color: '#41AF26', fontSize: 10}}>Online now</Text>
       </View>
       <TouchableOpacity onPress={() => props.navigation.navigate('calling')}>
@@ -84,6 +116,7 @@ function Chat(props) {
   }
 
   const renderSend = (props) => {
+    // console.log('props',props.messages)
     return (
       <Send
         // containerStyle={{
@@ -125,8 +158,21 @@ function Chat(props) {
         user={{
           _id: 1,
         }}
+        // onInputTextChanged={text =>setCustomText(text,'userMessage')}
+        onInputTextChanged={(text) => setCustomText(text, 'userMessage')}
       />
+      {/* {console.log('messages from state',state.userMessages)} */}
     </SafeAreaView>
   );
 }
-export default Chat;
+
+mapStateToProps = (state) => ({
+  isLoading: state.HireSomeOneReducer.isLoading,
+  hirePersonelData: state.HireSomeOneReducer.hirePersonelData,
+  userData: state.AuthReducer.userData,
+});
+mapDispatchToProps = {
+  // updatedUserAction: ProfileAction.SaveChanges,
+  UserMessage:UserMessageAction.UserMessage
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Chat);

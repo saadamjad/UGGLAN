@@ -1,6 +1,12 @@
 import React, {useState} from 'react';
 import {Button} from 'react-native-elements';
-import {View, Text, SafeAreaView, ImageBackground} from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  ImageBackground,
+  TouchableOpacity,
+} from 'react-native';
 import RadioForm, {
   RadioButton,
   RadioButtonInput,
@@ -10,16 +16,28 @@ import LinearGradient from 'react-native-linear-gradient';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import PayModal from '../../components/pay_on_cash';
 import GlobalHeader from '../../components/header';
+import {State} from 'react-native-gesture-handler';
 const App = (props) => {
   const Continue = () => {
-    setVisible(true);
+    console.log('Radio 1', isRadio2);
+    console.log('Radio 2', isRadio2);
+
+    if (setRadio2) {
+      setVisible(true);
+    }
+    // else if(setRadio1 ==false){
+
+    //  props.navigation.navigate('payMasterCard');
+    // }
+    // setVisible(true);
+
     // props.navigation.navigate('payMasterCard');
   };
-
+ 
   const [isRadio1, setRadio1] = useState(false);
   const [isRadio2, setRadio2] = useState(false);
   const [visible, setVisible] = useState(false);
-
+  
   return (
     <ImageBackground
       source={require('../../assets/images/bg_image.png')}
@@ -49,19 +67,6 @@ const App = (props) => {
             }}
             toggleVisible={() => setVisible(!visible)}
           />
-          {/* <View style={{flexDirection: 'row'}}>
-          <AntDesign
-            name="left"
-            size={19}
-            color="#C0C0C0"
-            style={{height: 19, width: 19}}
-          />
-          <Text style={{color: '#FFFFFF', marginLeft: 5}}>
-            Select payment method
-          </Text>
-        </View> */}
-
-          {/* ============Radio Buttons Start============= */}
 
           <View style={{marginVertical: 30}}>
             <RadioButton>
@@ -72,6 +77,7 @@ const App = (props) => {
                 isSelected={isRadio1}
                 onPress={(value) => {
                   setRadio1(!isRadio1);
+                  setRadio2(false);
                 }}
                 borderWidth={1}
                 buttonInnerColor={'white'}
@@ -94,7 +100,8 @@ const App = (props) => {
                   label: 'Pay online',
                 }}
                 onPress={(value) => {
-                  setRadio2(!isRadio2);
+                  setRadio1(!isRadio1);
+                  setRadio2(false);
                 }}
                 labelHorizontal={true}
                 labelStyle={{
@@ -103,14 +110,17 @@ const App = (props) => {
                 }}
               />
             </RadioButton>
+
             <RadioButton>
               <RadioButtonInput
                 obj={{
                   label: 'Pay on cash',
                 }}
                 isSelected={isRadio2}
-                onPress={() => {
+                onPress={(text) => {
+                  // console.log("hello",text)
                   setRadio2(!isRadio2);
+                  setRadio1(false);
                 }}
                 borderWidth={1}
                 buttonInnerColor={'white'}
@@ -135,6 +145,7 @@ const App = (props) => {
                 labelHorizontal={true}
                 onPress={(value) => {
                   setRadio2(!isRadio2);
+                  setRadio1(false);
                 }}
                 labelStyle={{
                   fontSize: 13,

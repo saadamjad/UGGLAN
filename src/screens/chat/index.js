@@ -8,32 +8,58 @@ import {connect} from 'react-redux';
 import {HireSomeOneAction, UserMessageAction} from '../../store/actions';
 
 function Chat(props) {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState({messages: []});
   const [state, setState] = useState({
     hirePersonelData: {},
     UserData: {},
     userMessage: '',
+    allMessage: [],
   });
 
   useEffect(() => {
-    let user = props.userData.user;
-   
-    let data = props.hirePersonelData;
-    
-    // console.log('data in chat', data);
-    setState({...state, userData: user,hirePersonelData: data});
-   
-
+    _getUserMessage();
+    // array();
   }, []);
+  useEffect(() => {
+    let allMessages = props.getUserMessage;
+    let user = props.userData.user;
+    let data = props.hirePersonelData;
 
-  // const onSend = useCallback((messages=[]) => {
-  //   console.log('mes in send ',messages)
-  //   setMessages((previousMessages) =>
-  //     GiftedChat.append(...previousMessages, messages),
+    setState({
+      ...state,
+      allMessage: allMessages,
+      userData: user,
+      hirePersonelData: data,
+    });
+    array();
+  }, [props.getUserMessage]);
 
-  //   );
+  const _getUserMessage = () => {
+    let userId = props.userMessage.userId;
+    let to = props.userMessage.to;
+    let token = props.userData.token;
+    // console.log('ideis',userId,to,token)
+    props.GetUserMessage(token, userId, to);
+  };
 
-  // }, []);
+  const array = () => {
+    let values = state.allMessage.map((item, i) => {
+      console.log('item lelo', item);
+      return {
+        _id: item._id,
+        text: item.message,
+        createdAt: new Date(),
+        user: {
+          _id: item.userId,
+          name: item.userName,
+        },
+      };
+
+      // ABC.push(testingArray)
+    });
+    console.log('state of data======= ', values);
+    setMessages({...messages, messages: [...values]});
+  };
 
   const onSend = () => {
     //  console.log('data',state.userMessages)
@@ -41,21 +67,20 @@ function Chat(props) {
   };
 
   const _onSend = () => {
-    // console.log('user messages',state.userMessage)
-    let token=props.userData.token
+    console.log('user messages', state.userMessage);
+    let token = props.userData.token;
     let data = {
-      userName: state.userData.userName,
-      userId: state.userData._id,
-      userEmail: state.userData.email,
-      to:state.hirePersonelData.id,
+      // userName: state.userData.userName,
+      // userId: state.userData._id,
+      // userEmail: state.userData.email,
+      to: state.hirePersonelData.id,
       message: state.userMessage,
     };
-
-    console.log('sending data', data,token);
-    props.UserMessage(data,token,props.navigation)
+    console.log('sending data', data, token);
+    props.UserMessage(data, token, props.navigation, _getUserMessage);
   };
   const setCustomText = async (value, name) => {
-    // console.log('messages of user',value)
+    console.log('messages of user', value);
     setState({...state, [name]: value});
   };
   const ChatHeader = () => (
@@ -151,17 +176,19 @@ function Chat(props) {
     <SafeAreaView style={{flex: 1, backgroundColor: 'black'}}>
       {ChatHeader()}
       <GiftedChat
-        messages={messages}
+        messages={messages.messages}
         renderSend={renderSend}
-        onSend={(messages) => onSend(messages)}
+        onSend={() => onSend()}
         renderBubble={renderBubble}
         user={{
-          _id: 1,
+          _id: props?.userMessage?.userId,
         }}
         // onInputTextChanged={text =>setCustomText(text,'userMessage')}
         onInputTextChanged={(text) => setCustomText(text, 'userMessage')}
       />
-      {/* {console.log('messages from state',state.userMessages)} */}
+      {state?.allMessage?.map((item, i) => {
+        console.log('items', item.message);
+      })}
     </SafeAreaView>
   );
 }
@@ -170,9 +197,12 @@ mapStateToProps = (state) => ({
   isLoading: state.HireSomeOneReducer.isLoading,
   hirePersonelData: state.HireSomeOneReducer.hirePersonelData,
   userData: state.AuthReducer.userData,
+  userMessage: state.UserMessageReducer.userMessage,
+  getUserMessage: state.UserMessageReducer.getUserMessage,
 });
 mapDispatchToProps = {
   // updatedUserAction: ProfileAction.SaveChanges,
-  UserMessage:UserMessageAction.UserMessage
+  UserMessage: UserMessageAction.UserMessage,
+  GetUserMessage: UserMessageAction.GetUserMessage,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Chat);

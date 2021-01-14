@@ -16,43 +16,45 @@ import {ToastError} from '../../../utils/toastErr';
 // import {parseSync} from '@babel/core';
 // import {Toast} from 'native-base';
 
+export default class UserMessageAction {
+  static UserMessage = (data, token, navigation, func) => {
+    console.log('data in action', data, token);
+    return (dispatch) => {
+      dispatch({type: ActionType.SEND_MESSAGE});
 
+      post(`send`, data, token)
+        .then((res) => {
+          console.log('response of post api', res.data.data);
+          func();
+          dispatch({
+            type: ActionType.SEND_MESSAGE_SUCCESS,
+            payload: res.data.data,
+          });
+        })
+        .catch((error) => {
+          console.log('error', error);
+          dispatch({type: ActionType.SEND_MESSAGE_FAILD});
+        });
+    };
+  };
 
-export default class UserMessageAction{
-    static UserMessage=(data,token)=>{
-        console.log('data in action',data,token)
-        return (dispatch) => {
-            dispatch({type: ActionType.SEND_MESSAGE});
-      
-            post(`send`, data, token)
-            .then((res)=>{
-                console.log('res data',res.data)
-            })
-            .catch((error)=>{
-                console.log('error', eror);
-            })
-            //   .then((res) => {
-            //     console.log('res', res.data.message);
-            //     if(res.data.success){
-            //       dispatch({type:ActionType.HIRE_NOW_SUCCESS,payload:res.data.message})
-            //       ToastError(res.data.message);
-            //         navigation.navigate('selectPaymentMethod');
-      
-      
-            //     }
-            //     else{
-            //       dispatch({type:ActionType.HIRE_NOW_FAILD})
-            //       ToastError(res.data.message);
-            //       navigation.navigate('selectPaymentMethod');
-      
-            //     }
-            //   })
-            //   .catch((eror) => {
-            //     console.log('error', eror);
-            //     dispatch({type:ActionType.HIRE_NOW_FAILD})
-            //   });
-          };
+  static GetUserMessage = (token, userId, to) => {
+    console.log('to id in  action ', to);
+    return (dispatch) => {
+      dispatch({type: ActionType.GET_MESSAGE});
 
-
-    }
+      get(`getMsg/${to}`, token)
+        .then((res) => {
+          // console.log('message res', res.data.data);
+          dispatch({
+            type: ActionType.GET_MESSAGE_SUCCESS,
+            payload: res.data.data,
+          });
+        })
+        .catch((error) => {
+          console.log('error', error);
+          dispatch({type: ActionType.GET_MESSAGE_FAILD});
+        });
+    };
+  };
 }

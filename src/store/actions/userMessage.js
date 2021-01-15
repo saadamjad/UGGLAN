@@ -18,13 +18,13 @@ import {ToastError} from '../../../utils/toastErr';
 
 export default class UserMessageAction {
   static UserMessage = (data, token, navigation, func) => {
-    console.log('data in action', data, token);
+    // console.log('data in action', data, token);
     return (dispatch) => {
       dispatch({type: ActionType.SEND_MESSAGE});
 
       post(`send`, data, token)
         .then((res) => {
-          console.log('response of post api', res.data.data);
+          // console.log('response of post api', res.data.data);
           func();
           dispatch({
             type: ActionType.SEND_MESSAGE_SUCCESS,
@@ -38,8 +38,8 @@ export default class UserMessageAction {
     };
   };
 
-  static GetUserMessage = (token, userId, to) => {
-    console.log('to id in  action ', to);
+  static GetUserMessage = (token, to) => {
+    // console.log('to id in  action ', to);
     return (dispatch) => {
       dispatch({type: ActionType.GET_MESSAGE});
 

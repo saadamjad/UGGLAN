@@ -17,7 +17,11 @@ export default (state = initialState, action) => {
     case ActionType.GET_MESSAGE:
       return {...state};
     case ActionType.GET_MESSAGE_SUCCESS:
-      return {...state, getUserMessage: action.payload};
+      return {
+        ...state,
+        getUserMessage:
+          action.payload?.length > 0 ? action.payload.reverse() : [],
+      };
     case ActionType.GET_MESSAGE_FAILD:
       return {...state};
     default:

@@ -13,7 +13,6 @@ function Chat(props) {
     hirePersonelData: {},
     UserData: {},
     userMessage: '',
-    allMessage: [],
   });
 
   useEffect(() => {
@@ -21,30 +20,30 @@ function Chat(props) {
     // array();
   }, []);
   useEffect(() => {
-    let allMessages = props.getUserMessage;
-    let user = props.userData.user;
+    let user = props.userData?.user;
     let data = props.hirePersonelData;
 
     setState({
       ...state,
-      allMessage: allMessages,
       userData: user,
       hirePersonelData: data,
     });
+
+
     array();
   }, [props.getUserMessage]);
 
   const _getUserMessage = () => {
-    let userId = props.userMessage.userId;
-    let to = props.userMessage.to;
-    let token = props.userData.token;
-    // console.log('ideis',userId,to,token)
-    props.GetUserMessage(token, userId, to);
+    // console.log('OH MY GO WOW', props.userData.user._id);
+    let to = props.hirePersonelData?.id;
+    let token = props.userData?.token;
+    // // console.log('ideis',userId,to,token)
+    props.GetUserMessage(token, to);
   };
 
   const array = () => {
-    let values = state.allMessage.map((item, i) => {
-      console.log('item lelo', item);
+    let values = props.getUserMessage.map((item, i) => {
+      // console.log('item lelo', item);
       return {
         _id: item._id,
         text: item.message,
@@ -57,17 +56,17 @@ function Chat(props) {
 
       // ABC.push(testingArray)
     });
-    console.log('state of data======= ', values);
+    // console.log('state of data======= ', values);
     setMessages({...messages, messages: [...values]});
   };
 
   const onSend = () => {
-    //  console.log('data',state.userMessages)
+    //  // console.log('data',state.userMessages)
     _onSend();
   };
 
   const _onSend = () => {
-    console.log('user messages', state.userMessage);
+    // console.log('user messages', state.userMessage);
     let token = props.userData.token;
     let data = {
       // userName: state.userData.userName,
@@ -76,11 +75,11 @@ function Chat(props) {
       to: state.hirePersonelData.id,
       message: state.userMessage,
     };
-    console.log('sending data', data, token);
+    // console.log('sending data', data, token);
     props.UserMessage(data, token, props.navigation, _getUserMessage);
   };
   const setCustomText = async (value, name) => {
-    console.log('messages of user', value);
+    // console.log('messages of user', value);
     setState({...state, [name]: value});
   };
   const ChatHeader = () => (
@@ -141,7 +140,7 @@ function Chat(props) {
   }
 
   const renderSend = (props) => {
-    // console.log('props',props.messages)
+    // // console.log('props',props.messages)
     return (
       <Send
         // containerStyle={{
@@ -186,9 +185,9 @@ function Chat(props) {
         // onInputTextChanged={text =>setCustomText(text,'userMessage')}
         onInputTextChanged={(text) => setCustomText(text, 'userMessage')}
       />
-      {state?.allMessage?.map((item, i) => {
-        console.log('items', item.message);
-      })}
+      {/* {state?.allMessage?.map((item, i) => {
+        // console.log('items', item.message);
+      })} */}
     </SafeAreaView>
   );
 }

@@ -14,6 +14,7 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
 import GlobalHeader from '../../components/header';
+import styles from './styles'
 import {connect} from 'react-redux';
 import {AuthAction, ProfileAction} from '../../store/actions';
 
@@ -25,11 +26,11 @@ const App = (props) => {
   });
 
   useEffect(() => {
-    let data = props.userData.user;
+    let data = props.userData?.user;
     setState({...state, userData: data});
   }, []);
   useEffect(() => {
-    let data = props.userData.user;
+    let data = props.userData?.user;
     setState({...state, userData: data});
   }, [props.userData]);
   const editableText = () => {

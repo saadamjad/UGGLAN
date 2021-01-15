@@ -1,5 +1,10 @@
 import {Platform, StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
+
+  ImageBackgroundLogin:{
+    height: '100%',
+    width: '100%',
+  },
   mainView: {
     flex: 1,
     marginTop: 20,

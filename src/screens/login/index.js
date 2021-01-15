@@ -84,7 +84,7 @@ const App = (props) => {
       <View style={styles.footerView}>
         <Text style={styles.footerText}>
           By Proceeding you Agree to our {'\n'} Terms & Conditions {'\n'} and
-          comfrom you are atleast 13 year old.
+          comfirm you are atleast 13 years old.
         </Text>
       </View>
     </ImageBackground>

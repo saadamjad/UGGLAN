@@ -6,6 +6,7 @@ import {Icon} from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
 import {connect} from 'react-redux';
 import {HireSomeOneAction, UserMessageAction} from '../../store/actions';
+import io from 'socket.io-client';
 
 function Chat(props) {
   const [messages, setMessages] = useState({messages: []});
@@ -13,6 +14,7 @@ function Chat(props) {
     hirePersonelData: {},
     UserData: {},
     userMessage: '',
+    socket:''
   });
 
   useEffect(() => {
@@ -20,6 +22,8 @@ function Chat(props) {
     // array();
   }, []);
   useEffect(() => {
+    // const socket=io('http://192.168.18.96:4500')
+
     let user = props.userData?.user;
     let data = props.hirePersonelData;
 
@@ -27,6 +31,8 @@ function Chat(props) {
       ...state,
       userData: user,
       hirePersonelData: data,
+      // socket:socket
+
     });
 
 
@@ -42,7 +48,7 @@ function Chat(props) {
   };
 
   const array = () => {
-    let values = props.getUserMessage.map((item, i) => {
+    let values = props?.getUserMessage?.map((item, i) => {
       // console.log('item lelo', item);
       return {
         _id: item._id,
@@ -76,6 +82,7 @@ function Chat(props) {
       message: state.userMessage,
     };
     // console.log('sending data', data, token);
+  // state.socket.emit("chat message",state.userMessage)
     props.UserMessage(data, token, props.navigation, _getUserMessage);
   };
   const setCustomText = async (value, name) => {
@@ -185,9 +192,7 @@ function Chat(props) {
         // onInputTextChanged={text =>setCustomText(text,'userMessage')}
         onInputTextChanged={(text) => setCustomText(text, 'userMessage')}
       />
-      {/* {state?.allMessage?.map((item, i) => {
-        // console.log('items', item.message);
-      })} */}
+    {/* {console.log('soket conectio -----',state.socket)} */}
     </SafeAreaView>
   );
 }

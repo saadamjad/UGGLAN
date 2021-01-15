@@ -15,29 +15,39 @@ import RadioForm, {
 import LinearGradient from 'react-native-linear-gradient';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import PayModal from '../../components/pay_on_cash';
+import AlertPopup from '../../components/popup_for_alerts';
 import GlobalHeader from '../../components/header';
 import {State} from 'react-native-gesture-handler';
 const App = (props) => {
-  const Continue = () => {
-    console.log('Radio 1', isRadio2);
-    console.log('Radio 2', isRadio2);
+  const [state, setState] = useState({
+    labelValue: '',
+    popupText: '',
+  });
 
-    if (setRadio2) {
-      setVisible(true);
-    }
-    // else if(setRadio1 ==false){
-
-    //  props.navigation.navigate('payMasterCard');
-    // }
-    // setVisible(true);
-
-    // props.navigation.navigate('payMasterCard');
-  };
- 
-  const [isRadio1, setRadio1] = useState(false);
-  const [isRadio2, setRadio2] = useState(false);
   const [visible, setVisible] = useState(false);
-  
+  const [visible1, setVisible1] = useState(false);
+  var labels = [
+    {label: 'Pay Online', value: 0},
+    {label: 'Pay OnCash', value: 1},
+  ];
+
+  const Continue = () => {
+    if (state.labelValue === 0) {
+      // setVisible1(false);
+      // alert('pay online')
+      props.navigation.navigate('payMasterCard');
+    } else if (state.labelValue === 1) {
+      // alert('pay on cash')
+      // setVisible1(false);
+      setVisible(true);
+    } else  {
+      // alert('plz select payment method')
+      setVisible1(true);
+
+      state.popupText = 'Select payment method';
+    }
+  };
+
   return (
     <ImageBackground
       source={require('../../assets/images/bg_image.png')}
@@ -68,91 +78,32 @@ const App = (props) => {
             toggleVisible={() => setVisible(!visible)}
           />
 
-          <View style={{marginVertical: 30}}>
-            <RadioButton>
-              <RadioButtonInput
-                obj={{
-                  label: 'Pay online',
-                }}
-                isSelected={isRadio1}
-                onPress={(value) => {
-                  setRadio1(!isRadio1);
-                  setRadio2(false);
-                }}
-                borderWidth={1}
-                buttonInnerColor={'white'}
-                buttonOuterColor={'white'}
-                buttonSize={12}
-                buttonOuterSize={18}
-                buttonStyle={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-                buttonWrapStyle={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  marginVertical: 5,
-                  // flex: 1,
-                }}
-              />
-              <RadioButtonLabel
-                obj={{
-                  label: 'Pay online',
-                }}
-                onPress={(value) => {
-                  setRadio1(!isRadio1);
-                  setRadio2(false);
-                }}
-                labelHorizontal={true}
-                labelStyle={{
-                  fontSize: 13,
-                  color: 'white',
-                }}
-              />
-            </RadioButton>
+          <AlertPopup
+            visible={visible1}
+            toggleVisible={() => setVisible1(!visible1)}
+            popupText={state.popupText}
+            onConfirm={() => {
+              setVisible1(false);
+              // deletePaymentCard();
+              // props.navigation.navigate('thankyou');
+              // alert('Deleted')
+            }}
+          />
 
-            <RadioButton>
-              <RadioButtonInput
-                obj={{
-                  label: 'Pay on cash',
-                }}
-                isSelected={isRadio2}
-                onPress={(text) => {
-                  // console.log("hello",text)
-                  setRadio2(!isRadio2);
-                  setRadio1(false);
-                }}
-                borderWidth={1}
-                buttonInnerColor={'white'}
-                buttonOuterColor={'white'}
-                buttonSize={12}
-                buttonOuterSize={18}
-                buttonStyle={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-                buttonWrapStyle={{
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  // marginVertical: 5,
-                  // flex: 1,
-                }}
-              />
-              <RadioButtonLabel
-                obj={{
-                  label: 'Pay on cash',
-                }}
-                labelHorizontal={true}
-                onPress={(value) => {
-                  setRadio2(!isRadio2);
-                  setRadio1(false);
-                }}
-                labelStyle={{
-                  fontSize: 13,
-                  color: 'white',
-                }}
-              />
-            </RadioButton>
+          <View style={{marginVertical: 30}}>
+            <RadioForm
+              radio_props={labels}
+              onPress={(value) => setState({labelValue: value})}
+              initial={-1}
+              buttonColor={'white'}
+              buttonSize={10}
+              buttonOuterSize={25}
+              selectedButtonColor={'white'}
+              selectedLabelColor={'white'}
+              labelColor={'white'}
+            />
+
+            {console.log('lable value', state.labelValue)}
           </View>
 
           {/* ================Radio Button End================ */}

@@ -13,6 +13,7 @@ import {
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 import GlobalHeader from '../../components/header';
 import RightDrawer from '../../components/rightSideDrawer';
+import styles from './styles';
 import * as Animatable from 'react-native-animatable';
 export default (props) => {
   //  state here
@@ -78,7 +79,7 @@ export default (props) => {
     // console.log('LOCATION HERE', location);
   };
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={styles.SafeAreaViewMain}>
       <GlobalHeader
         toggleDrawer={() => setState({...state, isVisible: !state.isVisible})}
         navigation={props.navigation}
@@ -89,7 +90,7 @@ export default (props) => {
       />
       <MapView
         provider={PROVIDER_GOOGLE}
-        style={{flex: 1}}
+        style={styles.MapViewHome}
         showsUserLocation={true}
         mapType="standard"
         coordinate={{
@@ -122,15 +123,7 @@ export default (props) => {
         )}
         {/* ))} */}
       </MapView>
-      <View
-        style={{
-          left: 30,
-          bottom: 50,
-          position: 'absolute',
-          // backgroundColor: 'black',
-          alignItems: 'center',
-          // justifyContent: 'space-between',
-        }}>
+      <View style={styles.animationViewIcon}>
         {[
           {type: 'FontAwesome5', name: 'satellite-dish'},
           {type: 'SimpleLineIcons', name: 'volume-2', name1: 'volume-off'},
@@ -139,32 +132,12 @@ export default (props) => {
         ].map((val) => (
           <Animatable.View
             animation={state.done ? 'bounceIn' : 'bounceOut'}
-            style={{paddingBottom: 10}}>
+            style={styles.AnimatableView}>
             <TouchableOpacity
               // onPress={() => runAnimation()}
-              style={{
-                height: 50,
 
-                width: 50,
-                borderRadius: 100,
-                backgroundColor: 'white',
-
-                shadowColor: '#000',
-                shadowOffset: {
-                  width: 0,
-                  height: 2,
-                },
-                shadowOpacity: 0.25,
-                shadowRadius: 3.84,
-                elevation: 5,
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-              <Icon
-                style={{color: 'black', fontSize: 25}}
-                type={val.type}
-                name={val.name}
-              />
+              style={styles.TouchableOpacityIcon}>
+              <Icon style={styles.IconStyle} type={val.type} name={val.name} />
             </TouchableOpacity>
           </Animatable.View>
         ))}
@@ -194,8 +167,10 @@ export default (props) => {
             elevation: 5,
             alignItems: 'center',
             justifyContent: 'center',
-          }}>
-          <Icon style={{color: '#F6931B'}} type="AntDesign" name="plus" />
+          }}
+          // style={styles.TouchableOpacityrunAnimation}
+        >
+          <Icon style={styles.IconPlus} type="AntDesign" name="plus" />
         </TouchableOpacity>
       </View>
     </SafeAreaView>

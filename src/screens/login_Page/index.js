@@ -54,9 +54,7 @@ const App = (props) => {
     console.log('login data', data);
     props.loginAction(data, props.navigation);
   };
-  // useEffect(()=>{
-
-  // },[props.])
+ 
 
   const signupPage = () => {
     props.navigation.navigate('signup');
@@ -68,10 +66,9 @@ const App = (props) => {
   return (
     <ImageBackground
       source={require('../../assets/images/bg_image.png')}
-      style={{
-        height: '100%',
-        width: '100%',
-      }}>
+     
+      style={styles.ImageBackgroundLogin}
+      >
       <SafeAreaView style={styles.mainView}>
         <View style={styles.loginView}>
           <Text style={styles.loginText}>Login</Text>
@@ -116,7 +113,7 @@ const App = (props) => {
               autoCapitalize="none"
               // maxLength={8}
               style={styles.passwordTextInput}
-              // onChangeText={(text) => setPassword(text)}
+             
               onChangeText={(text) =>
                 setState({
                   ...state,
@@ -173,9 +170,7 @@ const App = (props) => {
             popupText={state.popupText}
             onConfirm={() => {
               setVisible(false);
-              // deletePaymentCard();
-              // props.navigation.navigate('thankyou');
-              // alert('Deleted')
+            
             }}
           />
         </View>

@@ -13,6 +13,7 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
 import AlertPopup from '../../components/popup_for_alerts';
+import styles from './styles';
 import {connect} from 'react-redux';
 import {AuthAction} from '../../store/actions';
 import {TouchableOpacity} from 'react-native-gesture-handler';
@@ -104,55 +105,32 @@ const App = (props) => {
   return (
     <ImageBackground
       source={require('../../assets/images/bg_image.png')}
-      style={{
-        height: '100%',
-        width: '100%',
-      }}>
+      style={styles.ImageBackgroundSignUpMain}>
       <SafeAreaView
-        style={{flex: 1, marginTop: 20, width: '90%', alignSelf: 'center'}}>
+        // style={{flex: 1, marginTop: 20, width: '90%', alignSelf: 'center'}}
+        style={styles.SafeAreaViewSignup}>
         <View
           style={{
             justifyContent: 'center',
             alignItems: 'center',
             marginVertical: 20,
           }}>
-          <Text style={{color: '#FFFFFF', fontSize: 25}}>Create Account</Text>
+          <Text style={styles.CreateAccountText}>Create Account</Text>
         </View>
 
         {/* ==========Profile Image========== */}
 
-        <View style={{alignItems: 'center'}}>
-          <View
-            style={{
-              borderRadius: 100,
-              borderWidth: 0.5,
-              borderColor: 'white',
-              marginBottom: 50,
-            }}>
+        <View style={styles.ProfileImageView1}>
+          <View style={styles.ProfileImageView2}>
             <ImageBackground
               source={require('../../assets/images/1.jpg')}
-              style={{height: 100, width: 100}}
+              style={styles.ImageBackgroundSignUp}
               imageStyle={{borderRadius: 100}}>
-              <View style={{position: 'absolute', bottom: -10}}>
+              <View style={styles.ProfileImageView3}>
                 <LinearGradient
                   colors={['#F6931B', '#DE2516']}
-                  style={{
-                    marginLeft: 75,
-                    marginBottom: 15,
-                    borderRadius: 20,
-                    overflow: 'hidden',
-                  }}>
-                  <AntDesign
-                    name="plus"
-                    size={20}
-                    color="#FFFF"
-                    style={
-                      {
-                        // marginLeft: 20,
-                        // backgroundColor: 'white',
-                      }
-                    }
-                  />
+                  style={styles.LinearGradientSignup1}>
+                  <AntDesign name="plus" size={20} color="#FFFF" />
                 </LinearGradient>
               </View>
             </ImageBackground>
@@ -163,23 +141,12 @@ const App = (props) => {
 
         {/* ==========Full Name Row========== */}
 
-        <View
-          style={{
-            flexDirection: 'row',
-            borderBottomWidth: 1,
-            borderColor: '#C0C0C0',
-            alignItems: 'center',
-            width: '100%',
-          }}>
+        <View style={styles.fullNameRowView}>
           <TextInput
             placeholder="Full Name"
             placeholderTextColor="#696969"
             autoCapitalize="none"
-            style={{
-              color: 'white',
-              width: '90%',
-              height: 40,
-            }}
+            style={styles.TextInputfullNameRow}
             onChangeText={(text) => _OnChangeText(text, 'fullName')}
           />
           <AntDesign
@@ -196,148 +163,50 @@ const App = (props) => {
 
         {/* ======Code & Phone Row====== */}
 
-        <View
-          style={{
-            flexDirection: 'row',
-            alignSelf: 'center',
-            width: '100%',
-          }}>
-          {/* <View
-            style={{
-              flexDirection: 'row',
-              borderBottomWidth: 1,
-              borderColor: '#C0C0C0',
-              width: '35%',
-              alignItems: 'center',
-            }}>
-            <TextInput
-              placeholder="Code"
-              placeholderTextColor="#696969"
-              keyboardType="number-pad"
-              style={{
-                color: 'white',
-                width: '85%',
-                height: 40,
-              }}
-              onChangeText={(text) => _OnChangeText(text, 'code')}
-            />
-            <View style={{width: '15%'}}>
-              <AntDesign
-                name="down"
-                size={12}
-                color="#C0C0C0"
-                style={{
-                  alignItems: 'flex-end',
-                  // height: 5.21,
-                  // width: 9.12,
-                }}
-              />
-            </View>
-          </View>
-           */}
-          {/* ====+==== */}
-          {/* <View
-            style={{
-              flexDirection: 'row',
-              borderBottomWidth: 1,
-              borderColor: '#C0C0C0',
-              width: '55%',
-              marginHorizontal: 28,
-              alignItems: 'center',
-            }}>
-            <TextInput
-              placeholder="Phone"
-              placeholderTextColor="#696969"
-              keyboardType="numeric"
-              style={{
-                color: 'white',
-                width: '85%',
-                height: 40,
-              }}
-              onChangeText={(text) => _OnChangeText(text, 'phone')}
-            />
-            <Fontisto
-              name="phone"
-              // size={14}
-              color="#C0C0C0"
-              style={{
-                alignItems: 'flex-end',
-                height: 14.33,
-                width: 14.33,
-              }}
-            />
-          </View> */}
-        </View>
+        {/* <View style={styles.CodePhoneRowView}>
+    
+        </View> */}
 
         {/* ==========Email Row==========   */}
 
-        <View
-          style={{
-            flexDirection: 'row',
-            borderBottomWidth: 1,
-            borderColor: '#C0C0C0',
-            alignItems: 'center',
-            width: '100%',
-          }}>
+        <View style={styles.emailView}>
           <TextInput
             placeholder="Email or phone"
             placeholderTextColor="#696969"
             keyboardType="email-address"
             autoCapitalize="none"
-            style={{
-              color: 'white',
-              width: '90%',
-              height: 40,
-            }}
+            style={styles.TextInputemail}
             onChangeText={(text) => _OnChangeText(text, 'email')}
           />
-          <View style={{width: '15%'}}>
+          <View style={styles.emailIconView}>
             <Fontisto
               name="email"
               // size={14}
               color="#C0C0C0"
-              style={{
-                alignItems: 'flex-end',
-                height: 13.31,
-                width: 20.07,
-              }}
+              style={styles.IconStyleemail}
             />
           </View>
         </View>
 
         {/* ==========Password Row==========   */}
 
-        <View
-          style={{
-            flexDirection: 'row',
-            borderBottomWidth: 1,
-            borderColor: '#C0C0C0',
-            alignItems: 'center',
-            width: '100%',
-          }}>
+        <View style={styles.passwordView}>
           <TextInput
             placeholder="Password"
             placeholderTextColor="#696969"
             keyboardType="default"
             autoCapitalize="none"
             //   secureTextEntry= {secure}
-            style={{
-              color: 'white',
-              width: '90%',
-              height: 40,
-            }}
+
+            style={styles.TextInputpassword}
             onChangeText={(text) => _OnChangeText(text, 'password')}
           />
-          <View style={{width: '15%'}}>
+          <View style={styles.passwordIconView}>
             <Fontisto
               name="key"
               // size={14}
               color="#C0C0C0"
-              style={{
-                alignItems: 'flex-end',
-                height: 13.5,
-                width: 13.5,
-              }}
+              style={styles.passwordIcon}
             />
           </View>
         </View>
@@ -345,20 +214,12 @@ const App = (props) => {
 
         {/* ========Already Have An Account======== */}
 
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-            marginVertical: 40,
-          }}>
-          <Text style={{color: '#808080', fontSize: 12}}>
+        <View style={styles.AlreadyAccountView}>
+          <Text style={styles.AlreadyAccountText}>
             Already have an Account?
           </Text>
           <TouchableOpacity onPress={() => loginPage()}>
-            <Text style={{color: '#C0C0C0', paddingLeft: 5, height: 19}}>
-              Login
-            </Text>
+            <Text style={styles.LoginText}>Login</Text>
           </TouchableOpacity>
         </View>
 
@@ -366,13 +227,7 @@ const App = (props) => {
 
         <LinearGradient
           colors={['#F6931B', '#DE2516']}
-          style={{
-            width: 301,
-            height: 42,
-            alignSelf: 'center',
-            marginVertical: 10,
-            borderRadius: 3,
-          }}>
+          style={styles.LinearGradientSignupButton}>
           <Button
             title="Sign Up"
             loading={props.isLoading}

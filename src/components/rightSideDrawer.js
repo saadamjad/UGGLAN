@@ -48,10 +48,14 @@ const RightDrawer = (props) => {
               borderBottomColor: 'white',
               paddingBottom: 20,
             }}>
+
+
             <Text style={{color: 'white', fontSize: 18}}>
               My Safety Network
             </Text>
+            <TouchableOpacity onPress={()=>{props.navigation.navigate('addContacts')}}>
             <Icon name="plus" type="AntDesign" style={{color: 'white'}} />
+            </TouchableOpacity>
           </View>
         </View>
         <View

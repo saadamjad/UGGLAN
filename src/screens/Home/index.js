@@ -85,6 +85,7 @@ export default (props) => {
         navigation={props.navigation}
       />
       <RightDrawer
+        navigation={props.navigation}
         toggleDrawer={() => setState({...state, isVisible: !state.isVisible})}
         isVisible={state.isVisible}
       />

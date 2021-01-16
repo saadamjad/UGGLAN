@@ -7,6 +7,7 @@ import Profile from '../screens/profile';
 import {Image, View, Text, Settings} from 'react-native';
 import signup from '../screens/signup';
 import loginpage from '../screens/login_Page';
+import addContacts from '../screens/add_contacts'
 import otp from '../screens/otp';
 import newpassword from '../screens/new_password';
 import allcontacts from '../screens/all_contacts';
@@ -106,6 +107,11 @@ function HomeStack() {
       <Stack.Screen
         name="allcontacts"
         component={allcontacts}
+        options={{headerShown: false}}
+      />
+       <Stack.Screen
+        name="addContacts"
+        component={addContacts}
         options={{headerShown: false}}
       />
       <Stack.Screen

@@ -9,7 +9,8 @@ import {
   PaymentMethodReducer,
   HireSomeOneReducer,
   AllContactsReducer,
-  UserMessageReducer
+  UserMessageReducer,
+  AddFriendContactsReducer
 } from './reducers';
 
 export const rootReducer = combineReducers({
@@ -18,7 +19,8 @@ export const rootReducer = combineReducers({
   PaymentMethodReducer,
   HireSomeOneReducer,
   AllContactsReducer,
-  UserMessageReducer
+  UserMessageReducer,
+  AddFriendContactsReducer
 
 
 });

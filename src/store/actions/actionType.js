@@ -125,4 +125,16 @@ static GET_ALL_CONTACTS='GET_ALL_CONTACTS'
 static GET_ALL_CONTACTS_SUCCESS='GET_ALL_CONTACTS_SUCCESS'
 static GET_ALL_CONTACTS_FAILD='GET_ALL_CONTACTS_FAILD'
 
+
+
+/**
+|--------------------------------------------------
+| Add Freinds Contacts for Send Notification
+|--------------------------------------------------
+*/
+
+static ADD_FRIEND_CONTACTS='ADD_FRIEND_CONTACTS'
+static ADD_FRIEND_CONTACTS_SUCCESS='ADD_FRIEND_CONTACTS_SUCCESS'
+static ADD_FRIEND_CONTACTS_FAILD='ADD_FRIEND_CONTACTS_FAILD'
+
 }

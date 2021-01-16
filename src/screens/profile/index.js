@@ -14,13 +14,12 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
 import GlobalHeader from '../../components/header';
-import styles from './styles'
+import styles from './styles';
 import {connect} from 'react-redux';
 import {AuthAction, ProfileAction} from '../../store/actions';
 
 const App = (props) => {
   const [state, setState] = useState({
-   
     userData: {},
     editable: false,
   });
@@ -65,10 +64,7 @@ const App = (props) => {
   return (
     <ImageBackground
       source={require('../../assets/images/bg_image.png')}
-      style={{
-        height: '100%',
-        width: '100%',
-      }}>
+      style={styles.ImageBackgroundProfileMain}>
       <SafeAreaView>
         <GlobalHeader
           isBack={true}
@@ -76,42 +72,20 @@ const App = (props) => {
           navigation={props.navigation}
         />
       </SafeAreaView>
-      <SafeAreaView
-        style={{flex: 1, marginTop: 20, width: '90%', alignSelf: 'center'}}>
+      <SafeAreaView style={styles.SafeAreaViewProfile}>
         {/* ==========Profile Image========== */}
 
-        <View style={{alignItems: 'center'}}>
-          <View
-            style={{
-              borderRadius: 100,
-              borderWidth: 0.5,
-              borderColor: 'white',
-              marginBottom: 50,
-            }}>
+        <View style={styles.ProfileImageMain}>
+          <View style={styles.ProfileImageView}>
             <ImageBackground
               source={require('../../assets/images/1.jpg')}
-              style={{height: 100, width: 100}}
+              style={styles.ImageBackgroundProfilePic}
               imageStyle={{borderRadius: 100}}>
-              <View style={{position: 'absolute', bottom: -10}}>
+              <View style={styles.PlusIconView}>
                 <LinearGradient
                   colors={['#F6931B', '#DE2516']}
-                  style={{
-                    marginLeft: 75,
-                    marginBottom: 15,
-                    borderRadius: 20,
-                    overflow: 'hidden',
-                  }}>
-                  <AntDesign
-                    name="plus"
-                    size={20}
-                    color="#FFFF"
-                    style={
-                      {
-                        // marginLeft: 20,
-                        // backgroundColor: 'white',
-                      }
-                    }
-                  />
+                  style={styles.PlusIconColor}>
+                  <AntDesign name="plus" size={20} color="#FFFF" />
                 </LinearGradient>
               </View>
             </ImageBackground>
@@ -122,24 +96,13 @@ const App = (props) => {
 
         {/* ==========Full Name Row========== */}
 
-        <View
-          style={{
-            flexDirection: 'row',
-            borderBottomWidth: 1,
-            borderColor: '#C0C0C0',
-            alignItems: 'center',
-            width: '100%',
-          }}>
+        <View style={styles.FullNameView}>
           <TextInput
             placeholder="Full Name"
             value={state?.userData?.userName}
             placeholderTextColor="#696969"
             editable={state.editable}
-            style={{
-              color: 'white',
-              width: '90%',
-              height: 40,
-            }}
+            style={styles.TextInputFullName}
             onChangeText={(text) =>
               setState({
                 ...state,
@@ -151,35 +114,20 @@ const App = (props) => {
             name="user"
             size={14}
             color="#C0C0C0"
-            style={{
-              alignItems: 'flex-end',
-              height: 15.87,
-              // width: 13.34,
-            }}
+            style={styles.UserIcon}
           />
         </View>
-        {/* {console.log('userdata in profile console', props.userData)} */}
+
         {/* ====== Phone Row====== */}
 
-        <View
-          style={{
-            flexDirection: 'row',
-            borderBottomWidth: 1,
-            borderColor: '#C0C0C0',
-            alignItems: 'center',
-            width: '100%',
-          }}>
+        <View style={styles.PhoneRowView}>
           <TextInput
             placeholder="Phone"
             value={state?.userData?.phone}
             placeholderTextColor="#696969"
             keyboardType="email-address"
             editable={state.editable}
-            style={{
-              color: 'white',
-              width: '90%',
-              height: 40,
-            }}
+            style={styles.TextInputPhoneRow}
             onChangeText={(text) =>
               setState({
                 ...state,
@@ -187,41 +135,26 @@ const App = (props) => {
               })
             }
           />
-          <View style={{width: '15%'}}>
+          <View style={styles.PhoneIconView}>
             <Fontisto
               name="phone"
               // size={14}
               color="#C0C0C0"
-              style={{
-                alignItems: 'flex-end',
-                height: 13.31,
-                width: 20.07,
-              }}
+              style={styles.PhoneIcon}
             />
           </View>
         </View>
 
         {/* ==========Email Row==========   */}
 
-        <View
-          style={{
-            flexDirection: 'row',
-            borderBottomWidth: 1,
-            borderColor: '#C0C0C0',
-            alignItems: 'center',
-            width: '100%',
-          }}>
+        <View style={styles.EmailRowView}>
           <TextInput
             placeholder="Email"
             value={state?.userData?.email}
             placeholderTextColor="#696969"
             keyboardType="email-address"
             editable={state.editable}
-            style={{
-              color: 'white',
-              width: '90%',
-              height: 40,
-            }}
+            style={styles.TextInputEmailRow}
             onChangeText={(text) =>
               setState({
                 ...state,
@@ -229,16 +162,12 @@ const App = (props) => {
               })
             }
           />
-          <View style={{width: '15%'}}>
+          <View style={styles.EmailIconView}>
             <Fontisto
               name="email"
               // size={14}
               color="#C0C0C0"
-              style={{
-                alignItems: 'flex-end',
-                height: 13.31,
-                width: 20.07,
-              }}
+              style={styles.EmailIcon}
             />
           </View>
         </View>
@@ -249,14 +178,7 @@ const App = (props) => {
 
         <LinearGradient
           colors={['#F6931B', '#DE2516']}
-          style={{
-            width: 301,
-            marginTop: 40,
-            height: 42,
-            alignSelf: 'center',
-            marginVertical: 10,
-            borderRadius: 3,
-          }}>
+          style={styles.LinearGradientButton}>
           <Button
             loading={props.isLoading}
             title={state.editable ? 'Save' : 'Edit'}

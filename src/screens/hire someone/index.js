@@ -14,6 +14,7 @@ import StarRating from 'react-native-star-rating';
 import {connect} from 'react-redux';
 import {HireSomeOneAction} from '../../store/actions';
 import GlobalHeader from '../../components/header';
+import styles from './styles';
 const App = (props) => {
   useEffect(() => {
     let data = props.hireSomeOneData;
@@ -116,10 +117,7 @@ const App = (props) => {
   return (
     <ImageBackground
       source={require('../../assets/images/bg_image.png')}
-      style={{
-        height: '100%',
-        width: '100%',
-      }}>
+      style={styles.ImageBackgroundHireSomeMain}>
       <SafeAreaView>
         <GlobalHeader
           navigation={props.navigation}
@@ -127,55 +125,23 @@ const App = (props) => {
           screenText={'Hire Someone'}
         />
         <ScrollView showsVerticalScrollIndicator={false}>
-          <SafeAreaView
-            style={{
-              flex: 1,
-              marginTop: 20,
-              width: '90%',
-              alignSelf: 'center',
-            }}>
+          <SafeAreaView style={styles.SafeAreaViewHireSome}>
             {/* ==========Parrent Box========== */}
             {props.isLoading === true ? (
-              <View
-                style={{
-                  justifyContent: 'center',
-                  flex: 1,
-                  alignItems: 'center',
-                }}>
+              <View style={styles.ParrentBoxView}>
                 <ActivityIndicator size="large" color="#DE2516" />
               </View>
             ) : (
               state?.hireSomeOneData?.map((item, i) => {
                 return (
-                  <View 
-                  key={i}
-                    style={{
-                      flexDirection: 'row',
-                      width: '100%',
-                      marginVertical: 10,
-                      borderBottomWidth: 0.5,
-                      borderColor: '#707070',
-                      
-                    }}>
+                  <View key={i} style={styles.CardsView}>
                     {/* ==========Image========== */}
 
-                    <View
-                      style={{
-                        width: '25%',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        marginBottom: 20,
-                      }}>
-                      <View
-                        style={{
-                          borderWidth: 0.5,
-                          borderColor: '#F6931B',
-                          borderRadius: 100,
-                          overflow: 'hidden',
-                        }}>
+                    <View style={styles.CardImageViewMain}>
+                      <View style={styles.ProfileImageView}>
                         <Image
                           source={require('../../assets/images/1.jpg')}
-                          style={{height: 60, width: 60, borderRadius: 100}}
+                          style={styles.ProfileImage}
                           resizeMode="cover"
                         />
                       </View>
@@ -183,13 +149,9 @@ const App = (props) => {
 
                     {/* ==========Name & Address & Stars========== */}
 
-                    <View
-                      style={{
-                        flex: 1,
-                        marginLeft: 0,
-                      }}>
-                      <View style={{flexDirection: 'row'}}>
-                        <Text style={{fontSize: 15, color: '#FFFFFF'}}>
+                    <View style={styles.CardNameAddressStarsView}>
+                      <View style={styles.RowViewCardNameAddressStars}>
+                        <Text style={styles.TextOfUserName}>
                           {item?.userName}
                           {'   |'}
                         </Text>
@@ -204,14 +166,14 @@ const App = (props) => {
                           {item?.price}
                         </Text>
                       </View>
-                      <View style={{marginVertical: 5}}>
-                        <Text style={{fontSize: 13, color: '#F6931B'}}>
+                      <View style={styles.CardAdressView}>
+                        <Text style={styles.TextOfAdress}>
                           {/* {item.address} */}
                           Km: 0.7km away
                         </Text>
                       </View>
                       {/* ********Stars Area******** */}
-                      <View style={{marginVertical: 5}}>
+                      <View style={styles.CardStarsView}>
                         <StarRating
                           disabled={false}
                           maxStars={5}
@@ -234,15 +196,10 @@ const App = (props) => {
 
                     {/* ==========Hire Button========== */}
 
-                    <View
-                      style={{
-                        width: '25%',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                      }}>
+                    <View Style={styles.HireNowButtonView}>
                       <LinearGradient
                         colors={['#F6931B', '#DE2516']}
-                        style={{borderRadius: 3}}>
+                        style={styles.LinearGradientHireNowButton}>
                         <Button
                           title="Hire Now"
                           loading={props.isLoading}

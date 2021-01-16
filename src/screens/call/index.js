@@ -10,6 +10,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import GlobalHeader from '../../components/header';
+import styles from './styles'
 import {connect} from 'react-redux';
 import {AllContactsAction} from '../../store/actions';
 import allContacts from '../../store/reducers/allContacts';
@@ -79,10 +80,10 @@ const App = (props) => {
   return (
     <ImageBackground
       source={require('../../assets/images/bg_image.png')}
-      style={{
-        height: '100%',
-        width: '100%',
-      }}>
+    
+      
+    style={styles.ImageBackgroundCall}
+      >
       <SafeAreaView>
         <GlobalHeader
           screenText={'Call'}
@@ -91,20 +92,17 @@ const App = (props) => {
         />
         <ScrollView showsVerticalScrollIndicator={false}>
           <SafeAreaView
-            style={{
-              flex: 1,
-              marginTop: 20,
-              width: '90%',
-              alignSelf: 'center',
-            }}>
+          
+            
+            style={styles.SafeAreaViewMain}
+            >
             {/* ==========Box Start========== */}
             {props.isLoading === true ? (
               <View
-                style={{
-                  justifyContent: 'center',
-                  flex: 1,
-                  alignItems: 'center',
-                }}>
+            
+                
+                style={styles.BoxView}
+                >
                 <ActivityIndicator size="large" color="#DE2516" />
               </View>
             ) : (

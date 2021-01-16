@@ -16,6 +16,7 @@ function Chat(props) {
     userMessage: '',
     socket:''
   });
+  const [socket,setSocket]=useState(io('http://192.168.18.96:4500'))
 
   useEffect(() => {
     _getUserMessage();
@@ -24,6 +25,11 @@ function Chat(props) {
   useEffect(() => {
     // const socket=io('http://192.168.18.96:4500')
 
+    socket.on("chat",function(messageFromBackEnd){
+      console.log('Message from Socket',messageFromBackEnd)
+    })
+
+
     let user = props.userData?.user;
     let data = props.hirePersonelData;
 
@@ -31,7 +37,7 @@ function Chat(props) {
       ...state,
       userData: user,
       hirePersonelData: data,
-      // socket:socket
+      socket:socket
 
     });
 
@@ -76,13 +82,13 @@ function Chat(props) {
     let token = props.userData.token;
     let data = {
       // userName: state.userData.userName,
-      // userId: state.userData._id,
+      userId: state.userData._id,
       // userEmail: state.userData.email,
       to: state.hirePersonelData.id,
       message: state.userMessage,
     };
     // console.log('sending data', data, token);
-  // state.socket.emit("chat message",state.userMessage)
+  state.socket.emit("chat",data)
     props.UserMessage(data, token, props.navigation, _getUserMessage);
   };
   const setCustomText = async (value, name) => {

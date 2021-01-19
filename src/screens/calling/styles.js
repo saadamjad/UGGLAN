@@ -8,6 +8,7 @@ const dimensions = {
 export default StyleSheet.create({
   max: {
     flex: 1,
+    backgroundColor:'black'
   },
   buttonHolder: {
     height: 100,
@@ -15,6 +16,8 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-evenly',
+    paddingBottom:32
+  
   },
   button: {
     paddingHorizontal: 20,

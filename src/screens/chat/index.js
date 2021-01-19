@@ -14,9 +14,9 @@ function Chat(props) {
     hirePersonelData: {},
     UserData: {},
     userMessage: '',
-    socket:''
+    // socket:''
   });
-  const [socket,setSocket]=useState(io('http://192.168.18.96:4500'))
+  const [socket, setSocket] = useState(io('http://192.168.18.96:4500'));
 
   useEffect(() => {
     _getUserMessage();
@@ -25,10 +25,10 @@ function Chat(props) {
   useEffect(() => {
     // const socket=io('http://192.168.18.96:4500')
 
-    socket.on("chat",function(messageFromBackEnd){
-      console.log('Message from Socket',messageFromBackEnd)
-    })
-
+    socket.on('chat', function (messageFromBackEnd) {
+     props.SetUserMessage(messageFromBackEnd);
+      // console.log('Message from Socket',messageFromBackEnd)
+    });
 
     let user = props.userData?.user;
     let data = props.hirePersonelData;
@@ -37,10 +37,8 @@ function Chat(props) {
       ...state,
       userData: user,
       hirePersonelData: data,
-      socket:socket
-
+      // socket:socket
     });
-
 
     array();
   }, [props.getUserMessage]);
@@ -88,8 +86,8 @@ function Chat(props) {
       message: state.userMessage,
     };
     // console.log('sending data', data, token);
-  state.socket.emit("chat",data)
-    props.UserMessage(data, token, props.navigation, _getUserMessage);
+    socket.emit('chat', data);
+    // props.UserMessage(data, token, props.navigation, _getUserMessage);
   };
   const setCustomText = async (value, name) => {
     // console.log('messages of user', value);
@@ -193,12 +191,12 @@ function Chat(props) {
         onSend={() => onSend()}
         renderBubble={renderBubble}
         user={{
-          _id: props?.userMessage?.userId,
+          _id: state?.userData?._id
         }}
         // onInputTextChanged={text =>setCustomText(text,'userMessage')}
         onInputTextChanged={(text) => setCustomText(text, 'userMessage')}
       />
-    {/* {console.log('soket conectio -----',state.socket)} */}
+      {/* {console.log('soket conectio -----',state.socket)} */}
     </SafeAreaView>
   );
 }
@@ -213,6 +211,7 @@ mapStateToProps = (state) => ({
 mapDispatchToProps = {
   // updatedUserAction: ProfileAction.SaveChanges,
   UserMessage: UserMessageAction.UserMessage,
+  SetUserMessage: UserMessageAction.SetUserMessage,
   GetUserMessage: UserMessageAction.GetUserMessage,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Chat);

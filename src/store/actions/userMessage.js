@@ -57,4 +57,19 @@ export default class UserMessageAction {
         });
     };
   };
+
+
+
+  // for socket Action
+
+  static SetUserMessage = (data) => {
+    // console.log('socket messages in action ', data);
+
+    return (dispatch) => {
+      dispatch({
+        type: ActionType.GET_MESSAGE_SUCCESS,
+        payload: data,
+      });
+    };
+  };
 }

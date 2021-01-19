@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   ActivityIndicator,
 } from 'react-native';
+
 import GlobalHeader from '../../components/header';
 import styles from './styles'
 import {connect} from 'react-redux';
@@ -17,12 +18,26 @@ import allContacts from '../../store/reducers/allContacts';
 
 const App = (props) => {
   useEffect(() => {
+
+
+ 
+    // let data = props.allContacts;
+    // // console.log('data of cntanj', data);
+    // setState({...state, allContacts: data});
+
+    getAllContacts();
+  }, []);
+
+  useEffect(() => {
+
+
+ 
     let data = props.allContacts;
     // console.log('data of cntanj', data);
     setState({...state, allContacts: data});
 
-    getAllContacts();
-  }, []);
+    // getAllContacts();
+  }, [props.allContacts]);
 
   const [state, setState] = useState({
     allContacts: [],
@@ -39,43 +54,10 @@ const App = (props) => {
   };
   const callfunction = () => {
     props.navigation.navigate('calling');
+    // alert('caling ')
   };
-  // const [Data, SetData] = useState([
-  //   {
-  //     image: require('../../assets/images/1.jpg'),
-  //     name: 'Abdul Samad',
-  //     nickName: '(Accept)',
-  //     status: 'active',
-  //     mobileNumber: '+92 3103844268',
-  //     callImage: require('../../assets/images/call.png'),
-  //     videoImage: require('../../assets/images/videocam.png'),
-  //     chatImage: require('../../assets/images/chat.png'),
-  //     gpsImage: require('../../assets/images/gps.png'),
-  //     status: 'active',
-  //   },
-  //   {
-  //     image: require('../../assets/images/2.jpg'),
-  //     name: 'Logan',
-  //     nickName: '(Pending...)',
-  //     status: 'pending',
-  //     mobileNumber: '+92 3103844268',
-  //     callImage: require('../../assets/images/call.png'),
-  //     videoImage: require('../../assets/images/videocam.png'),
-  //     chatImage: require('../../assets/images/chat.png'),
-  //     gpsImage: require('../../assets/images/gps.png'),
-  //   },
-  //   {
-  //     image: require('../../assets/images/3.jpg'),
-  //     name: 'Babu Bhai',
-  //     nickName: '(Accept)',
-  //     status: 'active',
-  //     mobileNumber: '+92 3103844268',
-  //     callImage: require('../../assets/images/call.png'),
-  //     videoImage: require('../../assets/images/videocam.png'),
-  //     chatImage: require('../../assets/images/chat.png'),
-  //     gpsImage: require('../../assets/images/gps.png'),
-  //   },
-  // ]);
+
+
 
   return (
     <ImageBackground

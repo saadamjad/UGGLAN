@@ -24,7 +24,7 @@ export default class AllContactsAction {
 
       get('contacts/0/', token)
         .then((res) => {
-        //   console.log('All contacts data',res.data.data)
+          // console.log('All contacts data',res.data.data)
           if (res.data.success) {
             dispatch({
               type: ActionType.GET_ALL_CONTACTS_SUCCESS,

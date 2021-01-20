@@ -52,8 +52,9 @@ const App = (props) => {
     // console.log('token',token)
     props.AllContacts(token);
   };
-  const callfunction = () => {
-    props.navigation.navigate('calling');
+  const callfunction = (id) => {
+    // console.log('id',id)
+    props.navigation.navigate('calling' ,{id: id});
     // alert('caling ')
   };
 
@@ -180,7 +181,7 @@ const App = (props) => {
                           width: 23,
                           borderRadius: 23,
                         }}
-                        onPress={() => callfunction()}>
+                        onPress={() => callfunction(item._id)}>
                         <Image
                           source={require('../../assets/images/call.png')}
                           style={{

@@ -17,11 +17,17 @@ import GlobalHeader from '../../components/header';
 import styles from './styles';
 const App = (props) => {
   useEffect(() => {
+  
+    getAllSecurityUser();
+  }, []);
+
+
+  useEffect(() => {
     let data = props.hireSomeOneData;
     // console.log('hireSome One data', data);
     setState({...state, hireSomeOneData: data});
-    getAllSecurityUser();
-  }, []);
+    
+  }, [props.hireSomeOneData]);
   const [state, setState] = useState({
     hireSomeOneData: [],
     // someOneId:''

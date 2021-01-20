@@ -1,152 +1,181 @@
-import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  SafeAreaView,
-  Image,
-  TouchableOpacity,
-  ScrollView,
-  PermissionsAndroid,
-} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
-import Fontisto from 'react-native-vector-icons/Fontisto';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import styles from './styles';
+import React, {Component} from 'react';
+import {SafeAreaView} from 'react-native';
+import {Platform, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import RtcEngine, {
   RtcLocalView,
   RtcRemoteView,
-  StreamFallbackOptions,
   VideoRenderMode,
 } from 'react-native-agora';
-// import RtcEngine from 'react-native-agora';
+import {connect} from 'react-redux';
 
-const App = (props) => {
-  const [state, setState] = useState({
-    appId: 'a4a97cff51ed4d9786032b5e58903c72',
-    token:
-      '006a4a97cff51ed4d9786032b5e58903c72IAC58PBiQAZCiQkkWRXvCVSh0LUMdEnO1TeJicU9AbHgK026FwAAAAAAEAC0V+Lr4N8HYAEAAQDg3wdg',
-    channelName: 'UGGLAN',
-    joinSucceed: false,
-    peerIds: [],
-  });
-  let _engine;
-  useEffect(() => {
-    requestCameraAndAudioPermission();
-    init();
+import requestCameraAndAudioPermission from './Permission';
+import styles from './styles';
 
-    // if (Platform.OS === 'android') {
-    //   // Request required permissions from Android
-    //   requestCameraAndAudioPermission().then(() => {
-    //     console.log('requested!');
-    //   });
-    // }
+class App extends Component {
+  // _engine?: RtcEngine;
+  _engine = RtcEngine;
 
-    // startCall()
-
-  }, []);
-  
-
-  const requestCameraAndAudioPermission = async () => {
-    try {
-      const granted = await PermissionsAndroid.requestMultiple([
-        PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,
-        PermissionsAndroid.PERMISSIONS.CAMERA,
-      ]);
-      if (
-        granted['android.permission.RECORD_AUDIO'] ===
-          PermissionsAndroid.RESULTS.GRANTED &&
-        granted['android.permission.CAMERA'] ===
-          PermissionsAndroid.RESULTS.GRANTED
-      ) {
-        console.log('You can use the cameras & mic');
-      } else {
-        console.log('Permission denied');
-      }
-    } catch (err) {
-      console.warn(err);
+  constructor(props) {
+    // console.log('props',props.route.params.id)
+    super(props);
+    this.state = {
+      appId: 'a4a97cff51ed4d9786032b5e58903c72',
+      token:
+        '006a4a97cff51ed4d9786032b5e58903c72IAAYB4aZKxpV1O/94WB/QMnwaQD3/16lOFajk0TeIUpq/k26FwAAAAAAEAC0V+LrzEwJYAEAAQDLTAlg',
+      channelName: 'UGGLAN',
+      joinSucceed: false,
+      peerIds: [],
+      // userId: this.props.userData.user._id,
+      // friendId: props.route.params.id,
+    };
+    if (Platform.OS === 'android') {
+      // Request required permissions from Android
+      requestCameraAndAudioPermission().then(() => {
+        console.log('requested!');
+      });
     }
-  };
-  const init = async () => {
-    // const { appId } = this.state;
-    let appId = 'a4a97cff51ed4d9786032b5e58903c72';
-    // console.log('eeeee');
+  }
 
-    _engine = await RtcEngine.create(appId);
-    await _engine.enableVideo();
+  componentDidMount() {
+    this.init();
+    // let userId=this.props.userData.user._id
+    // this.setState({userId:userId})
+  }
 
-    _engine.addListener('Warning', (warn) => {
+  /**
+   * @name init
+   * @description Function to initialize the Rtc Engine, attach event listeners and actions
+   */
+  init = async () => {
+    // console.log('When Rtc Create',this.state)
+    const {appId} = this.state;
+    this._engine = await RtcEngine.create(appId);
+    await this._engine.enableVideo();
+    // console.log('Rtc created ',this._engine)
+    this._engine.addListener('Warning', (warn) => {
       console.log('Warning', warn);
     });
 
-    _engine.addListener('Error', (err) => {
+    this._engine.addListener('Error', (err) => {
       console.log('Error', err);
     });
 
-    _engine.addListener('UserJoined', (uid, elapsed) => {
+    this._engine.addListener('UserJoined', (uid, elapsed) => {
       console.log('UserJoined', uid, elapsed);
       // Get current peer IDs
-      // const { peerIds } = this.state;
+      const {peerIds} = this.state;
       // If new user
-      if (state.peerIds.indexOf(uid) === -1) {
-        setState({
+      if (peerIds.indexOf(uid) === -1) {
+        this.setState({
+          // Add peer ID to state array
           peerIds: [...peerIds, uid],
         });
       }
     });
 
-    _engine.addListener('UserOffline', (uid, reason) => {
+    this._engine.addListener('UserOffline', (uid, reason) => {
       console.log('UserOffline', uid, reason);
-      // const { peerIds } = this.state;
-      setState({
-    
+      const {peerIds} = this.state;
+      this.setState({
         // Remove peer ID from state array
-        peerIds: state.peerIds.filter((id) => id !== uid),
+        peerIds: peerIds.filter((id) => id !== uid),
       });
     });
 
     // If Local user joins RTC channel
-    _engine.addListener('JoinChannelSuccess', (channel, uid, elapsed) => {
+    this._engine.addListener('JoinChannelSuccess', (channel, uid, elapsed) => {
       console.log('JoinChannelSuccess', channel, uid, elapsed);
       // Set state variable to true
-      setState({
+      this.setState({
         joinSucceed: true,
       });
     });
-    _engine.addListener('LeaveChannel', (channel, uid, elapsed) => {
-      console.log('Channel Leaved Successfully', channel, uid, elapsed);
-      setState({...state, peerIds: [], joinSucceed: false});
-     
-     
-    });
+  };
+  // joinId = () => {
+  //   // let channelname=this.state.userId.concat("",this.state.friendId)
+  //   // console.log('joins',channelname)
+
+  //   let str1 = this.state.userId;
+  //   let str2 = this.state.friendId;
+
+  //   let str3 = str1.concat('', str2);
+  //   console.log('joisbbshs', str3);
+  //   this.setState({channelName: str3});
+  // };
+
+  /**
+   * @name startCall
+   * @description Function to start the call
+   */
+  startCall = async () => {
+    // Join Channel using null token and channel name
+    console.log('When click On start Call', this.state);
+    await this._engine?.joinChannel(
+      this.state.token,
+      this.state.channelName,
+
+      null,
+      0,
+    );
   };
 
-  const _renderVideos = () => {
-    // const { joinSucceed } = this.state;
-    return state.joinSucceed ? (
+  /**
+   * @name endCall
+   * @description Function to end the call
+   */
+  endCall = async () => {
+    await this._engine?.leaveChannel();
+    this.setState({peerIds: [], joinSucceed: false});
+    console.log('When click On end Call', this.state);
+  };
+
+  render() {
+    return (
+      <View style={styles.max}>
+        <View style={styles.max}>
+          {this._renderVideos()}
+         
+          <View style={styles.buttonHolder}>
+            <TouchableOpacity onPress={this.startCall} style={styles.button}>
+              <Text style={styles.buttonText}> Start Call </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={this.endCall} style={styles.button}>
+              <Text style={styles.buttonText}> End Call </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    );
+  }
+
+  _renderVideos = () => {
+    const {joinSucceed} = this.state;
+    return joinSucceed ? (
       <View style={styles.fullView}>
         <RtcLocalView.SurfaceView
           style={styles.max}
-          channelId={state.channelName}
+          channelId={this.state.channelName}
           renderMode={VideoRenderMode.Hidden}
         />
-        {_renderRemoteVideos()}
+        {this._renderRemoteVideos()}
       </View>
     ) : null;
   };
 
-  const _renderRemoteVideos = () => {
-    // const { peerIds } = this.state;
+  _renderRemoteVideos = () => {
+    const {peerIds} = this.state;
     return (
       <ScrollView
         style={styles.remoteContainer}
         contentContainerStyle={{paddingHorizontal: 2.5}}
         horizontal={true}>
-        {state?.peerIds?.map((value) => {
+        {peerIds.map((value) => {
+          console.log('peeridhbhc', value);
           return (
             <RtcRemoteView.SurfaceView
               style={styles.remote}
               uid={value}
-              channelId={state.channelName}
+              channelId={this.state.channelName}
               renderMode={VideoRenderMode.Hidden}
               zOrderMediaOverlay={true}
             />
@@ -155,58 +184,13 @@ const App = (props) => {
       </ScrollView>
     );
   };
-  const callingfunction = () => {
-    // props.navigation.navigate('hiresomeone');
-    alert('caling alert');
-  };
-  const startCall = async () => {
-    // alert('hddg')
-    console.log('start call')
-    // Join Channel using null token and channel name
-    // console.log('ALL DETAIL BEFORE JOINING', state.peerIds[3]);
+}
 
-    await _engine?.joinChannel(state.token, state.channelName, null, 0);
-   
- 
-  };
+mapStateToProps = (state) => ({
+  isLoading: state.AllContactsReducer.isLoading,
+  // hirePersonelData: state.HireSomeOneReducer.hirePersonelData,
+  allContacts: state.AllContactsReducer.allContacts,
+  userData: state.AuthReducer.userData,
+});
 
-const  endCall = async () => {
-
-console.log('ended call')
-    // alert('end call')
-    await _engine?.leaveChannel();
-    // // await _engine?.leaveChannel();
-    setState({ peerIds: [], joinSucceed: false});
-    props.navigation.navigate('call');
-    // console.log('props',props)
-  //  _engine?.muteLocalAudioStream()
-  RtcLocalView.stop()
-    
-   
- 
-   
-  };
-
-  return (
-    <View style={styles.max}>
-    <View style={styles.max}>
-    {_renderVideos()}
-      <View style={styles.buttonHolder}>
-        <TouchableOpacity onPress={()=>startCall()} style={styles.button}>
-          <Text style={styles.buttonText}> Start Call </Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={()=>endCall()} style={styles.button}>
-          <Text style={styles.buttonText}> End Call </Text>
-        </TouchableOpacity>
-      </View>
-     
-    </View>
-  </View>
-  
-  );
-};
-
-export default App;
-
-
-// {_renderVideos()}
+export default connect(mapStateToProps, null)(App);

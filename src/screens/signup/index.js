@@ -54,6 +54,8 @@ const App = (props) => {
     let value = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(
       state.email,
     );
+    let pass=!Number(state.email)
+    console.log('PASS',pass)
     // let pass =Number(state.email)
     // let check =
 
@@ -75,7 +77,7 @@ const App = (props) => {
         state.popupText = 'Email is not valid';
         setVisible(!visible);
       }
-      // else if (isNaN(state.email)){
+      // else if (!Number(state.email)){
       //   state.popupText('Number is not valid')
       //   setVisible(!visible)
       // }
@@ -93,7 +95,6 @@ const App = (props) => {
 
           data['email'] = state.email;
           props._Signup(state, props.navigation);
-          s;
         }
       }
     }

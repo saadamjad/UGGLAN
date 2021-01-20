@@ -48,6 +48,13 @@ const styles = StyleSheet.create({
     width: 13.5,
     height: 13.5,
   },
+  passwordIcon: {
+    alignItems: 'flex-end',
+    height: 25,
+    color: '#C0C0C0',
+    fontSize: 19,
+    width: 50,
+  },
 
   /* ==========Repeat Password========== */
 

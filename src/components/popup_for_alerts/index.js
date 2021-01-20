@@ -33,7 +33,7 @@ const App = ({toggleVisible, visible, onConfirm,popupText}) => {
                   lineHeight: 20,
                   letterSpacing: 1,
                 }}>
-                {popupText ? popupText:'Kindly fill inputs corretly'}
+                {popupText ? popupText:'Kindly fill inputs correctly'}
               </Text>
             </View>
             {buttonArrays.map((val) => (

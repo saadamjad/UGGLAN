@@ -34,11 +34,11 @@ const GlobalHeader = (props) => {
               alignItems: 'center',
             }}>
             <Icon
-              style={{color: 'white', fontSize: 17}}
+              style={{color: 'white', fontSize: 21}}
               name="left"
               type="AntDesign"
             />
-            <Text style={{color: 'white', marginLeft: 5, fontSize: 16}}>
+            <Text style={{color: 'white', marginLeft: 5, fontSize: 17}}>
               {props.screenText}
             </Text>
           </TouchableOpacity>

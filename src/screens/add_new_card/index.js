@@ -61,7 +61,16 @@ const App = (props) => {
     ) {
       // console.log('rong American Express');
       setMessage(true);
-    } else {
+    }
+    else if(state.cvv.length !==3 ){
+      setVisible(!visible);
+      setMessage(false);
+
+      state.popupText = 'CVV length should be 3 ';
+
+    }
+    
+    else {
       console.log('good hogaya');
       setMessage(false);
 
@@ -151,7 +160,7 @@ const App = (props) => {
       {/* {console.log(' check krnay  lye', state.cardNumber)} */}
       <SafeAreaView style={{flex: 1}}>
         <GlobalHeader
-          screenText={'Pay online'}
+          screenText={'Add New Card'}
           isBack={true}
           navigation={props.navigation}
         />
@@ -252,7 +261,7 @@ const App = (props) => {
               <TextInput
                 placeholder="04/25"
                 placeholderTextColor="#696969"
-                keyboardType="name-phone-pad"
+                keyboardType="numeric"
                 style={styles.DateTextInput}
                 onChangeText={(text) => _OnChangeTextOthers(text, 'expiry')}
               />

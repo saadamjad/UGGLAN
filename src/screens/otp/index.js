@@ -12,6 +12,8 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import AlertPopup from '../../components/popup_for_alerts';
+
 
 import {connect} from 'react-redux';
 import {AuthAction} from '../../store/actions';
@@ -19,6 +21,8 @@ const App = (props) => {
   const [userData, setOtp] = useState({});
   const [newText, setNewText] = useState('');
   const [resendOtp, setresendOtp] = useState(false);
+  const [visible, setVisible] = useState(false);
+
   const [state, setState] = useState({
     otpInputs: [
       {placeholder: '4', value: '', ref: ''},
@@ -28,6 +32,7 @@ const App = (props) => {
       {placeholder: '0', value: '', ref: ''},
       {placeholder: '3', value: '', ref: ''},
     ],
+  
   });
   const otpfunction = () => {
     // props.navigation.navigate('newpassword');
@@ -38,7 +43,10 @@ const App = (props) => {
     let otp = await getValueOtp();
     console.log('data', userData);
     if (props.userData.otp == otp) {
-      alert('Email Is Verified');
+      // alert('Email Is Verified');
+      setVisible(!visible);
+
+      state.popupText = 'Email is Verfied';
       props.updateUser(
         {emailVerified: true},
         props.navigation,
@@ -46,7 +54,10 @@ const App = (props) => {
       );
       // props.navigation.navigate('login');
     } else {
-      alert('Otp does not match');
+      // alert('Otp does not match');
+      setVisible(!visible);
+
+      state.popupText = 'Otp does not match ,enter valid otp';
     }
   };
   useEffect(() => {
@@ -267,7 +278,19 @@ const App = (props) => {
               }}
             />
           </LinearGradient>
+          <AlertPopup
+            visible={visible}
+            toggleVisible={() => setVisible(!visible)}
+            popupText={state.popupText}
+            onConfirm={() => {
+              setVisible(false);
+              // deletePaymentCard();
+              // props.navigation.navigate('thankyou');
+              // alert('Deleted')
+            }}
+          />
         </View>
+      
       </SafeAreaView>
     </ImageBackground>
   );

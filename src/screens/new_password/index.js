@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {Button} from 'react-native-elements';
 import {
   View,
@@ -6,16 +6,32 @@ import {
   ImageBackground,
   SafeAreaView,
   TextInput,
+  TouchableOpacity
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Fontisto from 'react-native-vector-icons/Fontisto';
+import {Icon} from 'native-base';
+
 import styles from './styles';
 
 const App = (props) => {
+
+  const [eye1, setEye1] = useState(true);
+  const [eye2, setEye2] = useState(true);
+
   const LginFntn = () => {
     props.navigation.navigate('loginpage');
   };
 
+
+  const toggleEye1 = () => {
+    setEye1(!eye1);
+    // console.log('EYE ', eye);
+  };
+  const toggleEye2 = () => {
+    setEye2(!eye2);
+    // console.log('EYE ', eye);
+  };
   return (
     <ImageBackground
       source={require('../../assets/images/bg_image.png')}
@@ -36,16 +52,19 @@ const App = (props) => {
               placeholder="Password"
               placeholderTextColor="#696969"
               keyboardType="default"
-              //   secureTextEntry= {secure}
+              secureTextEntry={eye1 == false ? false : true}
               style={styles.passwordTextInput}
             />
             <View style={{width: '15%'}}>
-              <Fontisto
-                name="key"
-                // size={14}
-                color="#C0C0C0"
+            <TouchableOpacity onPress={() => toggleEye1()}>
+              <Icon
+                name={eye1 == false ? 'eye' : 'eye-with-line'}
+                type="Entypo"
+                // color="#C0C0C0"
+                // size={19}
                 style={styles.passwordIcon}
               />
+            </TouchableOpacity>
             </View>
           </View>
 
@@ -56,16 +75,19 @@ const App = (props) => {
               placeholder="Repeat Password"
               placeholderTextColor="#696969"
               keyboardType="default"
-              //   secureTextEntry= {secure}
+              secureTextEntry={eye2 == false ? false : true}
               style={styles.rpTextInput}
             />
             <View style={{width: '15%'}}>
-              <Fontisto
-                name="key"
-                // size={14}
-                color="#C0C0C0"
-                style={styles.rpIcon}
+            <TouchableOpacity onPress={() => toggleEye2()}>
+              <Icon
+                name={eye2 == false ? 'eye' : 'eye-with-line'}
+                type="Entypo"
+                // color="#C0C0C0"
+                // size={19}
+                style={styles.passwordIcon}
               />
+            </TouchableOpacity>
             </View>
           </View>
 

@@ -153,7 +153,7 @@ const App = (props) => {
             value={state?.userData?.email}
             placeholderTextColor="#696969"
             keyboardType="email-address"
-            editable={state.editable}
+            editable={false}
             style={styles.TextInputEmailRow}
             onChangeText={(text) =>
               setState({

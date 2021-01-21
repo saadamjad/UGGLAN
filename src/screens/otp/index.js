@@ -43,10 +43,10 @@ const App = (props) => {
     let otp = await getValueOtp();
     console.log('data', userData);
     if (props.userData.otp == otp) {
-      // alert('Email Is Verified');
-      setVisible(!visible);
+      alert('Email Is Verified');
+      // setVisible(!visible);
 
-      state.popupText = 'Email is Verfied';
+      // state.popupText = 'Email is Verfied';
       props.updateUser(
         {emailVerified: true},
         props.navigation,
@@ -54,10 +54,10 @@ const App = (props) => {
       );
       // props.navigation.navigate('login');
     } else {
-      // alert('Otp does not match');
-      setVisible(!visible);
+      alert('Otp does not match');
+      // setVisible(!visible);
 
-      state.popupText = 'Otp does not match ,enter valid otp';
+      // state.popupText = 'Otp does not match ,enter valid otp';
     }
   };
   useEffect(() => {

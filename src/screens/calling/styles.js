@@ -6,6 +6,11 @@ const dimensions = {
 };
 
 export default StyleSheet.create({
+
+  ImageBackgroundCall:{
+    height: '100%',
+    width: '100%',
+},
   max: {
     flex: 1,
     backgroundColor:'black'

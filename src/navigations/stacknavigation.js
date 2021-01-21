@@ -13,6 +13,7 @@ import newpassword from '../screens/new_password';
 import allcontacts from '../screens/all_contacts';
 import call from '../screens/call';
 import calling from '../screens/calling';
+import videocalling from '../screens/videocalling'
 import hiresomeone from '../screens/hire someone';
 import hireProfile from '../screens/hire_someones_profile';
 import shareUGGLAN from '../screens/share_UGGLAN';
@@ -139,6 +140,11 @@ function HomeStack() {
         component={calling}
         options={{headerShown: false}}
       />
+       <Stack.Screen
+        name="videocalling"
+        component={videocalling}
+        options={{headerShown: false}}
+      />
       <Stack.Screen
         name="hiresomeone"
         component={hiresomeone}
@@ -239,6 +245,11 @@ function MainStack() {
       <Stack.Screen
         name="calling"
         component={calling}
+        options={{headerShown: false}}
+      />
+       <Stack.Screen
+        name="videocalling"
+        component={videocalling}
         options={{headerShown: false}}
       />
       <Stack.Screen
@@ -350,6 +361,11 @@ function LiveLocationStack() {
         component={calling}
         options={{headerShown: false}}
       />
+       <Stack.Screen
+        name="videocalling"
+        component={videocalling}
+        options={{headerShown: false}}
+      />
       <Stack.Screen
         name="hiresomeone"
         component={hiresomeone}
@@ -451,6 +467,11 @@ function CallStack() {
       <Stack.Screen
         name="calling"
         component={calling}
+        options={{headerShown: false}}
+      />
+       <Stack.Screen
+        name="videocalling"
+        component={videocalling}
         options={{headerShown: false}}
       />
       <Stack.Screen

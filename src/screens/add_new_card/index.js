@@ -12,9 +12,14 @@ import LinearGradient from 'react-native-linear-gradient';
 import styles from './styles';
 import GlobalHeader from '../../components/header';
 import AlertPopup from '../../components/popup_for_alerts';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import moment from 'moment';
+import 'react-native-gesture-handler';
+
 import {connect} from 'react-redux';
 import {PaymentMethodAction} from '../../store/actions';
 import {SystemMessage} from 'react-native-gifted-chat';
+import {TouchableOpacity} from 'react-native-gesture-handler';
 const App = (props) => {
   const [state, setState] = useState({
     cardName: '',
@@ -23,10 +28,32 @@ const App = (props) => {
     cvv: '',
     cardType: '',
     rongCardNumber: false,
-  
   });
   const [visible, setVisible] = useState(false);
   const [showMessage, setMessage] = useState(false);
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (date) => {
+    // console.log('A date has been picked: ', date);
+    let month=moment(date).format('L').substring(0,2)
+    // console.log('month',month)
+    let year=moment(date).format('L').substring(5,10)
+    // console.log('year',year)
+    let finalDate=month.concat("",year)
+    console.log('finalDate',finalDate)
+
+    setState({...state, expiry: finalDate});
+    // console.log('From state',state.expiry)
+    hideDatePicker();
+  };
 
   const AddPaymentMethod = () => {
     if (
@@ -61,16 +88,12 @@ const App = (props) => {
     ) {
       // console.log('rong American Express');
       setMessage(true);
-    }
-    else if(state.cvv.length !==3 ){
+    } else if (state.cvv.length !== 3) {
       setVisible(!visible);
       setMessage(false);
 
       state.popupText = 'CVV length should be 3 ';
-
-    }
-    
-    else {
+    } else {
       console.log('good hogaya');
       setMessage(false);
 
@@ -105,7 +128,6 @@ const App = (props) => {
         [name]: text,
         cardType: 'Master Card',
         rongCardNumber: false,
-      
       });
     } else if (changeType.substring(0, 1) === '4') {
       setState({
@@ -113,7 +135,6 @@ const App = (props) => {
         [name]: text,
         cardType: 'Visa Card',
         rongCardNumber: false,
-      
       });
     } else if (
       changeType.substring(0, 2) === '34' ||
@@ -130,7 +151,6 @@ const App = (props) => {
         [name]: text,
         cardType: 'American Express',
         rongCardNumber: false,
-     
       });
     } else {
       setState({
@@ -138,7 +158,6 @@ const App = (props) => {
         [name]: text,
         cardType: '',
         rongCardNumber: true,
-       
       });
     }
   };
@@ -256,16 +275,32 @@ const App = (props) => {
           {/* ======Expiry Date & CVV Row====== */}
 
           <View style={styles.RowView}>
+          <TouchableOpacity onPress={showDatePicker}>
             <View style={styles.DateView}>
-              <Text style={styles.DateText}>Expiry Date</Text>
+           
+                <Text style={styles.DateText}>
+                  Expiry Date {'                             '}
+                </Text>
+
+                <DateTimePickerModal
+                  isVisible={isDatePickerVisible}
+                  
+                  mode="date"
+                  onConfirm={(date) => handleConfirm(date)}
+                  onCancel={() => hideDatePicker()}
+                />
+           
+              {/* <Text>{state.expiry}</Text> */}
               <TextInput
-                placeholder="04/25"
+                placeholder="01/2021"
                 placeholderTextColor="#696969"
-                keyboardType="numeric"
-                style={styles.DateTextInput}
-                onChangeText={(text) => _OnChangeTextOthers(text, 'expiry')}
+                value={state.expiry}
+                style={styles.CVVTextInput}
+                editable={false}
               />
+              
             </View>
+            </TouchableOpacity>
 
             {/* ====+==== */}
 
@@ -275,6 +310,7 @@ const App = (props) => {
                 placeholder="021"
                 placeholderTextColor="#696969"
                 keyboardType="numeric"
+                maxLength={3}
                 style={styles.CVVTextInput}
                 onChangeText={(text) => _OnChangeTextOthers(text, 'cvv')}
               />

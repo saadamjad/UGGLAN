@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import {SafeAreaView} from 'react-native';
-import {Platform, ScrollView, Text, TouchableOpacity, View} from 'react-native';
+import {Platform, ScrollView, Text, TouchableOpacity, View ,ImageBackground} from 'react-native';
 import RtcEngine, {
   RtcLocalView,
   RtcRemoteView,
   VideoRenderMode,
 } from 'react-native-agora';
 import {connect} from 'react-redux';
+import GlobalHeader from '../../components/header';
+
 
 import requestCameraAndAudioPermission from './Permission';
 import styles from './styles';
@@ -21,7 +23,7 @@ class App extends Component {
     this.state = {
       appId: 'a4a97cff51ed4d9786032b5e58903c72',
       token:
-        '006a4a97cff51ed4d9786032b5e58903c72IAAYB4aZKxpV1O/94WB/QMnwaQD3/16lOFajk0TeIUpq/k26FwAAAAAAEAC0V+LrzEwJYAEAAQDLTAlg',
+        '006a4a97cff51ed4d9786032b5e58903c72IACcagp6X2QeVGJelofgeLby3bUKP7pr9Z/VnQkiKuD8NE26FwAAAAAAEAC0V+Lrnq4KYAEAAQCcrgpg',
       channelName: 'UGGLAN',
       joinSucceed: false,
       peerIds: [],
@@ -50,7 +52,7 @@ class App extends Component {
     // console.log('When Rtc Create',this.state)
     const {appId} = this.state;
     this._engine = await RtcEngine.create(appId);
-    await this._engine.enableVideo();
+    await this._engine.enableAudio();
     // console.log('Rtc created ',this._engine)
     this._engine.addListener('Warning', (warn) => {
       console.log('Warning', warn);
@@ -131,13 +133,25 @@ class App extends Component {
 
   render() {
     return (
+      <ImageBackground 
+      
+      source={require('../../assets/images/bg_image.png')}
+    
+      
+      style={styles.ImageBackgroundCall}
+      >
+         {/* <GlobalHeader
+          screenText={'Audio Call'}
+          navigation={this.props.navigation}
+          isBack={true}
+        /> */}
       <View style={styles.max}>
         <View style={styles.max}>
           {this._renderVideos()}
          
           <View style={styles.buttonHolder}>
             <TouchableOpacity onPress={this.startCall} style={styles.button}>
-              <Text style={styles.buttonText}> Start Call </Text>
+              <Text style={styles.buttonText}> Start AudioCall </Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={this.endCall} style={styles.button}>
               <Text style={styles.buttonText}> End Call </Text>
@@ -145,6 +159,7 @@ class App extends Component {
           </View>
         </View>
       </View>
+      </ImageBackground>
     );
   }
 

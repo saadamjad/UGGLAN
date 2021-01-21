@@ -53,10 +53,17 @@ const App = (props) => {
     props.AllContacts(token);
   };
   const callfunction = (id) => {
-    // console.log('id',id)
+    // console.log('call id',id)
     props.navigation.navigate('calling' ,{id: id});
     // alert('caling ')
   };
+
+  const videoCallFunction=(id)=>{
+// console.log('vediocall id',id)
+props.navigation.navigate('videocalling' ,{id: id});
+
+
+  }
 
 
 
@@ -177,9 +184,9 @@ const App = (props) => {
                         style={{
                           marginLeft: 10,
                           overflow: 'hidden',
-                          height: 23,
-                          width: 23,
-                          borderRadius: 23,
+                          height: 28,
+                          width: 28,
+                          borderRadius: 28,
                         }}
                         onPress={() => callfunction(item._id)}>
                         <Image
@@ -197,10 +204,12 @@ const App = (props) => {
                         style={{
                           marginLeft: 10,
                           overflow: 'hidden',
-                          height: 23,
-                          width: 23,
-                          borderRadius: 23,
-                        }}>
+                          height: 28,
+                          width: 28,
+                          borderRadius: 28,
+                        }} 
+                        onPress={() => videoCallFunction(item._id)}
+                        >
                         <Image
                           source={require('../../assets/images/videocam.png')}
                           style={{
@@ -217,9 +226,9 @@ const App = (props) => {
                         style={{
                           marginLeft: 10,
                           overflow: 'hidden',
-                          height: 23,
-                          width: 23,
-                          borderRadius: 23,
+                          height: 28,
+                          width: 28,
+                          borderRadius: 28,
                         }}>
                         <Image
                           source={require('../../assets/images/chat.png')}
@@ -236,9 +245,9 @@ const App = (props) => {
                         style={{
                           marginLeft: 10,
                           overflow: 'hidden',
-                          height: 23,
-                          width: 23,
-                          borderRadius: 23,
+                          height: 28,
+                          width: 28,
+                          borderRadius: 28,
                         }}>
                         <Image
                           source={require('../../assets/images/gps.png')}

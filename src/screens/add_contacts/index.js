@@ -65,6 +65,7 @@ const App = (props) => {
       </SafeAreaView>
       <SafeAreaView
         style={{flex: 1, marginTop: 20, width: '90%', alignSelf: 'center'}}>
+          <ScrollView>
         {/* ==========Form Start========== */}
 
         {/* ==========Full Name Row========== */}
@@ -239,6 +240,7 @@ const App = (props) => {
             
             }}
           />
+          </ScrollView>
       </SafeAreaView>
     </ImageBackground>
   );

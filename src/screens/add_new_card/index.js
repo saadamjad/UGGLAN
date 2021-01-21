@@ -7,6 +7,7 @@ import {
   ImageBackground,
   TextInput,
   Image,
+  ScrollView
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './styles';
@@ -184,6 +185,7 @@ const App = (props) => {
           navigation={props.navigation}
         />
         <SafeAreaView style={styles.mainView}>
+          <ScrollView>
           {/* ========Card no:========== */}
 
           <View
@@ -347,6 +349,7 @@ const App = (props) => {
               // alert('Deleted')
             }}
           />
+          </ScrollView>
         </SafeAreaView>
       </SafeAreaView>
     </ImageBackground>

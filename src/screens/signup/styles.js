@@ -90,10 +90,13 @@ const styles = StyleSheet.create({
   passwordIconView:{
     width: '15%'
   },
-  passwordIcon:{
+  
+  passwordIcon: {
     alignItems: 'flex-end',
-    height: 13.5,
-    width: 13.5,
+    height: 25,
+    color: '#C0C0C0',
+    fontSize: 19,
+    width: 50,
   },
   AlreadyAccountView:{
     flexDirection: 'row',

@@ -17,6 +17,7 @@ import GlobalHeader from '../../components/header';
 import styles from './styles';
 import {connect} from 'react-redux';
 import {AuthAction, ProfileAction} from '../../store/actions';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const App = (props) => {
   const [state, setState] = useState({
@@ -73,6 +74,7 @@ const App = (props) => {
         />
       </SafeAreaView>
       <SafeAreaView style={styles.SafeAreaViewProfile}>
+        <ScrollView>
         {/* ==========Profile Image========== */}
 
         <View style={styles.ProfileImageMain}>
@@ -188,6 +190,7 @@ const App = (props) => {
             buttonStyle={{backgroundColor: 'transparent'}}
           />
         </LinearGradient>
+        </ScrollView>
       </SafeAreaView>
     </ImageBackground>
   );

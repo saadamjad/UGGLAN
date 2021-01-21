@@ -14,9 +14,11 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import LinearGradient from 'react-native-linear-gradient';
 import AlertPopup from '../../components/popup_for_alerts';
 import styles from './styles';
+import {Icon} from 'native-base';
+
 import {connect} from 'react-redux';
 import {AuthAction} from '../../store/actions';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {ScrollView, TouchableOpacity} from 'react-native-gesture-handler';
 const App = (props) => {
   const [state, setState] = useState({
     fullName: '',
@@ -26,6 +28,13 @@ const App = (props) => {
 
   const [visible, setVisible] = useState(false);
   const [popupText, setPopupText] = useState(false);
+  const [eye, setEye] = useState(true);
+
+
+  const toggleEye = () => {
+    setEye(!eye);
+    // console.log('EYE ', eye);
+  };
   const SgnUpFntn = () => {
     console.log('sss', Number(state.email) ? 'number' : 'email');
     const data = Number(state.email)
@@ -107,9 +116,12 @@ const App = (props) => {
     <ImageBackground
       source={require('../../assets/images/bg_image.png')}
       style={styles.ImageBackgroundSignUpMain}>
+  
+        
       <SafeAreaView
         // style={{flex: 1, marginTop: 20, width: '90%', alignSelf: 'center'}}
         style={styles.SafeAreaViewSignup}>
+          <ScrollView>
         <View
           style={{
             justifyContent: 'center',
@@ -197,18 +209,21 @@ const App = (props) => {
             placeholderTextColor="#696969"
             keyboardType="default"
             autoCapitalize="none"
-            //   secureTextEntry= {secure}
+            secureTextEntry={eye == false ? false : true}
 
             style={styles.TextInputpassword}
             onChangeText={(text) => _OnChangeText(text, 'password')}
           />
           <View style={styles.passwordIconView}>
-            <Fontisto
-              name="key"
-              // size={14}
-              color="#C0C0C0"
-              style={styles.passwordIcon}
-            />
+          <TouchableOpacity onPress={() => toggleEye()}>
+              <Icon
+                name={eye == false ? 'eye' : 'eye-with-line'}
+                type="Entypo"
+                // color="#C0C0C0"
+                // size={19}
+                style={styles.passwordIcon}
+              />
+            </TouchableOpacity>
           </View>
         </View>
         {/* </View> */}
@@ -249,6 +264,7 @@ const App = (props) => {
             // alert('Deleted')
           }}
         />
+        </ScrollView>
       </SafeAreaView>
     </ImageBackground>
   );

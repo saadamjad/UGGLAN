@@ -18,6 +18,7 @@ import {connect} from 'react-redux';
 import {AuthAction} from '../../store/actions';
 import AlertPopup from '../../components/popup_for_alerts';
 import {Icon} from 'native-base';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const App = (props) => {
   const [state, setState] = useState({
@@ -70,6 +71,7 @@ const App = (props) => {
       style={styles.ImageBackgroundLogin}
       >
       <SafeAreaView style={styles.mainView}>
+        <ScrollView>
         <View style={styles.loginView}>
           <Text style={styles.loginText}>Login</Text>
         </View>
@@ -174,6 +176,7 @@ const App = (props) => {
             }}
           />
         </View>
+        </ScrollView>
       </SafeAreaView>
     </ImageBackground>
   );

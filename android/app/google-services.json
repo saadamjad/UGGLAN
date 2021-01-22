@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "529490315191",
+    "project_id": "ugglan-app",
+    "storage_bucket": "ugglan-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:529490315191:android:4a1529f8794dd931a78a32",
+        "android_client_info": {
+          "package_name": "com.ugglan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "529490315191-qhdrgn9alg2c7abvn32nnoloamogl7ek.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFiCF3rnUYp2Y7_hVNJEuE3B_B8dIVTsg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "529490315191-qhdrgn9alg2c7abvn32nnoloamogl7ek.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

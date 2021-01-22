@@ -1,7 +1,9 @@
 // import {handleApiErrors} from './api-errors';
 import axios from 'axios';
-export const API_URL = 'http://192.168.18.96:4500';
+// export const API_URL = 'http://192.168.18.96:4500';
 // export const API_URL = 'http://localhost:5000';
+export const API_URL = 'https://ugglan-app-security.herokuapp.com';
+
 
 export function put(path, obj, id, token) {
   const API_REQ_URL = id

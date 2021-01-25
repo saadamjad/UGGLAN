@@ -9,6 +9,7 @@ import {
   TextInput,
   Image,
   processColor,
+  ScrollView
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -22,6 +23,9 @@ const App = (props) => {
   const [newText, setNewText] = useState('');
   const [resendOtp, setresendOtp] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [text,setText]= useState({
+    popupText:''
+  })
 
   const [state, setState] = useState({
     otpInputs: [
@@ -43,10 +47,12 @@ const App = (props) => {
     let otp = await getValueOtp();
     console.log('data', userData);
     if (props.userData.otp == otp) {
-      alert('Email Is Verified');
-      // setVisible(!visible);
+      // alert('Email Is Verified');
 
-      // state.popupText = 'Email is Verfied';
+      text.popupText = 'Email is Verfied';
+      setVisible(!visible);
+
+  
       props.updateUser(
         {emailVerified: true},
         props.navigation,
@@ -54,10 +60,11 @@ const App = (props) => {
       );
       // props.navigation.navigate('login');
     } else {
-      alert('Otp does not match');
-      // setVisible(!visible);
+      // alert('Otp does not match');
+       text.popupText = 'Otp does not match ,enter valid otp';
+      setVisible(!visible);
 
-      // state.popupText = 'Otp does not match ,enter valid otp';
+     
     }
   };
   useEffect(() => {
@@ -217,6 +224,7 @@ const App = (props) => {
         width: '100%',
       }}>
       <SafeAreaView style={{flex: 1, marginTop: 20}}>
+        <ScrollView>
         <View style={{alignItems: 'center', marginVertical: 40}}>
           <Image
             source={require('../../assets/images/otp.png')}
@@ -278,10 +286,13 @@ const App = (props) => {
               }}
             />
           </LinearGradient>
-          <AlertPopup
+       
+        </View>
+      
+        <AlertPopup
             visible={visible}
             toggleVisible={() => setVisible(!visible)}
-            popupText={state.popupText}
+            popupText={text.popupText}
             onConfirm={() => {
               setVisible(false);
               // deletePaymentCard();
@@ -289,8 +300,7 @@ const App = (props) => {
               // alert('Deleted')
             }}
           />
-        </View>
-      
+          </ScrollView>
       </SafeAreaView>
     </ImageBackground>
   );

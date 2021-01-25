@@ -23,7 +23,7 @@ class App extends Component {
     this.state = {
       appId: 'a4a97cff51ed4d9786032b5e58903c72',
       token:
-        '006a4a97cff51ed4d9786032b5e58903c72IACcagp6X2QeVGJelofgeLby3bUKP7pr9Z/VnQkiKuD8NE26FwAAAAAAEAC0V+Lrnq4KYAEAAQCcrgpg',
+        '006a4a97cff51ed4d9786032b5e58903c72IAB/1sDwWxyWZ43e31YKB+w0k/vynxjDNKLNxMtnNwKFvU26FwAAAAAAEAC0V+LrCq4PYAEAAQAKrg9g',
       channelName: 'UGGLAN',
       joinSucceed: false,
       peerIds: [],
@@ -129,6 +129,8 @@ class App extends Component {
     await this._engine?.leaveChannel();
     this.setState({peerIds: [], joinSucceed: false});
     console.log('When click On end Call', this.state);
+    this.props.navigation.navigate('call')
+
   };
 
   render() {

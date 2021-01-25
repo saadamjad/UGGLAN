@@ -6,13 +6,14 @@ import {
   ImageBackground,
   SafeAreaView,
   TextInput,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Fontisto from 'react-native-vector-icons/Fontisto';
 import {Icon} from 'native-base';
 
 import styles from './styles';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const App = (props) => {
 
@@ -37,6 +38,7 @@ const App = (props) => {
       source={require('../../assets/images/bg_image.png')}
       style={styles.ImageBackground}>
       <SafeAreaView style={styles.SafeAreaView}>
+        <ScrollView>
         {/* ========Title======== */}
         <View style={styles.titleView}>
           <Text style={styles.titleText}>Create New Password</Text>
@@ -103,6 +105,7 @@ const App = (props) => {
             />
           </LinearGradient>
         </View>
+        </ScrollView>
       </SafeAreaView>
     </ImageBackground>
   );

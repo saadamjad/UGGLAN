@@ -17,7 +17,8 @@ const App = (props) => {
   };
 
   const function3 = () => {
-    props.navigation.navigate('HomeStacks');
+    // props.navigation.navigate('HomeStacks');
+    
   };
   useEffect(() => {
     // props.loginAction();

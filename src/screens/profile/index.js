@@ -127,7 +127,7 @@ const App = (props) => {
             placeholder="Phone"
             value={state?.userData?.phone}
             placeholderTextColor="#696969"
-            keyboardType="email-address"
+            keyboardType="numeric"
             editable={state.editable}
             style={styles.TextInputPhoneRow}
             onChangeText={(text) =>

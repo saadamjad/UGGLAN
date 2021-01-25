@@ -11,36 +11,21 @@ import {
 } from 'react-native';
 import MapView, {PROVIDER_GOOGLE, Marker} from 'react-native-maps';
 import GlobalHeader from '../../components/header';
+import styles from './styles';
 import RightDrawer from '../../components/rightSideDrawer';
 
 const Tab = (name, iconObj, size) => {
   return (
-    <View
-      style={{
-        backgroundColor: 'black',
-        height: 80,
-        width: '93%',
-        alignSelf: 'flex-end',
-        flexDirection: 'row',
-        alignItems: 'center',
-      }}>
-      <View
-        style={{
-          borderWidth: 2,
-          height: 40,
-          width: 40,
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderRadius: 100,
-          borderColor: 'white',
-        }}>
+    <View style={styles.liveLocationMainView}>
+      <View style={styles.IconView}>
         <Icon
           style={{color: 'white', fontSize: size ? size : 35}}
+          // style={styles.IconsStyle}
           name={iconObj.name}
           type={iconObj.type}
         />
       </View>
-      <Text style={{color: 'white', fontSize: 18, marginLeft: 10}}>{name}</Text>
+      <Text style={styles.TextName}>{name}</Text>
     </View>
   );
 };
@@ -76,7 +61,7 @@ export default (props) => {
     // console.log('LOCATION HERE', location);
   };
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={styles.SafeAreaViewMainView}>
       <GlobalHeader
         isBack={true}
         bg={true}
@@ -85,7 +70,7 @@ export default (props) => {
       />
       <MapView
         provider={PROVIDER_GOOGLE}
-        style={{flex: 1}}
+        style={styles.MapviewStyle}
         showsUserLocation={true}
         // initialRegion={
         //   Object.keys(state.position).length > 0
@@ -114,18 +99,11 @@ export default (props) => {
         )}
         {/* ))} */}
       </MapView>
-      <View
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          backgroundColor: 'black',
-          width: '100%',
-          height: '50%',
-        }}>
+      <View style={styles.MainContentView}>
         {Tab('Share live location', {name: 'location', type: 'EvilIcons'})}
-        <View style={{backgroundColor: '#242424', paddingVertical: 5}}>
-          <View style={{width: '80%', alignSelf: 'flex-end'}}>
-            <Text style={{color: 'white', fontSize: 16}}>Current Location</Text>
+        <View style={styles.backgroundColorView}>
+          <View style={styles.ContentView}>
+            <Text style={styles.CurrentLocationText}>Current Location</Text>
           </View>
         </View>
         {Tab(

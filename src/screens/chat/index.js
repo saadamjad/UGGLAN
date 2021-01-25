@@ -4,6 +4,7 @@ import {GiftedChat, Bubble, Send} from 'react-native-gifted-chat';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Icon} from 'native-base';
 import LinearGradient from 'react-native-linear-gradient';
+import styles from './styles';
 import {connect} from 'react-redux';
 import {HireSomeOneAction, UserMessageAction} from '../../store/actions';
 import io from 'socket.io-client';
@@ -26,7 +27,7 @@ function Chat(props) {
     // const socket=io('http://192.168.18.96:4500')
 
     socket.on('chat', function (messageFromBackEnd) {
-     props.SetUserMessage(messageFromBackEnd);
+      props.SetUserMessage(messageFromBackEnd);
       // console.log('Message from Socket',messageFromBackEnd)
     });
 
@@ -94,37 +95,16 @@ function Chat(props) {
     setState({...state, [name]: value});
   };
   const ChatHeader = () => (
-    <View
-      style={{
-        height: 80,
-        width: '100%',
-        backgroundColor: '#1C1C1C',
-        borderBottomLeftRadius: 30,
-        borderBottomRightRadius: 30,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        paddingHorizontal: 10,
-      }}>
+    <View style={styles.ChatHeaderMainView}>
       <TouchableOpacity onPress={() => props.navigation.goBack()}>
-        <Icon
-          style={{color: 'white', fontSize: 20}}
-          name="left"
-          type="AntDesign"
-        />
+        <Icon style={styles.arrowLeftIcon} name="left" type="AntDesign" />
       </TouchableOpacity>
-      <View style={{justifyContent: 'center', alignItems: 'center'}}>
-        <Text style={{color: 'white', fontSize: 18}}>
-          {state?.hirePersonelData?.name}
-        </Text>
-        <Text style={{color: '#41AF26', fontSize: 10}}>Online now</Text>
+      <View style={styles.nameView}>
+        <Text style={styles.nameText}>{state?.hirePersonelData?.name}</Text>
+        <Text style={styles.OnlineNowText}>Online now</Text>
       </View>
       <TouchableOpacity onPress={() => props.navigation.navigate('calling')}>
-        <Icon
-          style={{color: 'white', fontSize: 26, marginLeft: 10}}
-          name="phone"
-          type="FontAwesome"
-        />
+        <Icon style={styles.phoneIcon} name="phone" type="FontAwesome" />
       </TouchableOpacity>
     </View>
   );
@@ -162,18 +142,12 @@ function Chat(props) {
         //   backgroundColor: 'white',
         // }}
         {...props}>
-        <View
-          style={{
-            height: '100%',
-            alignItems: 'center',
-            justifyContent: 'center',
-            width: 60,
-          }}>
+        <View style={styles.sendIconView}>
           <LinearGradient
-            style={{borderRadius: 20, padding: 10}}
+            style={styles.LinearGradientSendIcon}
             colors={['#F6931B', '#DE2516']}>
             <Image
-              style={{width: 20, height: 20}}
+              style={styles.sendImage}
               source={require('../../assets/icons/send.png')}
             />
           </LinearGradient>
@@ -183,7 +157,7 @@ function Chat(props) {
   };
 
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: 'black'}}>
+    <SafeAreaView style={styles.SafeAreaViewGiftedChat}>
       {ChatHeader()}
       <GiftedChat
         messages={messages.messages}
@@ -191,7 +165,7 @@ function Chat(props) {
         onSend={() => onSend()}
         renderBubble={renderBubble}
         user={{
-          _id: state?.userData?._id
+          _id: state?.userData?._id,
         }}
         // onInputTextChanged={text =>setCustomText(text,'userMessage')}
         onInputTextChanged={(text) => setCustomText(text, 'userMessage')}

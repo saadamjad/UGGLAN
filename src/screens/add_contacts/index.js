@@ -7,6 +7,7 @@ import {
   ImageBackground,
   TextInput,
   Platform,
+  ScrollView,
 } from 'react-native';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Fontisto from 'react-native-vector-icons/Fontisto';
@@ -31,31 +32,27 @@ const App = (props) => {
 
   const addContacts = () => {
     if (state.name == '' || state.phone == '') {
-        setVisible(!visible);
-        state.popupText = 'Kindly fill fields';
+      setVisible(!visible);
+      state.popupText = 'Kindly fill fields';
     } else {
       _addContacts();
     }
   };
   const _addContacts = () => {
     // alert('done');
-    let token =props.userData.token
-    let data ={
-        name:state.name,
-        phone:state.phone
-    }
-    console.log('Data',data)
-    props.AddFriendContacts(data,token,props.navigation)
-
+    let token = props.userData.token;
+    let data = {
+      name: state.name,
+      phone: state.phone,
+    };
+    console.log('Data', data);
+    props.AddFriendContacts(data, token, props.navigation);
   };
 
   return (
     <ImageBackground
       source={require('../../assets/images/bg_image.png')}
-      style={{
-        height: '100%',
-        width: '100%',
-      }}>
+      style={styles.ImageBackgroundAddContacts}>
       <SafeAreaView>
         <GlobalHeader
           isBack={true}
@@ -63,108 +60,79 @@ const App = (props) => {
           navigation={props.navigation}
         />
       </SafeAreaView>
-      <SafeAreaView
-        style={{flex: 1, marginTop: 20, width: '90%', alignSelf: 'center'}}>
-          <ScrollView>
-        {/* ==========Form Start========== */}
+      <SafeAreaView style={styles.SafeAreaViewForm}>
+        <ScrollView>
+          {/* ==========Form Start========== */}
 
-        {/* ==========Full Name Row========== */}
+          {/* ==========Full Name Row========== */}
 
-        <View
-          style={{
-            flexDirection: 'row',
-            borderBottomWidth: 1,
-            borderColor: '#C0C0C0',
-            alignItems: 'center',
-            width: '100%',
-          }}>
-          <TextInput
-            placeholder="Full Name"
-            // value={state?.userData?.userName}
-            placeholderTextColor="#696969"
-            // editable={state.editable}
-            style={{
-              color: 'white',
-              width: '90%',
-              height: 40,
-            }}
-            // onChangeText={(text) =>
-            //   setState({
-            //     ...state,
-            //     userData: {...state.userData, userName: text},
-            //   })
-            // }
+          <View style={styles.formViewName}>
+            <TextInput
+              placeholder="Full Name"
+              // value={state?.userData?.userName}
+              placeholderTextColor="#696969"
+              // editable={state.editable}
 
-            onChangeText={(text) =>
-              setState({
-                ...state,
-                name: text,
-              })
-            }
-          />
-          <AntDesign
-            name="user"
-            size={14}
-            color="#C0C0C0"
-            style={{
-              alignItems: 'flex-end',
-              height: 15.87,
-              // width: 13.34,
-            }}
-          />
-        </View>
-        {/* {console.log('userdata in profile console', props.userData)} */}
-        {/* ====== Phone Row====== */}
+              style={styles.TextInputFullNameRow}
+              // onChangeText={(text) =>
+              //   setState({
+              //     ...state,
+              //     userData: {...state.userData, userName: text},
+              //   })
+              // }
 
-        <View
-          style={{
-            flexDirection: 'row',
-            borderBottomWidth: 1,
-            borderColor: '#C0C0C0',
-            alignItems: 'center',
-            width: '100%',
-          }}>
-          <TextInput
-            placeholder="Phone"
-            // value={state?.userData?.phone}
-            placeholderTextColor="#696969"
-            keyboardType="numeric"
-            // editable={state.editable}
-            style={{
-              color: 'white',
-              width: '90%',
-              height: 40,
-            }}
-            // onChangeText={(text) =>
-            //   setState({
-            //     ...state,
-            //     userData: {...state.userData, phone: text},
-            //   })
-            // }
-            onChangeText={(text) =>
-              setState({
-                ...state,
-                phone: text,
-              })
-            }
-          />
-          <View style={{width: '15%'}}>
-            <Fontisto
-              name="phone"
-              // size={14}
+              onChangeText={(text) =>
+                setState({
+                  ...state,
+                  name: text,
+                })
+              }
+            />
+            <AntDesign
+              name="user"
+              size={14}
               color="#C0C0C0"
-              style={{
-                alignItems: 'flex-end',
-                height: 13.31,
-                width: 20.07,
-              }}
+              style={styles.TextInputFullNameIcon}
             />
           </View>
-        </View>
+          {/* {console.log('userdata in profile console', props.userData)} */}
+          {/* ====== Phone Row====== */}
 
-        {/* ==========Email Row==========   */}
+          <View style={styles.formViewPhone}>
+            <TextInput
+              placeholder="Phone"
+              // value={state?.userData?.phone}
+              placeholderTextColor="#696969"
+              keyboardType="numeric"
+              // editable={state.editable}
 
-        {/* <View
+              style={styles.TextInputPhoneRow}
+              // onChangeText={(text) =>
+              //   setState({
+              //     ...state,
+              //     userData: {...state.userData, phone: text},
+              //   })
+              // }
+              onChangeText={(text) =>
+                setState({
+                  ...state,
+                  phone: text,
+                })
+              }
+            />
+            <View style={{width: '15%'}}>
+              <Fontisto
+                name="phone"
+                // size={14}
+                color="#C0C0C0"
+                style={styles.TextInputPhoneIcon}
+              />
+            </View>
+          </View>
+
+          {/* ==========Email Row==========   */}
+
+          {/* <View
           style={{
             flexDirection: 'row',
             borderBottomWidth: 1,
@@ -204,43 +172,42 @@ const App = (props) => {
           </View>
         </View> */}
 
-        {/* </View> */}
+          {/* </View> */}
 
-        {/* ========Sign Up Button======== */}
+          {/* ========Sign Up Button======== */}
 
-        <LinearGradient
-          colors={['#F6931B', '#DE2516']}
-          style={{
-            width: 301,
-            marginTop: 40,
-            height: 42,
-            alignSelf: 'center',
-            marginVertical: 10,
-            borderRadius: 3,
-          }}>
-          <Button
-            loading={props.isLoading}
-            // title={state.editable ? 'Save' : 'Edit'}
-            // onPress={() => {
-            //   state.editable ? saveChanges() : editableText();
-            // }}
-            title={'Add'}
-            onPress={() => {
-              addContacts();
-            }}
-            buttonStyle={{backgroundColor: 'transparent'}}
-          />
-        </LinearGradient>
-        <AlertPopup
+          <LinearGradient
+            colors={['#F6931B', '#DE2516']}
+            style={{
+              width: 301,
+              marginTop: 40,
+              height: 42,
+              alignSelf: 'center',
+              marginVertical: 10,
+              borderRadius: 3,
+            }}>
+            <Button
+              loading={props.isLoading}
+              // title={state.editable ? 'Save' : 'Edit'}
+              // onPress={() => {
+              //   state.editable ? saveChanges() : editableText();
+              // }}
+              title={'Add'}
+              onPress={() => {
+                addContacts();
+              }}
+              buttonStyle={{backgroundColor: 'transparent'}}
+            />
+          </LinearGradient>
+          <AlertPopup
             visible={visible}
             toggleVisible={() => setVisible(!visible)}
             popupText={state.popupText}
             onConfirm={() => {
               setVisible(false);
-            
             }}
           />
-          </ScrollView>
+        </ScrollView>
       </SafeAreaView>
     </ImageBackground>
   );
@@ -250,8 +217,7 @@ mapStateToProps = (state) => ({
   userData: state.AuthReducer.userData,
 });
 mapDispatchToProps = {
-    AddFriendContacts:AddFriendContactsAction.AddFriendContacts
+  AddFriendContacts: AddFriendContactsAction.AddFriendContacts,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
-

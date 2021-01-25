@@ -1,5 +1,7 @@
 import {StyleSheet} from 'react-native';
 const styles = StyleSheet.create({
+
+  // ========ImageBackgroundHireSomeMain======
   ImageBackgroundHireSomeMain: {
     height: '100%',
     width: '100%',
@@ -10,11 +12,17 @@ const styles = StyleSheet.create({
     width: '90%',
     alignSelf: 'center',
   },
+
+
+  // =========ParrentBoxView======
   ParrentBoxView: {
     justifyContent: 'center',
     flex: 1,
     alignItems: 'center',
   },
+
+
+  // ========vCardsView======
   CardsView: {
     flexDirection: 'row',
     width: '100%',
@@ -28,6 +36,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 20,
   },
+
+// =========ProfileImageView======
+
   ProfileImageView: {
     borderWidth: 0.5,
     borderColor: '#F6931B',
@@ -39,6 +50,10 @@ const styles = StyleSheet.create({
     width: 60,
     borderRadius: 100,
   },
+
+  // =======CardNameAddressStarsView======
+
+
   CardNameAddressStarsView: {
     flex: 1,
     marginLeft: 0,
@@ -65,6 +80,10 @@ const styles = StyleSheet.create({
   CardStarsView: {
     marginVertical: 5,
   },
+
+  // =======HireNowButtonView=======
+
+  
   HireNowButtonView: {
     width: '25%',
     alignItems: 'center',

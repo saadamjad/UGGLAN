@@ -2,6 +2,9 @@ import {Platform, StyleSheet} from 'react-native';
 
 
 const styles=StyleSheet.create({
+
+    // ======ImageBackgroundProfileMain=====
+
     ImageBackgroundProfileMain:{
         height: '100%',
         width: '100%',
@@ -9,6 +12,10 @@ const styles=StyleSheet.create({
     SafeAreaViewProfile:{
         flex: 1, marginTop: 20, width: '90%', alignSelf: 'center'
     },
+
+
+    // ======ProfileImageMain=====
+
     ProfileImageMain:{
         alignItems: 'center'
     },
@@ -30,6 +37,10 @@ const styles=StyleSheet.create({
         borderRadius: 20,
         overflow: 'hidden',
     },
+
+
+    // =======FullNameView======
+
     FullNameView:{
         flexDirection: 'row',
         borderBottomWidth: 1,
@@ -47,6 +58,11 @@ const styles=StyleSheet.create({
         height: 15.87,
         // width: 13.34,
     },
+
+
+
+    // =====PhoneRowView====
+
     PhoneRowView:{
         flexDirection: 'row',
         borderBottomWidth: 1,
@@ -67,6 +83,9 @@ const styles=StyleSheet.create({
         height: 13.31,
         width: 20.07,
     },
+
+    // =====EmailRowView=====
+
     EmailRowView:{
         flexDirection: 'row',
         borderBottomWidth: 1,
@@ -87,6 +106,10 @@ const styles=StyleSheet.create({
         height: 13.31,
         width: 20.07,
     },
+
+
+    // =====LinearGradientButton====
+    
     LinearGradientButton:{
         width: 301,
         marginTop: 40,

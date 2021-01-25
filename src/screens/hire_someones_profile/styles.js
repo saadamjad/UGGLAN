@@ -1,6 +1,11 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
+
+  // =======ImageBackgroundProfileMain======
+
+
+
   ImageBackgroundProfileMain: {
     height: '100%',
     width: '100%',
@@ -8,6 +13,10 @@ const styles = StyleSheet.create({
   SafeAreaViewProfile: {
     flex: 1,
   },
+
+
+  // =======CardMainView======
+
   CardMainView: {
     // flex: 1,
     height: '80%',
@@ -33,6 +42,11 @@ const styles = StyleSheet.create({
     width: 100,
     borderRadius: 100,
   },
+
+
+  // ========ProfileImage======
+
+
   ProfileImage: {
     height: '100%',
     width: '100%',
@@ -83,6 +97,11 @@ const styles = StyleSheet.create({
     fontSize: 13,
     textAlign: 'center',
   },
+
+
+
+  // =======ButtonsView======
+  
   ButtonsView: {
     flexDirection: 'row',
     marginVertical: 30,

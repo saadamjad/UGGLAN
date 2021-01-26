@@ -23,7 +23,7 @@ class App extends Component {
     this.state = {
       appId: 'a4a97cff51ed4d9786032b5e58903c72',
       token:
-        '006a4a97cff51ed4d9786032b5e58903c72IAB/1sDwWxyWZ43e31YKB+w0k/vynxjDNKLNxMtnNwKFvU26FwAAAAAAEAC0V+LrCq4PYAEAAQAKrg9g',
+        '006a4a97cff51ed4d9786032b5e58903c72IADBRjLkPAICV8MAdsHd1UrbrUMHbQfSzyBRJbA2AWt8S026FwAAAAAAEAC0V+Lr/k0RYAEAAQD9TRFg',
       channelName: 'UGGLAN',
       joinSucceed: false,
       peerIds: [],

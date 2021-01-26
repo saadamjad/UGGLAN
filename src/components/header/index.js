@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {TouchableOpacity, Text, Image, View} from 'react-native';
 import {Icon} from 'native-base';
+import styles from './styles'
 import LinearGradient from 'react-native-linear-gradient';
 import RightDrawer from '../rightSideDrawer';
 const GlobalHeader = (props) => {
@@ -13,17 +14,10 @@ const GlobalHeader = (props) => {
             : ['transparent', 'transparent']
           : ['#F6931B', '#DE2516']
       }
-      style={{
-        elevation: 0,
-        borderBottomWidth: 0,
-        flexDirection: 'row',
-        // borderWidth: 1,
-        backgroundColor: '',
-        borderColor: 'red',
-        height: 50,
-        alignItems: 'center',
-        justifyContent: 'space-around',
-      }}>
+    
+      
+    style={styles.LinearGradientGlobalMain}
+      >
       {props.isBack ? (
         <>
           <TouchableOpacity
@@ -32,33 +26,30 @@ const GlobalHeader = (props) => {
               width: props.isMonthPicker ? '60%' : '90%',
               flexDirection: 'row',
               alignItems: 'center',
-            }}>
+            }} 
+            
+            // style={styles.TouchableOpacityOfBack}
+            >
             <Icon
-              style={{color: 'white', fontSize: 21}}
+          
+              style={styles.BackIcon}
               name="left"
               type="AntDesign"
             />
-            <Text style={{color: 'white', marginLeft: 5, fontSize: 17}}>
+            <Text  style={styles.ScreenText}>
               {props.screenText}
             </Text>
           </TouchableOpacity>
           {props.isMonthPicker && (
             <TouchableOpacity
               // onPress={() => co}
-              style={{
-                borderWidth: 1,
-                borderColor: 'orange',
-                width: 80,
-                alignItems: 'center',
-                justifyContent: 'space-around',
-                height: 28,
-                paddingHorizontal: 5,
-                borderRadius: 5,
-                flexDirection: 'row',
-              }}>
-              <Text style={{color: 'white'}}>Month</Text>
+            
+              style={styles.TouchableOpacityOfMonth}
+              >
+              <Text  style={styles.MonthText}>Month</Text>
               <Icon
-                style={{color: 'white', fontSize: 12}}
+                
+                style={styles.IconDown}
                 name="down"
                 type="AntDesign"
               />
@@ -67,49 +58,37 @@ const GlobalHeader = (props) => {
         </>
       ) : (
         <View
-          style={{
-            elevation: 0,
-            borderBottomWidth: 0,
-            flexDirection: 'row',
-            // borderWidth: 1,
-            backgroundColor: '',
-            borderColor: 'red',
-            height: 50,
-            alignItems: 'center',
-            alignSelf: 'center',
-            width: '90%',
-            justifyContent: 'space-between',
-          }}>
+        
+          style={styles.toggleDrawerMenuView}
+          >
           <TouchableOpacity
             onPress={() => props.navigation.toggleDrawer()}
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginLeft: -15,
-              // alignItems: 'center',
-            }}>
+         
+            
+            style={styles.TouchableOpacityOfMenu}
+            >
             <Icon
-              style={{color: 'white', fontSize: 32}}
+          
+              style={styles.toggleDrawerMenuIcon}
               name="menu"
               type="MaterialIcons"
             />
           </TouchableOpacity>
           <View
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <Text style={{color: 'white', fontSize: 18, fontWeight: 'bold'}}>
+           
+            
+            style={styles.toggleDrawerUsersView}
+            >
+            <Text  style={styles.UgglanTextMainScreen}>
               UGGLAN
             </Text>
           </View>
           <TouchableOpacity
             onPress={() => props.toggleDrawer()}
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <Icon style={{color: 'white'}} name="users" type="FontAwesome5" />
+           
+            style={styles.TouchableOpacityOfUsers}
+            >
+            <Icon style={styles.toggleDrawerUsersIcon} name="users" type="FontAwesome5" />
           </TouchableOpacity>
         </View>
       )}

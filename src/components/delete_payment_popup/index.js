@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button} from 'react-native-elements';
 import {View, Text, Image, SafeAreaView, Modal} from 'react-native';
+import styles from './styles'
 import LinearGradient from 'react-native-linear-gradient';
 
 const App = ({toggleVisible, visible, onConfirm}) => {
@@ -10,29 +11,27 @@ const App = ({toggleVisible, visible, onConfirm}) => {
   ];
   return (
     <Modal transparent={true} animationType={'slide'} visible={visible}>
-      <View style={{width: '90%', alignSelf: 'center', marginVertical: 100}}>
+      <View  style={styles.DeletePaymentModelMainView}>
         <View
-          style={{
-            backgroundColor: '#3E3E3E',
-            paddingVertical: 10,
-            borderRadius: 3,
-          }}>
-          <View style={{width: '90%', alignSelf: 'center'}}>
-            <View style={{alignItems: 'center', marginTop: 20}}>
+         
+          style={styles.DeletePaymentModelMainView2}
+          
+          >
+          <View 
+            style={styles.DeletePaymentModelMainView3}
+          
+          >
+            <View  style={styles.NotifyTextView}>
               <Text
-                style={{color: '#FFFFFF', fontSize: 16, fontWeight: 'bold'}}>
+              style={styles.NotifyText}>
                 Notify
               </Text>
             </View>
-            <View style={{alignItems: 'center', marginVertical: 15}}>
+            <View style={styles.ConfirmTextView}>
               <Text
-                style={{
-                  color: '#D4D4D4',
-                  fontSize: 12,
-                  textAlign: 'center',
-                  lineHeight: 20,
-                  letterSpacing: 1,
-                }}>
+            
+                style={styles.ConfirmText}
+                >
                 Confirm this deletion.?
 
               </Text>
@@ -40,11 +39,10 @@ const App = ({toggleVisible, visible, onConfirm}) => {
             {buttonArrays.map((val) => (
               <LinearGradient
                 colors={val.color ? ['#fff', '#fff'] : ['#F6931B', '#DE2516']}
-                style={{
-                  alignSelf: 'center',
-                  borderRadius: 3,
-                  marginBottom: 10,
-                }}>
+             
+                
+                style={styles.LinearGradientOfButton}
+                >
                 <Button
                   title={val.name}
                   onPress={val.func}

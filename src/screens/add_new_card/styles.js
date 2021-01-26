@@ -82,6 +82,11 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 15,
   },
+  SelectDateText: {
+    color: '#696969',
+    fontSize: 13,
+    paddingTop:15
+  },
 
   DateTextInput: {
     color: 'white',

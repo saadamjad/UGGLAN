@@ -9,12 +9,12 @@ import {
   TextInput,
   Image,
   processColor,
-  ScrollView
+  ScrollView,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AlertPopup from '../../components/popup_for_alerts';
-
+import styles from './styles';
 
 import {connect} from 'react-redux';
 import {AuthAction} from '../../store/actions';
@@ -23,9 +23,9 @@ const App = (props) => {
   const [newText, setNewText] = useState('');
   const [resendOtp, setresendOtp] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [text,setText]= useState({
-    popupText:''
-  })
+  const [text, setText] = useState({
+    popupText: '',
+  });
 
   const [state, setState] = useState({
     otpInputs: [
@@ -36,7 +36,6 @@ const App = (props) => {
       {placeholder: '0', value: '', ref: ''},
       {placeholder: '3', value: '', ref: ''},
     ],
-  
   });
   const otpfunction = () => {
     // props.navigation.navigate('newpassword');
@@ -52,7 +51,6 @@ const App = (props) => {
       text.popupText = 'Email is Verfied';
       setVisible(!visible);
 
-  
       props.updateUser(
         {emailVerified: true},
         props.navigation,
@@ -61,10 +59,8 @@ const App = (props) => {
       // props.navigation.navigate('login');
     } else {
       // alert('Otp does not match');
-       text.popupText = 'Otp does not match ,enter valid otp';
+      text.popupText = 'Otp does not match ,enter valid otp';
       setVisible(!visible);
-
-     
     }
   };
   useEffect(() => {
@@ -112,42 +108,42 @@ const App = (props) => {
       }
     }
   };
-  const _TextBox = () => {
-    return (
-      <View>
-        <View
-          style={{
-            flexDirection: 'row',
-            borderBottomWidth: 1,
-            borderColor: '#C0C0C0',
-            alignItems: 'center',
-            width: '100%',
-          }}>
-          <TextInput
-            keyboardType="email-address"
-            placeholder="Full Name"
-            placeholderTextColor="#696969"
-            style={{
-              color: 'white',
-              width: '90%',
-              height: 40,
-            }}
-            onChangeText={(text) => setNewText(text)}
-          />
-          <Ionicons
-            name="person"
-            // size={14}
-            color="#C0C0C0"
-            style={{
-              alignItems: 'flex-end',
-              height: 15.87,
-              width: 13.34,
-            }}
-          />
-        </View>
-      </View>
-    );
-  };
+  // const _TextBox = () => {
+  //   return (
+  //     <View>
+  //       <View
+  //         style={{
+  //           flexDirection: 'row',
+  //           borderBottomWidth: 1,
+  //           borderColor: '#C0C0C0',
+  //           alignItems: 'center',
+  //           width: '100%',
+  //         }}>
+  //         <TextInput
+  //           keyboardType="email-address"
+  //           placeholder="Full Name"
+  //           placeholderTextColor="#696969"
+  //           style={{
+  //             color: 'white',
+  //             width: '90%',
+  //             height: 40,
+  //           }}
+  //           onChangeText={(text) => setNewText(text)}
+  //         />
+  //         <Ionicons
+  //           name="person"
+  //           // size={14}
+  //           color="#C0C0C0"
+  //           style={{
+  //             alignItems: 'flex-end',
+  //             height: 15.87,
+  //             width: 13.34,
+  //           }}
+  //         />
+  //       </View>
+  //     </View>
+  //   );
+  // };
 
   const _resendOtp = () => {
     console.log('sssss');
@@ -161,18 +157,7 @@ const App = (props) => {
   };
   const _RenderOtp = () => {
     return state.otpInputs.map((val, i) => (
-      <View
-        style={{
-          width: '15%',
-          justifyContent: 'center',
-          alignItems: 'center',
-          color: 'black',
-          height: 70,
-          fontSize: 26,
-          backgroundColor: 'white',
-          marginRight: 7,
-          borderWidth: 1,
-        }}>
+      <View style={styles.RenderOtpMapView}>
         <TextInput
           onKeyPress={({nativeEvent}) => {
             if (nativeEvent.key === 'Backspace') {
@@ -209,9 +194,7 @@ const App = (props) => {
               state.otpInputs[i == 0 ? state.otpInputs.length - 1 : 0].ref,
             );
           }}
-          style={{
-            fontSize: 18,
-          }}
+          style={styles.TextInputOtp}
         />
       </View>
     ));
@@ -219,77 +202,52 @@ const App = (props) => {
   return (
     <ImageBackground
       source={require('../../assets/images/bg_image.png')}
-      style={{
-        height: '100%',
-        width: '100%',
-      }}>
-      <SafeAreaView style={{flex: 1, marginTop: 20}}>
+      style={styles.ImageBackgroundOtpMain}>
+      <SafeAreaView style={styles.SafeAreaViewOtpMain}>
         <ScrollView>
-        <View style={{alignItems: 'center', marginVertical: 40}}>
-          <Image
-            source={require('../../assets/images/otp.png')}
-            style={{height: 107.74, width: 173}}
-          />
-        </View>
-
-        <View style={{width: '100%', alignItems: 'center'}}>
-          {/* ==========OTP Start========== */}
-          <View
-            style={{
-              alignItems: 'center',
-              borderWidth: 1,
-              width: '100%',
-            }}>
-            <Text style={{color: '#FFFFFF', fontSize: 14, textAlign: 'center'}}>
-              {console.log(
-                'props.userData?.user?.phone',
-                userData?.user?.phone,
-              )}
-              We have sent OTP to {'\n'}
-              {userData?.user?.phone
-                ? userData.user.phone
-                : userData?.user?.email}
-            </Text>
-            <Text
-              style={{color: '#FFFFFF', fontSize: 14, marginVertical: 10}}
-              onPress={() => props.navigation.goBack()}>
-              wrong number ? Click here to update
-            </Text>
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              paddingHorizontal: 15,
-              marginVertical: 10,
-              // borderWidth: 1,
-            }}>
-            {_RenderOtp()}
-          </View>
-
-          <LinearGradient
-            colors={['#F6931B', '#DE2516']}
-            style={{
-              width: 301,
-              height: 42,
-              alignSelf: 'center',
-              marginVertical: 10,
-              borderRadius: 3,
-            }}>
-            <Button
-              loading={props.isLoading}
-              title={' Resend Otp'}
-              onPress={() => _resendOtp()}
-              buttonStyle={{
-                backgroundColor: 'transparent',
-              }}
+          <View style={styles.OtpImageView}>
+            <Image
+              source={require('../../assets/images/otp.png')}
+              style={styles.OtpImage}
             />
-          </LinearGradient>
-       
-        </View>
-      
-        <AlertPopup
+          </View>
+
+          <View style={styles.OtpStartView}>
+            {/* ==========OTP Start========== */}
+            <View style={styles.AllTextView}>
+              <Text style={styles.SentText}>
+                {console.log(
+                  'props.userData?.user?.phone',
+                  userData?.user?.phone,
+                )}
+                We have sent OTP to {'\n'}
+                {userData?.user?.phone
+                  ? userData.user.phone
+                  : userData?.user?.email}
+              </Text>
+              <Text
+                style={styles.WrongNumberText}
+                onPress={() => props.navigation.goBack()}>
+                wrong number ? Click here to update
+              </Text>
+            </View>
+            <View style={styles.RenderOtpView}>{_RenderOtp()}</View>
+
+            <LinearGradient
+              colors={['#F6931B', '#DE2516']}
+              style={styles.LinearGradientOtp}>
+              <Button
+                loading={props.isLoading}
+                title={' Resend Otp'}
+                onPress={() => _resendOtp()}
+                buttonStyle={{
+                  backgroundColor: 'transparent',
+                }}
+              />
+            </LinearGradient>
+          </View>
+
+          <AlertPopup
             visible={visible}
             toggleVisible={() => setVisible(!visible)}
             popupText={text.popupText}
@@ -300,7 +258,7 @@ const App = (props) => {
               // alert('Deleted')
             }}
           />
-          </ScrollView>
+        </ScrollView>
       </SafeAreaView>
     </ImageBackground>
   );

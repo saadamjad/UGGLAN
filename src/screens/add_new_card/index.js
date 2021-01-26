@@ -7,7 +7,7 @@ import {
   ImageBackground,
   TextInput,
   Image,
-  ScrollView
+  ScrollView,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import styles from './styles';
@@ -44,12 +44,12 @@ const App = (props) => {
 
   const handleConfirm = (date) => {
     // console.log('A date has been picked: ', date);
-    let month=moment(date).format('L').substring(0,2)
+    let month = moment(date).format('L').substring(0, 2);
     // console.log('month',month)
-    let year=moment(date).format('L').substring(5,10)
+    let year = moment(date).format('L').substring(5, 10);
     // console.log('year',year)
-    let finalDate=month.concat("",year)
-    console.log('finalDate',finalDate)
+    let finalDate = month.concat('', year);
+    console.log('finalDate', finalDate);
 
     setState({...state, expiry: finalDate});
     // console.log('From state',state.expiry)
@@ -186,169 +186,168 @@ const App = (props) => {
         />
         <SafeAreaView style={styles.mainView}>
           <ScrollView>
-          {/* ========Card no:========== */}
+            {/* ========Card no:========== */}
 
-          <View
-            style={[
-              styles.rowView,
-              {
-                // {====Change Border Color If cardNumber Is rong =====}
-                borderColor:
-                  // state.cardNumber.length > 15
-                  showMessage
-                    ? state.rongCardNumber == true
-                      ? 'red'
-                      : 'white'
-                    : 'white',
-              },
-            ]}>
             <View
-              style={{
-                flex: 1,
-              }}>
-              <View style={styles.CardView}>
-                <Text style={styles.NameText}>Card Number</Text>
-                <TextInput
-                  maxLength={
-                    state.cardType === 'Master Card'
-                      ? 16
-                      : state.cardType === 'Visa Card'
-                      ? 16
-                      : state.cardType === 'American Express'
-                      ? 15
-                      : 16
-                  }
-                  placeholder="4025 8303 4000 2867"
-                  placeholderTextColor="#696969"
-                  keyboardType="numeric"
-                  style={[styles.CardTextInput]}
-                  onChangeText={(text) =>
-                    _OnChangeTextCardNumber(text, 'cardNumber')
-                  }
-                />
+              style={[
+                styles.rowView,
+                {
+                  // {====Change Border Color If cardNumber Is rong =====}
+                  borderColor:
+                    // state.cardNumber.length > 15
+                    showMessage
+                      ? state.rongCardNumber == true
+                        ? 'red'
+                        : 'white'
+                      : 'white',
+                },
+              ]}>
+              <View
+                style={{
+                  flex: 1,
+                }}>
+                <View style={styles.CardView}>
+                  <Text style={styles.NameText}>Card Number</Text>
+                  <TextInput
+                    maxLength={
+                      state.cardType === 'Master Card'
+                        ? 16
+                        : state.cardType === 'Visa Card'
+                        ? 16
+                        : state.cardType === 'American Express'
+                        ? 15
+                        : 16
+                    }
+                    placeholder="4025 8303 4000 2867"
+                    placeholderTextColor="#696969"
+                    keyboardType="numeric"
+                    style={[styles.CardTextInput]}
+                    onChangeText={(text) =>
+                      _OnChangeTextCardNumber(text, 'cardNumber')
+                    }
+                  />
+                </View>
+              </View>
+
+              {/* ==========Card Type Images========== */}
+
+              <View style={styles.cardTypeImageView}>
+                {state.cardType === 'Master Card' ? (
+                  <Image
+                    source={require('../../assets/images/mastercard.png')}
+                    style={styles.cardTypeImageStyle}
+                  />
+                ) : null}
+                {state.cardType === 'Visa Card' ? (
+                  <Image
+                    source={require('../../assets/images/visa.png')}
+                    style={styles.cardTypeImageStyle}
+                  />
+                ) : null}
+                {state.cardType === 'American Express' ? (
+                  <Image
+                    source={require('../../assets/images/americanexp.png')}
+                    style={styles.cardTypeImageStyle}
+                  />
+                ) : null}
               </View>
             </View>
 
-            {/* ==========Card Type Images========== */}
-
-            <View style={styles.cardTypeImageView}>
-              {state.cardType === 'Master Card' ? (
-                <Image
-                  source={require('../../assets/images/mastercard.png')}
-                  style={styles.cardTypeImageStyle}
-                />
-              ) : null}
-              {state.cardType === 'Visa Card' ? (
-                <Image
-                  source={require('../../assets/images/visa.png')}
-                  style={styles.cardTypeImageStyle}
-                />
-              ) : null}
-              {state.cardType === 'American Express' ? (
-                <Image
-                  source={require('../../assets/images/americanexp.png')}
-                  style={styles.cardTypeImageStyle}
-                />
-              ) : null}
-            </View>
-          </View>
-
-          {/* 
+            {/* 
            {====Alert Text When Enter Rong Card Number =====} */}
 
-          {showMessage ? (
-            <Text style={{color: 'red', fontSize: 12}}>
-              you enter a rong card number
-            </Text>
-          ) : null}
+            {showMessage ? (
+              <Text style={{color: 'red', fontSize: 12}}>
+                you enter a rong card number
+              </Text>
+            ) : null}
 
-          {/* ==========Name On Card========== */}
-          <View style={styles.NameView}>
-            <Text style={styles.NameText}>Name on Card</Text>
-            <TextInput
-              placeholder="Card Name"
-              keyboardType="name-phone-pad"
-              placeholderTextColor="#696969"
-              style={styles.NameTextInput}
-              onChangeText={(text) => _OnChangeTextOthers(text, 'cardName')}
-            />
-          </View>
+            {/* ==========Name On Card========== */}
+            <View style={styles.NameView}>
+              <Text style={styles.NameText}>Name on Card</Text>
+              <TextInput
+                placeholder="Card Name"
+                keyboardType="name-phone-pad"
+                placeholderTextColor="#696969"
+                style={styles.NameTextInput}
+                onChangeText={(text) => _OnChangeTextOthers(text, 'cardName')}
+              />
+            </View>
 
-          {/* ======Expiry Date & CVV Row====== */}
+            {/* ======Expiry Date & CVV Row====== */}
 
-          <View style={styles.RowView}>
-          <TouchableOpacity onPress={showDatePicker}>
-            <View style={styles.DateView}>
-           
-                <Text style={styles.DateText}>
-                  Expiry Date {'                             '}
-                </Text>
+            <View style={styles.RowView}>
+              <View style={styles.DateView}>
+                <Text style={styles.DateText}>Expiry Date</Text>
+                <TouchableOpacity onPress={showDatePicker}>
+                  <DateTimePickerModal
+                    isVisible={isDatePickerVisible}
+                    mode="date"
+                    onConfirm={(date) => handleConfirm(date)}
+                    onCancel={() => hideDatePicker()}
+                  />
 
-                <DateTimePickerModal
-                  isVisible={isDatePickerVisible}
-                  
-                  mode="date"
-                  onConfirm={(date) => handleConfirm(date)}
-                  onCancel={() => hideDatePicker()}
+                  {state?.expiry ? (
+                    <TextInput
+                      placeholder="01/2021"
+                      placeholderTextColor="#696969"
+                      value={state.expiry}
+                      style={styles.CVVTextInput}
+                      editable={false}
+                    />
+                  ) : (
+                    <Text style={styles.SelectDateText}>Select Date</Text>
+                  )}
+                </TouchableOpacity>
+              </View>
+
+              {/* ====+==== */}
+
+              <View style={styles.CVVView}>
+                <Text style={styles.CVVText}>CVV</Text>
+                <TextInput
+                  placeholder="021"
+                  placeholderTextColor="#696969"
+                  keyboardType="numeric"
+                  maxLength={3}
+                  style={styles.CVVTextInput}
+                  onChangeText={(text) => _OnChangeTextOthers(text, 'cvv')}
                 />
-           
-              {/* <Text>{state.expiry}</Text> */}
-              <TextInput
-                placeholder="01/2021"
-                placeholderTextColor="#696969"
-                value={state.expiry}
-                style={styles.CVVTextInput}
-                editable={false}
-              />
-              
+              </View>
             </View>
-            </TouchableOpacity>
-
-            {/* ====+==== */}
-
-            <View style={styles.CVVView}>
-              <Text style={styles.CVVText}>CVV</Text>
-              <TextInput
-                placeholder="021"
-                placeholderTextColor="#696969"
-                keyboardType="numeric"
-                maxLength={3}
-                style={styles.CVVTextInput}
-                onChangeText={(text) => _OnChangeTextOthers(text, 'cvv')}
+            {/* ==========Buttons========== */}
+            <LinearGradient
+              colors={['#F6931B', '#DE2516']}
+              style={styles.SaveLG}>
+              <Button
+                title="Save"
+                loading={props.isLoading}
+                onPress={() => AddPaymentMethod()}
+                buttonStyle={{backgroundColor: 'transparent'}}
+              />
+            </LinearGradient>
+            <View style={styles.CancelView}>
+              <Button
+                title="Cancel"
+                onPress={() => Cancel()}
+                titleStyle={{
+                  color: '#727272',
+                }}
+                buttonStyle={{backgroundColor: '#FFFFFF'}}
               />
             </View>
-          </View>
-          {/* ==========Buttons========== */}
-          <LinearGradient colors={['#F6931B', '#DE2516']} style={styles.SaveLG}>
-            <Button
-              title="Save"
-              loading={props.isLoading}
-              onPress={() => AddPaymentMethod()}
-              buttonStyle={{backgroundColor: 'transparent'}}
-            />
-          </LinearGradient>
-          <View style={styles.CancelView}>
-            <Button
-              title="Cancel"
-              onPress={() => Cancel()}
-              titleStyle={{
-                color: '#727272',
+
+            <AlertPopup
+              visible={visible}
+              toggleVisible={() => setVisible(!visible)}
+              popupText={state.popupText}
+              onConfirm={() => {
+                setVisible(false);
+                // deletePaymentCard();
+                // props.navigation.navigate('thankyou');
+                // alert('Deleted')
               }}
-              buttonStyle={{backgroundColor: '#FFFFFF'}}
             />
-          </View>
-
-          <AlertPopup
-            visible={visible}
-            toggleVisible={() => setVisible(!visible)}
-            popupText={state.popupText}
-            onConfirm={() => {
-              setVisible(false);
-              // deletePaymentCard();
-              // props.navigation.navigate('thankyou');
-              // alert('Deleted')
-            }}
-          />
           </ScrollView>
         </SafeAreaView>
       </SafeAreaView>

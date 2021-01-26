@@ -63,6 +63,8 @@ const App = (props) => {
 
   const newPassword = () => {
     props.navigation.navigate('newpassword');
+    
+
   };
   return (
     <ImageBackground

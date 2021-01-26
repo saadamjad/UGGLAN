@@ -17,7 +17,7 @@ function Chat(props) {
     userMessage: '',
     // socket:''
   });
-  const [socket, setSocket] = useState(io('http://192.168.18.96:4500'));
+  const [socket, setSocket] = useState(io('https://ugglan-app-security.herokuapp.com'));
 
   useEffect(() => {
     _getUserMessage();

@@ -17,6 +17,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import PayModal from '../../components/pay_on_cash';
 import AlertPopup from '../../components/popup_for_alerts';
 import GlobalHeader from '../../components/header';
+import styles from './styles'
 import {State} from 'react-native-gesture-handler';
 const App = (props) => {
   const [state, setState] = useState({
@@ -35,7 +36,8 @@ const App = (props) => {
     if (state.labelValue === 0) {
       // setVisible1(false);
       // alert('pay online')
-      props.navigation.navigate('payMasterCard');
+      // props.navigation.navigate('payMasterCard');
+      alert('Work in progress ')
     } else if (state.labelValue === 1) {
       // alert('pay on cash')
       // setVisible1(false);
@@ -51,24 +53,22 @@ const App = (props) => {
   return (
     <ImageBackground
       source={require('../../assets/images/bg_image.png')}
-      style={{
-        height: '100%',
-        width: '100%',
-      }}>
-      <SafeAreaView style={{flex: 1}}>
+    
+      
+      style={styles.ImageBackgroundPaymentMain}
+      >
+      <SafeAreaView  style={styles.SafeAreaViewPayment}>
         <GlobalHeader
           isBack={true}
-          screenText={'Select payment method'}
+          screenText={'Select Payment Method'}
           navigation={props.navigation}
         />
 
         <SafeAreaView
-          style={{
-            flex: 1,
-            width: '90%',
-            marginTop: 20,
-            alignSelf: 'center',
-          }}>
+        
+          
+          style={styles.SafeAreaViewPaymentModels}
+          >
           <PayModal
             visible={visible}
             onConfirm={() => {
@@ -96,14 +96,14 @@ const App = (props) => {
               onPress={(value) => setState({labelValue: value})}
               initial={-1}
               buttonColor={'white'}
-              buttonSize={10}
-              buttonOuterSize={25}
+              buttonSize={8}
+              buttonOuterSize={20}
               selectedButtonColor={'white'}
               selectedLabelColor={'white'}
               labelColor={'white'}
             />
 
-            {console.log('lable value', state.labelValue)}
+            {/* {console.log('lable value', state.labelValue)} */}
           </View>
 
           {/* ================Radio Button End================ */}
@@ -112,13 +112,10 @@ const App = (props) => {
 
           <LinearGradient
             colors={['#F6931B', '#DE2516']}
-            style={{
-              width: 301,
-              height: 40,
-              alignSelf: 'center',
-              marginVertical: 50,
-              borderRadius: 3,
-            }}>
+          
+            
+            style={styles.LinearGradientRadioButton}
+            >
             <Button
               title="Continue"
               onPress={() => Continue()}

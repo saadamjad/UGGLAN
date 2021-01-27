@@ -2,45 +2,25 @@ import React from 'react';
 import {Button} from 'react-native-elements';
 import {View, Text, Image, SafeAreaView} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import styles from './styles';
 
 const App = () => {
   const buttonArrays = [{name: 'Confirm'}, {name: 'Cancel', color: 'white'}];
   return (
-    <SafeAreaView style={{backgroundColor: '#000000', flex: 1}}>
-      <View style={{width: '90%', alignSelf: 'center', marginVertical: 50}}>
-        <View
-          style={{
-            backgroundColor: '#3E3E3E',
-            paddingVertical: 10,
-            borderRadius: 3,
-          }}>
-          <View style={{width: '90%', alignSelf: 'center'}}>
-            <View style={{alignItems: 'center', marginTop: 20}}>
-              <Text
-                style={{color: '#FFFFFF', fontSize: 16, fontWeight: 'bold'}}>
-                Notify
-              </Text>
+    <SafeAreaView style={styles.SafeAreaViewOfPaymentVisaMain}>
+      <View style={styles.PaymentVisaModelMainView}>
+        <View style={styles.PaymentVisaModelMainView2}>
+          <View style={styles.PaymentVisaModelMainView3}>
+            <View style={styles.NotifyTextView}>
+              <Text style={styles.NotifyText}>Notify</Text>
             </View>
-            <View style={{alignItems: 'center', marginVertical: 15}}>
-              <Text
-                style={{
-                  color: '#D4D4D4',
-                  fontSize: 12,
-                  textAlign: 'center',
-                  lineHeight: 20,
-                  letterSpacing: 1,
-                }}>
-                Confirm this Payment.?
-              </Text>
+            <View style={styles.ConfirmTextView}>
+              <Text style={styles.ConfirmText}>Confirm this Payment.?</Text>
             </View>
             {buttonArrays.map((val) => (
               <LinearGradient
                 colors={val.color ? ['#fff', '#fff'] : ['#F6931B', '#DE2516']}
-                style={{
-                  alignSelf: 'center',
-                  borderRadius: 3,
-                  marginBottom: 10,
-                }}>
+                style={styles.LinearGradientOfButton}>
                 <Button
                   title={val.name}
                   titleStyle={{
